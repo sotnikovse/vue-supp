@@ -1,0 +1,46 @@
+{
+  "name": "uipart",
+  "description": "Vue 3 use-case, utility library for creating custom base components.",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5cube/upart",
+    "directory": "packages/uipart"
+  },
+  "bugs": {
+    "url": "https://github.com/5cube/upart/issues"
+  },
+  "keywords": [
+    "uipart",
+    "ui library"
+  ],
+  "author": "Stepan Sotnikov <sotnikov1207@gmail.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "src/",
+    "dist/",
+    "lib/",
+    "types/"
+  ],
+  "scripts": {
+    "playground": "vite serve playground --port=8080",
+    "playground:build": "vite build playground",
+    "build": "rm -rf ./lib/* && tsc"
+  },
+  "engines": {
+    "node": "^12 || ^14"
+  },
+  "dependencies": {
+    "vue": "^3.0.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@vue/compiler-sfc": "^3.0.4",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "vite": "^1.0.0-rc.13"
+  }
+}

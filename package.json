@@ -9,7 +9,10 @@
     "bootstrap": "yarn install && lerna bootstrap",
     "release": "lerna version --conventional-commits --yes",
     "clean": "lerna clean --yes",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "playground": "lerna run playground --scope=uipart --stream",
+    "playground:build": "lerna run playground:build --scope=uipart --stream",
+    "build": "lerna run build --scope=uipart --stream"
   },
   "engines": {
     "node": "^12 || ^14",
