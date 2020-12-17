@@ -1,11 +1,5 @@
 {
-  "name": "uipart",
-  "description": "Vue 3 use-case, utility library for creating custom base components.",
-  "main": "index.js",
   "repository": "https://github.com/5cube/upart",
-  "contributors": [
-    "Stepan Sotnikov <sotnikov1207@gmail.com>"
-  ],
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -22,6 +16,7 @@
     "yarn": "^1.12"
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "typescript": "^4.1.3"
   }
 }
