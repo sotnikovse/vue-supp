@@ -1,5 +1,7 @@
 import { ref, watch, Ref } from 'vue'
 
+import { SetupProps, SetupContext } from '../types'
+
 const DEFAULT_PROP = 'modelValue'
 const DEFAULT_EVENT = 'update:modelValue'
 
@@ -24,14 +26,18 @@ export const useToggleEmits = (returnArray: boolean = true, event: string = DEFA
   }
 }
 
+export interface ToggleProps {
+  modelValue: any
+}
+
 /**
  * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {undefined} props.modelValue The model value.
+ * @param {any} props.modelValue The model value.
  * @param {Object} context The context of use-case.
  * @param {Function} context.emit The emit function.
  * @param {string} [event=DEFAULT_EVENT] The emit event name.
  */
-export const useToggle = (props: any, { emit }: any, event: string = DEFAULT_EVENT) => {
+export const useToggle = (props: ToggleProps | SetupProps, { emit }: SetupContext, event: string = DEFAULT_EVENT) => {
   // Data
   const isActive: Ref = ref(!!props.modelValue)
 
@@ -56,7 +62,7 @@ export const useToggle = (props: any, { emit }: any, event: string = DEFAULT_EVE
 export const toggle = (prop: string = DEFAULT_PROP, event: string = DEFAULT_EVENT) => {
   return {
     useToggleProps: () => useToggleProps(prop),
-    useToggle: (props: any, context: any) => useToggle(props, context, event),
+    useToggle: (props: ToggleProps | SetupProps, context: SetupContext) => useToggle(props, context, event),
     useToggleEmits: useToggleEmits,
   }
 }

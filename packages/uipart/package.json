@@ -33,6 +33,7 @@
     "node": "^12 || ^14"
   },
   "dependencies": {
+    "@popperjs/core": "^2.6.0",
     "vue": "^3.0.4"
   },
   "devDependencies": {
