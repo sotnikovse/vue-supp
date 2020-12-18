@@ -10,6 +10,31 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 * added activator use ([544afef](https://github.com/5cube/upart/commit/544afef93a78f823bee7184a62ae1883bdd6fc61))
 
+* added aspec ratio use
+
+* added attach use
+
+* added dimensions use
+
+* added filter use
+
+* added group use
+
+* added input use
+
+* added input validation use
+
+* added lazy content use
+
+* added measure use
+
+* added popper use
+
+* added utils
+
+### Bug Fixes
+
+* fix(toggle): update types
 
 
 
