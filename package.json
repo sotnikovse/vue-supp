@@ -6,10 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "yarn install && lerna bootstrap",
-    "release": "lerna version --conventional-commits --yes",
     "publish-ci": "lerna publish",
-    "clean": "lerna clean --yes",
+    "clean": "lerna clean",
     "lerna": "lerna",
     "playground": "lerna run playground --scope=uipart --stream",
     "playground:build": "lerna run playground:build --scope=uipart --stream",
