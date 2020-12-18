@@ -8,7 +8,7 @@
   "scripts": {
     "bootstrap": "yarn install && lerna bootstrap",
     "release": "lerna version --conventional-commits --yes",
-    "publish-ci": "lerna publish --yes",
+    "publish-ci": "lerna publish",
     "clean": "lerna clean --yes",
     "lerna": "lerna",
     "playground": "lerna run playground --scope=uipart --stream",
