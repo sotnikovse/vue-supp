@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/5cube/upart/compare/v0.3.0...v0.4.0) (2020-12-18)
+
+
+* fix!: udpated changlog ([e131ace](https://github.com/5cube/upart/commit/e131ace5c20d04dbd3d56114d972acba793e0511))
+
+
+### BREAKING CHANGES
+
+* testing github actions for build and publish
+
+
+
+
+
 # [0.3.0](https://github.com/5cube/upart/compare/v0.2.2...v0.3.0) (2020-12-18)
 
 
