@@ -1,0 +1,26 @@
+{
+  "name": "@uipart/playground",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "vite --port=8080",
+    "build": "vite build",
+    "lint": "eslint src -f codeframe"
+  },
+  "dependencies": {
+    "uipart": "^0.3.0",
+    "vue": "^3.0.4",
+    "vue-router": "^4.0.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-virtual": "^2.0.3",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@vue/compiler-sfc": "^3.0.4",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "vite": "^1.0.0-rc.13",
+    "vite-plugin-auto-routes": "^0.1.1"
+  }
+}
