@@ -14,7 +14,6 @@
     "uipart",
     "ui library"
   ],
-  "author": "Stepan Sotnikov <sotnikov1207@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
