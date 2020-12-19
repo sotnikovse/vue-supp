@@ -2,16 +2,12 @@
   "extends": "../../tsconfig.json",
   "include": [
     "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.ts"
   ],
   "compilerOptions": {
     "declaration": true,
-    "isolatedModules": true,
     "rootDir": "./src",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
       "@/*": [

@@ -15,18 +15,15 @@
     "ui library"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "src/",
     "dist/",
-    "lib/",
     "types/"
   ],
   "scripts": {
-    "playground": "vite serve playground --port=8080",
-    "playground:build": "vite build playground",
-    "build": "rm -rf ./lib/* && tsc"
+    "build": "rm -rf ./dist/* && tsc"
   },
   "engines": {
     "node": "^12 || ^14"
@@ -36,11 +33,6 @@
     "vue": "^3.0.4"
   },
   "devDependencies": {
-    "@tailwindcss/postcss7-compat": "^2.0.2",
-    "@vue/compiler-sfc": "^3.0.4",
-    "autoprefixer": "^9",
-    "postcss": "^7",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
-    "vite": "^1.0.0-rc.13"
+    "@vue/compiler-sfc": "^3.0.4"
   }
 }
