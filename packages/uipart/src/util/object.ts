@@ -27,9 +27,9 @@ export const getObjectValueByPath = (obj: any, path: string, fallback?: any): an
 }
 
 export const getPropertyFromItem = (
-  item: object,
+  item: Record<string, unknown>,
   property: SelectItemKey,
-  fallback?: any
+  fallback?: any,
 ): any => {
   if (property == null) return item === undefined ? fallback : item
 

@@ -15,12 +15,14 @@ import {
 import { SetupProps } from '../types'
 
 import { useAttachProps, useAttach } from './attach'
-import { useMeasureProps, useMeasure } from './measure'
+import { dimensions } from './dimensions'
+
+const { useDimensionsProps, useDimensions } = dimensions()
 
 export const usePopperProps = () => {
   return {
     ...useAttachProps(),
-    ...useMeasureProps(),
+    ...useDimensionsProps(),
     placement: {
       type: String,
       validator: (value: string) => {
@@ -131,14 +133,18 @@ export const usePopper = (props: SetupProps) => {
     minHeight,
     maxHeight,
   })
-  const { measureStyles } = useMeasure(measureProps)
+  const { dimensionsStyles } = useDimensions(measureProps)
 
   const placement = computed(() => {
     return props.placement
-      ? props.placement : props.left
-        ? 'left' : props.right
-          ? 'right' : props.bottom
-            ? 'bottom' : 'top'
+      ? props.placement
+      : props.left
+        ? 'left'
+        : props.right
+          ? 'right'
+          : props.bottom
+            ? 'bottom'
+            : 'top'
   })
 
   const strategy = computed(() => props.fixed ? 'fixed' : 'absolute')
@@ -182,10 +188,12 @@ export const usePopper = (props: SetupProps) => {
   }
 
   const genArrow = () => {
-    return props.arrow ? h('div', {
-      class: 'popper__arrow',
-      'data-popper-arrow': '',
-    }) : null
+    return props.arrow
+      ? h('div', {
+          class: 'popper__arrow',
+          'data-popper-arrow': '',
+        })
+      : null
   }
 
   // Need to keep visible on cursor move
@@ -198,10 +206,14 @@ export const usePopper = (props: SetupProps) => {
       const statePlacement = (instance.value && instance.value.state.placement) || placement.value
       const basePlacement = statePlacement.split('-')[0]
       const styleProp = basePlacement === 'top'
-        ? 'bottom' : basePlacement === 'bottom'
-          ? 'top' : basePlacement === 'left'
-            ? 'right' : basePlacement === 'right'
-              ? 'top' : undefined
+        ? 'bottom'
+        : basePlacement === 'bottom'
+          ? 'top'
+          : basePlacement === 'left'
+            ? 'right'
+            : basePlacement === 'right'
+              ? 'top'
+              : undefined
       const styles: any = {
         position: 'absolute',
         top: 0,
@@ -234,14 +246,16 @@ export const usePopper = (props: SetupProps) => {
       ...data,
       class: ['popper__box', ...dataClasses, props.boxClass.trim()],
       style: {
-        ...measureStyles.value,
+        ...dimensionsStyles.value,
         ...dataStyles,
       },
     }
 
     const transition = typeof props.transition === 'string'
-      ? { name: props.transition } : props.transition
-        ? { ...props.transition } : {}
+      ? { name: props.transition }
+      : props.transition
+        ? { ...props.transition }
+        : {}
 
     return h(Transition, {
       onBeforeEnter (el: any) {

@@ -7,9 +7,10 @@ import {
   onBeforeUnmount,
   inject,
   toRefs,
+  SetupContext,
 } from 'vue'
 
-import { SetupProps, SetupContext } from '../types'
+import { SetupProps } from '../types'
 
 export const useInputValidationProps = () => {
   return {
@@ -56,10 +57,10 @@ export const useInputValidationProps = () => {
  * @param {Object} context The setup context.
  * @param {Symbol} injectKey The injection key.
  */
-export const useInputValidation = (props: SetupProps, { emit }: SetupContext, injectKey: Symbol) => {
+export const useInputValidation = (props: SetupProps, { emit }: SetupContext, injectKey: symbol) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
 
-  const { internalValue, isFocused } = toRefs(props)
+  const { internalValue } = toRefs(props)
 
   const valid = ref<boolean>(false)
 

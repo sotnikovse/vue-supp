@@ -1,6 +1,6 @@
-import { ref, computed, watch, PropType } from 'vue'
+import { ref, computed, watch, PropType, SetupContext } from 'vue'
 
-import { SetupProps, SetupContext } from '../types'
+import { SetupProps } from '../types'
 
 import { getPropertyFromItem } from '../util/object'
 
@@ -36,13 +36,8 @@ export const useFilterProps = () => {
   }
 }
 
-/**
- * @param {boolean} [returnArray=true] Return Array or Object emits.
- */
-export const useFilterEmits = (returnArray: boolean = true) => {
-  return returnArray ? [EVENT] : {
-    [EVENT]: () => true,
-  }
+export const useFilterEmits = (): string[] => {
+  return [EVENT]
 }
 
 export interface FilterProps {
@@ -51,21 +46,10 @@ export interface FilterProps {
   itemText: string
   itemValue: string
   noFilter?: boolean
-  filter: Function
+  filter: () => void
 }
-/**
- * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {string} props.search The search input.
- * @param {Array} props.items The items.
- * @param {string} [props.itemText] The item text key.
- * @param {string} [props.itemValue] The item value key.
- * @param {boolean} [props.noFilter] Prevent filter.
- * @param {Function} [props.filter] Filter function.
- * @param {Object} context The context of use-case.
- * @param {Function} context.emit The emit function.
- */
 export const useFilter = (props: FilterProps | SetupProps, { emit }: SetupContext) => {
-  const search = ref(props.search)
+  const search = ref<string | null | undefined>(props.search)
 
   const searchIsDirty = computed(() => {
     return search.value != null && search.value !== ''

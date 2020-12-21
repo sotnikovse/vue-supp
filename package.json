@@ -10,6 +10,7 @@
     "clean": "lerna clean",
     "lerna": "lerna",
     "playground": "yarn workspace @uipart/playground",
+    "uipart": "yarn workspace uipart",
     "build": "lerna run build --scope=uipart --stream"
   },
   "engines": {

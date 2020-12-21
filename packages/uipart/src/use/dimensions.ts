@@ -1,59 +1,72 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, Prop } from 'vue'
 
-import { SetupProps } from '../types'
+import { toUnit } from '../util/convert'
 
-export interface DimensionsProps {
-  element: Element | HTMLElement
-  hasResizeListener?: boolean
-  shouldRound?: boolean
+const PROPS = {
+  width: {
+    type: [Number, String],
+  },
+  height: {
+    type: [Number, String],
+  },
+  maxWidth: {
+    type: [Number, String],
+  },
+  maxHeight: {
+    type: [Number, String],
+  },
+  minWidth: {
+    type: [Number, String],
+  },
+  minHeight: {
+    type: [Number, String],
+  },
 }
 
-/**
- * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {HTMLElement} props.element The HTML element.
- * @param {boolean} [props.hasResizeListener] Should add resize listener.
- * @param {boolean} [props.shouldRound] Should round dimensions.
- */
-export const useDimensions = (props: DimensionsProps | SetupProps) => {
-  const options: AddEventListenerOptions = {
-    passive: true
-  }
+type PropValue = string | number | null | undefined
+type PropNames = keyof typeof PROPS
 
-  const dimensions = ref({})
+export const dimensions = <S extends PropNames>(...possibleProps: S[]) => {
+  const selectedProps = possibleProps.length ? possibleProps : Object.keys(PROPS) as S[]
 
-  const getBoundedClientRect = (el: Element | HTMLElement) => {
-    const rect = el.getBoundingClientRect()
+  const useDimensionsProps = (defaults?: Partial<Record<S, PropValue>>) => {
+    const props = selectedProps.reduce((acc, key) => {
+      acc[key] = PROPS[key]
+      return acc
+    }, {} as Record<S, Prop<PropValue>>)
 
-    return !props.shouldRound ? rect : {
-      top: Math.round(rect.top),
-      left: Math.round(rect.left),
-      bottom: Math.round(rect.bottom),
-      right: Math.round(rect.right),
-      width: Math.round(rect.width),
-      height: Math.round(rect.height),
+    if (defaults) {
+      return selectedProps.reduce((acc, key) => {
+        const prop = props[key] as Record<S, Prop<PropValue>>
+        acc[key] = {
+          ...prop,
+          default: defaults[key],
+        }
+        return acc
+      }, {} as Record<S, Prop<PropValue>>)
+    } else {
+      return props
     }
   }
 
-  const updateDimensions = () => {
-    if (!props.element || !props.element) return
-    dimensions.value = getBoundedClientRect(props.element)
+  const useDimensions = (props: Partial<Record<S, PropValue>>) => {
+    const dimensionsStyles = computed(() => {
+      return selectedProps.reduce((acc, key) => {
+        const value: PropValue = props[key]
+        if (value) {
+          acc[key] = toUnit(value)
+        }
+        return acc
+      }, {} as Record<S, string | undefined>)
+    })
+
+    return {
+      dimensionsStyles,
+    }
   }
-
-  onMounted(() => {
-    updateDimensions()
-    if (props.hasResizeListener) {
-      window.addEventListener('resize', updateDimensions, options)
-    }
-  })
-
-  onUnmounted(() => {
-    if (props.hasResizeListener) {
-      window.removeEventListener('resize', updateDimensions, options)
-    }
-  })
 
   return {
-    dimensions,
-    updateDimensions,
+    useDimensionsProps,
+    useDimensions,
   }
 }

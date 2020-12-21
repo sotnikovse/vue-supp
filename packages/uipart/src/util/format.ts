@@ -5,7 +5,7 @@ import { isNumber, isString } from './check'
  * @param {string} str The value to transforme.
  * @returns {string} Returns transformed string.
  */
-export const upperFirst = (str: string) => {
+export const upperFirst = (str: string): string => {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
@@ -24,7 +24,7 @@ export const unformatNumber = (value: string | number, decimal?: string): number
   if (typeof value === 'number') return value
 
   // Decimal can be ',' or '.'
-  decimal = decimal || '(,|.)'
+  decimal = decimal ?? '(,|.)'
 
   // Build regex to strip out everything except digits, decimal point and minus sign:
   const regex = new RegExp('[^0-9-' + decimal + ']', 'g')
@@ -62,10 +62,10 @@ interface FormatNumberOption {
 export const formatNumber = (number: any, options: FormatNumberOption = {}): string | null => {
   // Build options object, extending defaults:
   const opts = {
-    precision: options.precision || 0,
-    thousand: options.thousand || '',
-    decimal: options.decimal || ',',
-    fixed: options.fixed || false,
+    precision: options.precision ?? 0,
+    thousand: options.thousand ?? '',
+    decimal: options.decimal ?? ',',
+    fixed: options.fixed ?? false,
   }
   if ((number === null || number === '')) {
     if (isNumber(options.fallback)) {
@@ -88,14 +88,15 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
     numberDecimal = stringDecimal
   }
   const numberPrecision = (numberDecimal.length > opts.precision) || opts.fixed
-    ? opts.precision : numberDecimal.length
+    ? opts.precision
+    : numberDecimal.length
 
   // Clean up precision
   const usePrecision = checkPrecision(numberPrecision, opts.precision)
 
   // Do some calc:
   const negative = number < 0 ? '-' : ''
-  const base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + ''
+  const base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + '' // eslint-disable-line
   const mod = base.length > 3 ? base.length % 3 : 0
 
   // Format the number:
@@ -111,9 +112,9 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
  */
 const toFixed = (value: number, precision: number): string => {
   precision = checkPrecision(precision, 0)
-  const exponentialForm = Number(unformatNumber(value) + 'e' + precision)
+  const exponentialForm = Number(unformatNumber(value) + 'e' + precision) // eslint-disable-line
   const rounded = Math.round(exponentialForm)
-  const finalResult = Number(rounded + 'e-' + precision).toFixed(precision)
+  const finalResult = Number(rounded + 'e-' + precision).toFixed(precision) // eslint-disable-line
   return finalResult
 }
 

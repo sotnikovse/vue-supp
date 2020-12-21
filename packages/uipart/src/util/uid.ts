@@ -5,7 +5,7 @@ const uidCounter: Record<string, number> = {}
  * @param {string} [prefix=$default] The value to prefix the id with.
  * @returns {string} Returns the unique id.
  */
-const uid = (prefix: string = '$default'): string => {
+const uid = (prefix = '$default'): string => {
   if (!uidCounter[prefix]) {
     uidCounter[prefix] = 0
   }

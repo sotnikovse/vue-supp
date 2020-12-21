@@ -4,8 +4,8 @@
  * @param {number} position
  * @returns {Event}
  */
-export const setCursor = (el: HTMLInputElement, position: number) => {
-  const setSelectionRange = () => { el.setSelectionRange(position, position) }
+export const setCursor = (el: HTMLInputElement, position: number): void => {
+  const setSelectionRange = (): void => { el.setSelectionRange(position, position) }
   if (el === document.activeElement) {
     setSelectionRange()
     setTimeout(setSelectionRange, 1) // Android Fix

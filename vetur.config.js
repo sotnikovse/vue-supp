@@ -2,5 +2,6 @@
 module.exports = {
   projects: [
     './packages/playground',
+    './packages/uipart',
   ]
 }

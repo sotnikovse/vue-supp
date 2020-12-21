@@ -8,11 +8,12 @@ import {
   onUnmounted,
   nextTick,
   watch,
+  SetupContext,
 } from 'vue'
 
-import { SetupProps, SetupContext } from '../types'
+import { SetupProps } from '../types'
 
-import { useToggle } from './toggle'
+import { toggle } from './toggle'
 
 import { parseEventName } from '../util/parse'
 
@@ -67,10 +68,12 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
   const activatorElement = ref<HTMLElement|null>(null)
   const _listeners = ref<any>({})
 
+  const { useToggle } = toggle()
+
   const toggleProps = reactive({
     modelValue: computed(() => props.modelValue),
   })
-  const { isActive } = useToggle(toggleProps, { emit })
+  const { isActive } = useToggle(toggleProps, { emit } as SetupContext)
 
   watch([() => props.activator, () => props.openOnHover], () => {
     resetActivator()
@@ -117,7 +120,7 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
   const genActivatorListeners = ($listeners?: any) => {
     if (props.disabled) return {}
 
-    const listeners:any = {}
+    const listeners: any = {}
 
     if (props.openOnHover) {
       listeners.onMouseenter = () => {
@@ -193,7 +196,7 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
       })
 
     for (const [key, type, modifiers] of keys) {
-      _activator.addEventListener(type, _listeners.value[key], modifiers)
+      _activator.addEventListener(type as any, _listeners.value[key as string], modifiers)
     }
   }
 
@@ -210,7 +213,7 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
       })
 
     for (const [key, type, modifiers] of keys) {
-      activatorElement.value.removeEventListener(type, _listeners.value[key], modifiers)
+      activatorElement.value.removeEventListener(type as any, _listeners.value[key as string], modifiers as any)
     }
 
     _listeners.value = {}

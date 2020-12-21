@@ -1,6 +1,6 @@
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, SetupContext } from 'vue'
 
-import { SetupProps, SetupContext } from '../types'
+import { SetupProps } from '../types'
 
 import { deepEqual } from '../util/check'
 import { wrapInArray } from '../util/array'
@@ -78,7 +78,7 @@ export const useGroup = (props: GroupProps | SetupProps, { emit }: SetupContext)
   const selectedIndex = computed(() => {
     if (props.multiple) return
 
-    return items.value.findIndex((item, i) => isSelected(item.id))
+    return items.value.findIndex((item) => isSelected(item.id))
   })
 
   const register = (item: any, index: any) => {

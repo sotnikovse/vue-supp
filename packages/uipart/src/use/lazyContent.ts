@@ -1,26 +1,28 @@
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, Ref, PropType, VNode } from 'vue'
 
 import { SetupProps } from '../types'
 
-export const useLazyContentProps = () => {
+export interface LazyContentProps {
+  eager?: PropType<boolean>
+  disabled?: PropType<boolean>
+}
+export interface LazyContentSetupProps extends LazyContentProps {
+  isActive: PropType<boolean>
+}
+export interface LazyContent {
+  isBooted: Ref<boolean>
+  hasContent: Ref<boolean>
+  showLazyContent: () => VNode[] | undefined
+}
+
+export const useLazyContentProps = (): Record<string, PropType<boolean>> => {
   return {
     eager: Boolean,
     disabled: Boolean,
   }
 }
 
-export interface LazyProps {
-  isActive: boolean
-  disabled?: boolean
-  eager?: boolean
-}
-/**
- * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {boolean} props.isActive The active state.
- * @param {boolean} props.disabled The disabled state.
- * @param {boolean} [props.eager] Will force component content render on mounted.
- */
-export const useLazyContent = (props: LazyProps | SetupProps) => {
+export const useLazyContent = (props: LazyContentSetupProps | SetupProps): LazyContent => {
   const isBooted = ref<boolean>(false)
 
   const hasContent = computed(() => {
@@ -32,7 +34,7 @@ export const useLazyContent = (props: LazyProps | SetupProps) => {
     isBooted.value = true
   })
 
-  const showLazyContent = (content: Function | null | undefined) => {
+  const showLazyContent = (content?: () => VNode[]): VNode[] | undefined => {
     return (hasContent.value && content) ? content() : undefined
   }
 

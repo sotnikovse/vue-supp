@@ -1,28 +1,20 @@
 /**
  * String type check.
- * @param {any} v
- * @returns {boolean}
  */
-export const isString = (v: any) => typeof v === 'string' || v instanceof String
+export const isString = (v: any): boolean => typeof v === 'string' || v instanceof String
 
 /**
  * Number type check.
- * @param {any} v
- * @returns {boolean}
  */
-export const isNumber = (v: any) => typeof v === 'number' && isFinite(v)
+export const isNumber = (v: any): boolean => typeof v === 'number' && isFinite(v)
 
 /**
  * Array type check.
- * @param {any} v
- * @returns {boolean}
  */
-export const isArray = (v: any) => v && typeof v === 'object' && v.constructor === Array
+export const isArray = (v: any): boolean => v && typeof v === 'object' && v.constructor === Array
 
 /**
  * Object type check.
- * @param {any} v
- * @returns {boolean}
  */
 export const isObject = (v: any) => v && typeof v === 'object' && v.constructor === Object
 
