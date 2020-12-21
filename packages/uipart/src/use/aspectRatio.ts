@@ -1,6 +1,6 @@
 import { computed, Prop, Ref } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 export interface UseAspectRatioProps {
   aspectRatio: Prop<string | number>

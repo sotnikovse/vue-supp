@@ -1,6 +1,6 @@
 import { ref, computed, watch, PropType, SetupContext } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 import { getPropertyFromItem } from '../util/object'
 

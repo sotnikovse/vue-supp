@@ -1,4 +1,4 @@
-import { SelectItemKey } from '../types'
+import { SelectItemKey } from '../../types'
 
 export const getNestedValue = (obj: any, path: (string | number)[], fallback?: any): any => {
   const last = path.length - 1

@@ -32,4 +32,23 @@ export type TouchValue = TouchHandlers & {
   options?: AddEventListenerOptions
 }
 
+export declare module 'uipart/directives' {
+  // eslint-disable-next-line import/no-duplicates
+  import { DirectiveOptions } from 'vue'
+
+  const ClickOutside: DirectiveOptions
+  const Intersect: DirectiveOptions
+  const Mask: DirectiveOptions
+  const Scroll: DirectiveOptions
+  const Touch: DirectiveOptions
+
+  export {
+    ClickOutside,
+    Intersect,
+    Mask,
+    Scroll,
+    Touch,
+  }
+}
+
 /* eslint-enable no-use-before-define */

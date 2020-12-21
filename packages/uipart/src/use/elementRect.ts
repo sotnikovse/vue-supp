@@ -1,6 +1,6 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 export interface ElementRectProps {
   element: Element | HTMLElement

@@ -6,7 +6,7 @@ import {
   SetupContext,
 } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 export const useInputProps = () => {
   return {

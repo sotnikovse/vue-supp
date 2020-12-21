@@ -1,6 +1,6 @@
 import { computed, Prop, ComputedRef } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 export interface UseAttachProp {
   attach: Prop<string | boolean | undefined>

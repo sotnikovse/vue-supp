@@ -12,7 +12,7 @@ import {
   reactive,
 } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 import { useAttachProps, useAttach } from './attach'
 import { dimensions } from './dimensions'

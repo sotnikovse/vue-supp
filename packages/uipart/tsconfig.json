@@ -5,9 +5,10 @@
     "tests/**/*.ts"
   ],
   "compilerOptions": {
+    "target": "esnext",
     "declaration": true,
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./lib",
     "baseUrl": ".",
     "paths": {
       "@/*": [

@@ -6,7 +6,7 @@ import type {
   TouchHandlers,
   TouchValue,
   TouchWrapper,
-} from '../types'
+} from '../../types'
 
 import uid from '../util/uid'
 

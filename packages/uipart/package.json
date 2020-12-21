@@ -15,16 +15,16 @@
     "ui library"
   ],
   "license": "MIT",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "src/",
-    "dist/",
+    "lib/",
     "types/"
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf ./dist/* && tsc",
+    "build": "rm -rf ./lib/* && tsc",
     "lint": "eslint src -f codeframe"
   },
   "engines": {

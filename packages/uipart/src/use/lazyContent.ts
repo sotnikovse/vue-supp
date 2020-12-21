@@ -1,6 +1,6 @@
 import { ref, computed, watch, Ref, PropType, VNode } from 'vue'
 
-import { SetupProps } from '../types'
+import { SetupProps } from '../../types'
 
 export interface LazyContentProps {
   eager?: PropType<boolean>
