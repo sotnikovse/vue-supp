@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.1](https://github.com/5cube/upart/compare/v0.5.0...v0.5.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* **build:** tsconfig.json target es5 ([7207e14](https://github.com/5cube/upart/commit/7207e147e3311e6665532f5a910c9db39edfc6ca))
+
+
+
+
+
 # [0.5.0](https://github.com/5cube/upart/compare/v0.4.0...v0.5.0) (2020-12-22)
 
 
