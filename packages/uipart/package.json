@@ -15,8 +15,9 @@
     "ui library"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/index.cjs.js",
   "types": "lib/index.d.ts",
+  "module": "lib/index.esm.js",
   "files": [
     "src/",
     "lib/",
@@ -24,7 +25,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "build": "rm -rf ./lib/* && tsc",
+    "build": "rm -rf ./lib/* && rollup -c",
     "lint": "eslint src -f codeframe"
   },
   "engines": {
