@@ -5,7 +5,6 @@
     "tests/**/*.ts"
   ],
   "compilerOptions": {
-    "target": "esnext",
     "declaration": true,
     "rootDir": "./src",
     "outDir": "./lib",
