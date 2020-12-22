@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/5cube/upart/compare/v0.4.0...v0.5.0) (2020-12-22)
+
+
+### Bug Fixes
+
+* uipart package version ([41c2b7a](https://github.com/5cube/upart/commit/41c2b7a27c74fb516df31922787c3d7961d848bb))
+* **lib:** removed vite ([0c0687b](https://github.com/5cube/upart/commit/0c0687bbe61ac56b121f70a539d6d72ce6abdc65))
+* **uipart:** installed eslint & jest ([ffa3afa](https://github.com/5cube/upart/commit/ffa3afae24db42ba85e654882e0c6dfd901672be))
+
+
+### Features
+
+* add playground package ([41b05e1](https://github.com/5cube/upart/commit/41b05e1e7b7d7ec09b40633c81ef3d36baaade46))
+* added directives ([85b07a0](https://github.com/5cube/upart/commit/85b07a0f50da22c58c338b004c87f5eb2a9940af))
+
+
+
+
+
 # [0.4.0](https://github.com/5cube/upart/compare/v0.3.0...v0.4.0) (2020-12-18)
 
 
