@@ -14,7 +14,9 @@ yarn add uipart
 
 ### Toggle use with default
 ```js
-import { useToggleProps, useToggleEmits, useToggle } from 'uipart/use/toggle'
+import { toggle } from 'uipart'
+
+const { useToggleProps, useToggleEmits, useToggle } = toggle()
 
 export default {
   name: 'MyComponent',
@@ -35,7 +37,7 @@ export default {
 
 ### Toggle use with custom
 ```js
-import { toggle } from 'uipart/use/toggle'
+import { toggle } from 'uipart'
 
 const { useToggleProps, useToggleEmits, useToggle } = toggle('value', 'update:value')
 
@@ -59,7 +61,9 @@ export default {
 ### Toggle props
 ```js
 import { reactive, computed, toRefs } from 'vue'
-import { useToggleProps, useToggleEmits, useToggle } from 'uipart/use/toggle'
+import { toggle } from 'uipart'
+
+const { useToggleProps, useToggleEmits, useToggle } = toggle()
 
 export default {
   name: 'MyComponent',
