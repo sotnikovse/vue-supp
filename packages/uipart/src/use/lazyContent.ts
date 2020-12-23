@@ -1,4 +1,4 @@
-import { ref, computed, watch, Ref, PropType, VNode } from 'vue'
+import { ref, computed, watch, Ref, ComputedRef, PropType, VNode } from 'vue'
 
 import { SetupProps } from '../../types'
 
@@ -11,7 +11,7 @@ export interface LazyContentSetupProps extends LazyContentProps {
 }
 export interface LazyContent {
   isBooted: Ref<boolean>
-  hasContent: Ref<boolean>
+  hasContent: ComputedRef<boolean>
   showLazyContent: () => VNode[] | undefined
 }
 
