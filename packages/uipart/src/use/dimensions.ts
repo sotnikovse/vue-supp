@@ -1,6 +1,6 @@
 import { computed, Prop } from 'vue'
 
-import { toUnit } from '../util/convert'
+import { convertToUnit } from '../util/convert'
 
 const PROPS = {
   width: {
@@ -54,7 +54,7 @@ export const dimensions = <S extends PropNames>(...possibleProps: S[]) => {
       return selectedProps.reduce((acc, key) => {
         const value: PropValue = props[key]
         if (value) {
-          acc[key] = toUnit(value)
+          acc[key] = convertToUnit(value)
         }
         return acc
       }, {} as Record<S, string | undefined>)
