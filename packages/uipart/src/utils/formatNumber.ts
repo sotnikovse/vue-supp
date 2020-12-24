@@ -1,15 +1,6 @@
 import { isNumber, isString } from './check'
 
 /**
- * Makes the first character of a string uppercase.
- * @param {string} str The value to transforme.
- * @returns {string} Returns transformed string.
- */
-export const upperFirst = (str: string): string => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-/**
  * Unformat number.
  * @param {string|number} value
  * @param {string} decimal
@@ -136,4 +127,9 @@ const checkPrecision = (val: number, base: number): number => {
  */
 const toStr = (value: string | number): string => {
   return value ? value.toString() : ''
+}
+
+export default {
+  formatNumber,
+  unformatNumber,
 }

@@ -11,3 +11,7 @@ export const setCursor = (el: HTMLInputElement, position: number): void => {
     setTimeout(setSelectionRange, 1) // Android Fix
   }
 }
+
+export default {
+  setCursor,
+}

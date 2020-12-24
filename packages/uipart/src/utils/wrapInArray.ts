@@ -11,3 +11,5 @@ export const wrapInArray = <T>(v: T | T[] | null | undefined): T[] => {
       ? v
       : [v]
 }
+
+export default wrapInArray

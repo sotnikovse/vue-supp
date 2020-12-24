@@ -2,8 +2,8 @@ import { ref, computed, onMounted, SetupContext } from 'vue'
 
 import { SetupProps } from '../../types'
 
-import { deepEqual } from '../utils/check'
-import { wrapInArray } from '../utils/array'
+import deepEqual from '../utils/deepEqual'
+import wrapInArray from '../utils/wrapInArray'
 
 export const useGroupProps = () => {
   return {

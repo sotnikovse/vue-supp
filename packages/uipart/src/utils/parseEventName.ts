@@ -18,3 +18,5 @@ export const parseEventName = (name: string): [string, AddEventListenerOptions |
   }
   return [name.slice(2).toLowerCase(), options]
 }
+
+export default parseEventName

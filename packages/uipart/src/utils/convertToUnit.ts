@@ -13,3 +13,5 @@ export const convertToUnit = (value: string | number | null | undefined, unit = 
     return `${Number(value)}${unit}`
   }
 }
+
+export default convertToUnit

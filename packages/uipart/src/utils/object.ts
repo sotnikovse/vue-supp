@@ -45,3 +45,9 @@ export const getPropertyFromItem = (
 
   return typeof value === 'undefined' ? fallback : value
 }
+
+export default {
+  getNestedValue,
+  getObjectValueByPath,
+  getPropertyFromItem,
+}
