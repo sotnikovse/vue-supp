@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.4](https://github.com/5cube/upart/compare/v0.5.3...v0.5.4) (2020-12-24)
+
+
+### Bug Fixes
+
+* rollup config ([8c35c68](https://github.com/5cube/upart/commit/8c35c68ade84cada33c0c1d8fc38ab26bf63b25c))
+* toUnit -> convertToUnit ([98bfc16](https://github.com/5cube/upart/commit/98bfc16082b91391bc75815eebfb7e361ac890cc))
+* util/ -> utils/ ([8b873d8](https://github.com/5cube/upart/commit/8b873d8e2d1cc6cbcff240bca9308a013e6ed9b5))
+
+
+
+
+
 ## [0.5.3](https://github.com/5cube/upart/compare/v0.5.2...v0.5.3) (2020-12-23)
 
 
