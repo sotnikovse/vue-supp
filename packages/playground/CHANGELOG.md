@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.3](https://github.com/5cube/uipart/compare/v0.5.2...v0.5.3) (2020-12-23)
+
+**Note:** Version bump only for package @uipart/playground
+
+
+
+
+
 ## [0.5.2](https://github.com/5cube/uipart/compare/v0.5.1...v0.5.2) (2020-12-22)
 
 **Note:** Version bump only for package @uipart/playground
