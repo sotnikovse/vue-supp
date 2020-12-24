@@ -15,7 +15,7 @@ import { SetupProps } from '../../types'
 
 import { toggle } from './toggle'
 
-import { parseEventName } from '../util/parse'
+import { parseEventName } from '../utils/parse'
 
 export const useActivatorProps = () => {
   return {

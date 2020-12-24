@@ -1,6 +1,6 @@
 import { computed, Prop } from 'vue'
 
-import { convertToUnit } from '../util/convert'
+import { convertToUnit } from '../utils/convert'
 
 const PROPS = {
   width: {

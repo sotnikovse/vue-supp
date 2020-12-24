@@ -8,7 +8,7 @@ import type {
   TouchWrapper,
 } from '../../types'
 
-import uid from '../util/uid'
+import uid from '../utils/uid'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
