@@ -2,20 +2,14 @@ import ts from 'rollup-plugin-typescript2'
 import json from '@rollup/plugin-json'
 import pkg from './package.json'
 
-const banner = `/*!
-  * ${pkg.name} v${pkg.version}
-  * (c) ${new Date().getFullYear()}
-  * Released under the ${pkg.license} License.
-  */`
-
 const outputConfigs = {
   'esm': {
     file: pkg.module,
-    format: `es`
+    format: 'es'
   },
   cjs: {
     file: pkg.main,
-    format: `cjs`
+    format: 'cjs'
   },
 }
 
@@ -28,8 +22,6 @@ function createConfig (format, output, plugins = []) {
     console.log(require('chalk').yellow(`invalid format: "${format}"`))
     process.exit(1)
   }
-
-  output.banner = banner
 
   const tsPlugin = ts({
     check: false,
