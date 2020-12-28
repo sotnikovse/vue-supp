@@ -13,10 +13,12 @@
 </template>
 
 <script lang="ts">
-import { reactive, ref } from 'vue'
-import { useToggle } from 'uipart'
+import { reactive, ref, SetupContext } from 'vue'
+import { toggle } from 'uipart'
 
-import Btn from '/~/components/Btn.vue'
+import Btn from '/~/components/Btn'
+
+const { useToggle } = toggle()
 
 export default {
   name: 'Toggle',
@@ -26,7 +28,7 @@ export default {
     const toggleProps = reactive({
       modelValue: toggle,
     })
-    const { isActive } = useToggle(toggleProps, { emit })
+    const { isActive } = useToggle(toggleProps, { emit } as SetupContext)
     return {
       toggle,
       isActive,

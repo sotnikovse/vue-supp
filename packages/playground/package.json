@@ -4,7 +4,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "vite --port=8080",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint src -f codeframe"
   },
