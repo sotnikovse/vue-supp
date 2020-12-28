@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/5cube/upart/compare/v0.5.4...v0.5.5) (2020-12-28)
+
+
+### Bug Fixes
+
+* activator element select on nested slot ([76bb5e2](https://github.com/5cube/upart/commit/76bb5e2f0ec2340f5b2ea5e34964df718f55b01c))
+* utils refactored ([dd5010a](https://github.com/5cube/upart/commit/dd5010adff1a63114ccff7813364b87dfa7b944b))
+
+
+
+
+
 ## [0.5.4](https://github.com/5cube/upart/compare/v0.5.3...v0.5.4) (2020-12-24)
 
 
