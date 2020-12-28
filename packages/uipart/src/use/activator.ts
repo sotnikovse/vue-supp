@@ -237,6 +237,10 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
         // HTMLElement | Element
         _activator = props.activator
       }
+    } else if (activatorNode.value && activatorNode.value.key === '_activator' && activatorNode.value.children.length) {
+      // set correct element on nested activator slot
+      // TODO: select element recursively if element type is 'Symbol' or 'text'
+      _activator = activatorNode.value.children[0].el
     } else if (activatorNode.value) {
       _activator = activatorNode.value.el
     }
