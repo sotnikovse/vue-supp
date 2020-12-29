@@ -2,13 +2,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 import { SetupProps } from '../../types'
 
-export interface ElementRectProps {
+export interface ClientRectProps {
   element: Element | HTMLElement
   hasResizeListener?: boolean
   shouldRound?: boolean
 }
 
-export const useClientRect = (props: ElementRectProps | SetupProps) => {
+export const useClientRect = (props: ClientRectProps | SetupProps) => {
   const options: AddEventListenerOptions = {
     passive: true,
   }

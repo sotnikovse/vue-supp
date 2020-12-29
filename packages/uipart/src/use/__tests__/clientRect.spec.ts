@@ -1,6 +1,6 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { h, defineComponent, readonly, toRefs, PropType } from 'vue'
-import { useClientRect } from '../elementRect'
+import { useClientRect } from '../clientRect'
 
 describe('Dimensions', () => {
   let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
