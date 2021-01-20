@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/5cube/vue-supp/compare/v0.7.0...v0.7.1) (2021-01-20)
+
+
+### Bug Fixes
+
+* refactor ([98ea329](https://github.com/5cube/vue-supp/commit/98ea329e934705765b298e07bd36962491b4fd94))
+
+
+
+
+
 # [0.7.0](https://github.com/5cube/vue-supp/compare/v0.6.0...v0.7.0) (2021-01-20)
 
 
