@@ -1,11 +1,13 @@
 import ts from 'rollup-plugin-typescript2'
+import analyze from 'rollup-plugin-analyzer'
 import json from '@rollup/plugin-json'
 import pkg from './package.json'
 
 const outputConfigs = {
   'esm': {
     file: pkg.module,
-    format: 'es'
+    format: 'es',
+    plugins: [analyze({ summaryOnly: true })],
   },
   cjs: {
     file: pkg.main,
