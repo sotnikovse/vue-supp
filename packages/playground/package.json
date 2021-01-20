@@ -1,5 +1,5 @@
 {
-  "name": "@uipart/playground",
+  "name": "@vue-supp/playground",
   "version": "0.7.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "lint": "eslint src -f codeframe"
   },
   "dependencies": {
-    "uipart": "^0.7.0",
+    "vue-supp": "^0.7.0",
     "vue": "^3.0.5",
     "vue-router": "^4.0.2"
   },

@@ -101,14 +101,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-* vue-supp package version ([41c2b7a](https://github.com/5cube/vue-supp/commit/41c2b7a27c74fb516df31922787c3d7961d848bb))
 * **lib:** removed vite ([0c0687b](https://github.com/5cube/vue-supp/commit/0c0687bbe61ac56b121f70a539d6d72ce6abdc65))
 * **vue-supp:** installed eslint & jest ([ffa3afa](https://github.com/5cube/vue-supp/commit/ffa3afae24db42ba85e654882e0c6dfd901672be))
 
 
 ### Features
 
-* add playground package ([41b05e1](https://github.com/5cube/vue-supp/commit/41b05e1e7b7d7ec09b40633c81ef3d36baaade46))
 * added directives ([85b07a0](https://github.com/5cube/vue-supp/commit/85b07a0f50da22c58c338b004c87f5eb2a9940af))
 
 
@@ -182,11 +180,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 # [0.2.0](https://github.com/5cube/vue-supp/compare/v0.1.0...v0.2.0) (2020-12-18)
-
-
-### Bug Fixes
-
-* added npm publish script ([a11f734](https://github.com/5cube/vue-supp/commit/a11f73428295b83ade0a333910675b48954e580d))
 
 
 ### Features

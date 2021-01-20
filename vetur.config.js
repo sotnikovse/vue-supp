@@ -2,6 +2,6 @@
 module.exports = {
   projects: [
     './packages/playground',
-    './packages/uipart',
+    './packages/vue-supp',
   ]
 }

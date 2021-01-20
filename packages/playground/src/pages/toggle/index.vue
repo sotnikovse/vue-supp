@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { reactive, ref, SetupContext } from 'vue'
-import { toggle } from 'uipart'
+import { toggle } from 'vue-supp'
 
 import Btn from '/~/components/Btn'
 

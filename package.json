@@ -1,5 +1,5 @@
 {
-  "repository": "https://github.com/5cube/upart",
+  "repository": "https://github.com/5cube/vue-supp",
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -9,9 +9,9 @@
     "publish-ci": "lerna publish",
     "clean": "lerna clean",
     "lerna": "lerna",
-    "playground": "yarn workspace @uipart/playground",
-    "uipart": "yarn workspace uipart",
-    "build": "lerna run build --scope=uipart --stream"
+    "playground": "yarn workspace @vue-supp/playground",
+    "vue-supp": "yarn workspace vue-supp",
+    "build": "lerna run build --scope=vue-supp --stream"
   },
   "engines": {
     "node": "^12 || ^14",

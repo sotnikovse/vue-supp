@@ -20,9 +20,9 @@ import {
   useAttachProps,
   dimensions,
   ClickOutside,
-} from 'uipart'
+} from 'vue-supp'
 
-import convertToUnit from 'uipart/src/utils/convertToUnit'
+import convertToUnit from 'vue-supp/src/utils/convertToUnit'
 
 const { useDimensionsProps, useDimensions } = dimensions('width', 'maxWidth')
 

@@ -4,10 +4,10 @@
 
 ```bash
 # With npm
-npm i uipart
+npm i vue-supp
 
 # With Yarn
-yarn add uipart
+yarn add vue-supp
 ```
 
 ## Documentation

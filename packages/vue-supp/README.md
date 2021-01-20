@@ -4,17 +4,17 @@
 
 ```bash
 # With npm
-npm i uipart
+npm i vue-supp
 
 # With Yarn
-yarn add uipart
+yarn add vue-supp
 ```
 
 ## Usage
 
 ### Toggle use with default
 ```js
-import { toggle } from 'uipart'
+import { toggle } from 'vue-supp'
 
 const { useToggleProps, useToggleEmits, useToggle } = toggle()
 
@@ -37,7 +37,7 @@ export default {
 
 ### Toggle use with custom
 ```js
-import { toggle } from 'uipart'
+import { toggle } from 'vue-supp'
 
 const { useToggleProps, useToggleEmits, useToggle } = toggle('value', 'update:value')
 
@@ -61,7 +61,7 @@ export default {
 ### Toggle props
 ```js
 import { reactive, computed, toRefs } from 'vue'
-import { toggle } from 'uipart'
+import { toggle } from 'vue-supp'
 
 const { useToggleProps, useToggleEmits, useToggle } = toggle()
 

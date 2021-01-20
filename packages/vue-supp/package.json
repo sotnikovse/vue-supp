@@ -1,17 +1,17 @@
 {
-  "name": "uipart",
+  "name": "vue-supp",
   "description": "Vue 3 use-case, utility library for creating custom base components.",
   "version": "0.7.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/5cube/upart",
-    "directory": "packages/uipart"
+    "url": "git+https://github.com/5cube/vue-supp",
+    "directory": "packages/vue-supp"
   },
   "bugs": {
-    "url": "https://github.com/5cube/upart/issues"
+    "url": "https://github.com/5cube/vue-supp/issues"
   },
   "keywords": [
-    "uipart",
+    "vue-supp",
     "ui library"
   ],
   "license": "MIT",
