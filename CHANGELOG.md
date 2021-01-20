@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/5cube/upart/compare/v0.6.0...v0.7.0) (2021-01-20)
+
+
+### Features
+
+* added replaceAt util ([448c67d](https://github.com/5cube/upart/commit/448c67d7acccdada76c0c6881ed74052693b3723))
+
+
+
+
+
 # [0.6.0](https://github.com/5cube/upart/compare/v0.5.6...v0.6.0) (2021-01-20)
 
 
