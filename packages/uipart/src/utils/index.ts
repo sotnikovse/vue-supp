@@ -1,11 +1,26 @@
-export * from './wrapInArray'
-export * from './check'
-export * from './convertToUnit'
-export * from './dom'
+// check
+export * from './isString'
+export * from './isNumber'
+
+// dom
+export * from './setCursor'
+
+// format number
 export * from './formatNumber'
-export * from './object'
-export * from './parseEventName'
+export * from './unformatNumber'
+
+// object
+export * from './getNestedValue'
+export * from './getObjectValueByPath'
+export * from './getPropertyFromItem'
+
+// array
+export * from './wrapInArray'
+
+// helpers
 export * from './uid'
 export * from './wait'
-export * from './upperFirst'
 export * from './deepEqual'
+export * from './upperFirst'
+export * from './convertToUnit'
+export * from './parseEventName'

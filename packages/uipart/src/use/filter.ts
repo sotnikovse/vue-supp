@@ -2,7 +2,7 @@ import { ref, computed, watch, PropType, SetupContext } from 'vue'
 
 import { SetupProps } from '../../types'
 
-import { getPropertyFromItem } from '../utils/object'
+import getPropertyFromItem from '../utils/getPropertyFromItem'
 
 const EVENT = 'update:search'
 
