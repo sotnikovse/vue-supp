@@ -2,6 +2,7 @@ import ts from 'rollup-plugin-typescript2'
 import analyze from 'rollup-plugin-analyzer'
 import json from '@rollup/plugin-json'
 import pkg from './package.json'
+import { terser } from 'rollup-plugin-terser'
 
 const outputConfigs = {
   'esm': {
@@ -67,7 +68,14 @@ function createConfig (format, output, plugins = []) {
       }),
       tsPlugin,
       ...nodePlugins,
-      ...plugins
+      ...plugins,
+      terser({
+        module: /^esm/.test(format),
+        compress: {
+          ecma: 2015,
+          pure_getters: true
+        }
+      }),
     ],
     output,
     treeshake: {
