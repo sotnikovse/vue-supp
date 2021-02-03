@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.2](https://github.com/5cube/vue-supp/compare/v0.7.1...v0.7.2) (2021-02-03)
+
+
+### Bug Fixes
+
+* **build:** target es5 & minify ([92d7458](https://github.com/5cube/vue-supp/commit/92d7458aae47f680628af31d0cd246e1be5995f0))
+
+
+
+
+
 ## [0.7.1](https://github.com/5cube/vue-supp/compare/v0.7.0...v0.7.1) (2021-01-20)
 
 
