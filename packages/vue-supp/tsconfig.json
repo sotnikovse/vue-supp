@@ -3,10 +3,10 @@
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts",
-    "types",
+    "types"
   ],
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "declaration": true,
     "removeComments": true,
     "rootDir": "./src",
@@ -16,6 +16,6 @@
       "@/*": [
         "src/*"
       ]
-    },
+    }
   }
 }

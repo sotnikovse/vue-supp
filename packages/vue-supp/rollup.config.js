@@ -2,7 +2,6 @@ import ts from 'rollup-plugin-typescript2'
 import analyze from 'rollup-plugin-analyzer'
 import json from '@rollup/plugin-json'
 import pkg from './package.json'
-import { terser } from 'rollup-plugin-terser'
 
 const outputConfigs = {
   'esm': {
@@ -12,7 +11,7 @@ const outputConfigs = {
   },
   cjs: {
     file: pkg.main,
-    format: 'cjs'
+    format: 'cjs',
   },
 }
 
@@ -35,8 +34,8 @@ function createConfig (format, output, plugins = []) {
         sourceMap: true,
         declaration: true,
       },
-      exclude: ['node_modules', '**/__tests__']
-    }
+      exclude: ['node_modules', '**/__tests__'],
+    },
   })
 
   const external = [
@@ -49,13 +48,13 @@ function createConfig (format, output, plugins = []) {
     format !== 'cjs'
       ? [
           require('@rollup/plugin-node-resolve').nodeResolve({
-            preferBuiltins: true
+            preferBuiltins: true,
           }),
           require('@rollup/plugin-commonjs')({
-            sourceMap: false
+            sourceMap: false,
           }),
           require('rollup-plugin-node-builtins')(),
-          require('rollup-plugin-node-globals')()
+          require('rollup-plugin-node-globals')(),
         ]
       : []
 
@@ -64,22 +63,15 @@ function createConfig (format, output, plugins = []) {
     external,
     plugins: [
       json({
-        namedExports: false
+        namedExports: false,
       }),
       tsPlugin,
       ...nodePlugins,
       ...plugins,
-      terser({
-        module: /^esm/.test(format),
-        compress: {
-          ecma: 2015,
-          pure_getters: true
-        }
-      }),
     ],
     output,
     treeshake: {
-      moduleSideEffects: false
+      moduleSideEffects: false,
     }
   }
 }
