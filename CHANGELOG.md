@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/5cube/vue-supp/compare/v0.7.2...v0.7.3) (2021-02-04)
+
+
+### Bug Fixes
+
+* activator prop type ([f7e925c](https://github.com/5cube/vue-supp/commit/f7e925c980a1f298c14995136b4692fa02e1a64c))
+
+
+### Reverts
+
+* target es5 & minify ([4a7cc40](https://github.com/5cube/vue-supp/commit/4a7cc403c5b2889469d2fbec07519a11bca10015))
+
+
+
+
+
 ## [0.7.2](https://github.com/5cube/vue-supp/compare/v0.7.1...v0.7.2) (2021-02-03)
 
 
