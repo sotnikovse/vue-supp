@@ -9,6 +9,8 @@ import {
   nextTick,
   watch,
   SetupContext,
+  PropType,
+  VNode,
 } from 'vue'
 
 import { SetupProps } from '../../types'
@@ -24,8 +26,10 @@ export const useActivatorProps = () => {
       default: false,
     },
     activator: {
-      type: [String, Object, HTMLElement, Element],
-      default: null,
+      default: null as unknown as PropType<string | HTMLElement | VNode | Element | null>,
+      validator: (val: string | Record<string, unknown>) => {
+        return ['string', 'object'].includes(typeof val)
+      },
     },
     openOnHover: {
       type: Boolean,
