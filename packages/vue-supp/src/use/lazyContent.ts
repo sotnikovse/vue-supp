@@ -12,10 +12,10 @@ export interface LazyContentSetupProps extends LazyContentProps {
 export interface LazyContent {
   isBooted: Ref<boolean>
   hasContent: ComputedRef<boolean>
-  showLazyContent: () => VNode[] | undefined
+  showLazyContent: (content?: () => VNode | VNode[]) => VNode | VNode[] | undefined
 }
 
-export const useLazyContentProps = (): Record<string, PropType<boolean>> => {
+export const useLazyContentProps = (): Required<LazyContentProps> => {
   return {
     eager: Boolean,
     disabled: Boolean,
@@ -34,7 +34,7 @@ export const useLazyContent = (props: LazyContentSetupProps | SetupProps): LazyC
     isBooted.value = true
   })
 
-  const showLazyContent = (content?: () => VNode[]): VNode[] | undefined => {
+  const showLazyContent = (content?: () => VNode | VNode[]): VNode | VNode[] | undefined => {
     return (hasContent.value && content) ? content() : undefined
   }
 
