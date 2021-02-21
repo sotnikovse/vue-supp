@@ -162,7 +162,7 @@ export const usePopper = (props: SetupProps) => {
     destroy()
   })
 
-  const create = (reference: HTMLElement, popper: HTMLElement) => {
+  const create = (reference: HTMLElement | undefined, popper: HTMLElement | undefined) => {
     destroy()
     if (!reference || !popper) return
     const options = {
