@@ -51,7 +51,7 @@ export interface InputProps {
  * @param {Object} context The setup context.
  */
 export const useInput = (props: InputProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
-  const inputElement = ref<HTMLElement | null>(null)
+  const inputElement = ref<HTMLElement>()
   const internal = ref<InputValue>(props.modelValue)
   const isFocused = ref<boolean>(false)
   const badInput = ref<boolean>(false)
@@ -67,13 +67,13 @@ export const useInput = (props: InputProps | SetupProps, { emit }: Pick<SetupCon
   })
 
   const focus = () => {
-    inputElement.value && inputElement.value.focus()
+    inputElement.value?.focus()
   }
 
   const blur = () => {
     // Safari tab order gets broken if called synchronous
     window.requestAnimationFrame(() => {
-      inputElement.value && inputElement.value.blur()
+      inputElement.value?.blur()
     })
   }
 

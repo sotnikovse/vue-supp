@@ -116,8 +116,8 @@ export const usePopper = (props: SetupProps) => {
   const instance = ref<any>(null)
   const isVisible = ref<boolean>(false) // visibility for root element, for lazy content
   const isContentVisible = ref<boolean>(false) // visibility of content, for toggling animation
-  const wrapperElement = ref<HTMLElement|null>(null)
-  const boxOffsetElement = ref<HTMLElement|null>(null)
+  const wrapperElement = ref<HTMLElement>()
+  const boxOffsetElement = ref<HTMLElement>()
 
   const { attach, width, minWidth, maxWidth, height, minHeight, maxHeight } = toRefs(props)
 

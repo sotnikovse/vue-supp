@@ -68,8 +68,8 @@ export interface ActivatorProps {
  * @param {boolean} [props.disableKeys]
  */
 export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }: Pick<SetupContext, 'slots'|'emit'>) => {
-  const activatorNode = ref<any>(null)
-  const activatorElement = ref<HTMLElement|null>(null)
+  const activatorNode = ref<any>()
+  const activatorElement = ref<HTMLElement>()
   const _listeners = ref<any>({})
 
   const { useToggle } = toggle()
@@ -108,7 +108,7 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
   // Functions
   const resetActivator = () => {
     removeActivatorEvents()
-    activatorElement.value = null
+    activatorElement.value = undefined
     getActivator()
     genActivatorListeners()
   }
