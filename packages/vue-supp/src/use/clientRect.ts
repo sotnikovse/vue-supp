@@ -13,7 +13,7 @@ export const useClientRect = (props: ClientRectProps | SetupProps) => {
     passive: true,
   }
 
-  const clientRect = ref({})
+  const clientRect = ref<DOMRectReadOnly>()
 
   const getBoundedClientRect = (el: Element | HTMLElement) => {
     const rect = el.getBoundingClientRect()
@@ -21,13 +21,13 @@ export const useClientRect = (props: ClientRectProps | SetupProps) => {
     return !props.shouldRound
       ? rect
       : {
-          top: Math.round(rect.top),
-          left: Math.round(rect.left),
-          bottom: Math.round(rect.bottom),
-          right: Math.round(rect.right),
-          width: Math.round(rect.width),
-          height: Math.round(rect.height),
-        }
+        top: Math.round(rect.top),
+        left: Math.round(rect.left),
+        bottom: Math.round(rect.bottom),
+        right: Math.round(rect.right),
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
+      } as DOMRectReadOnly
   }
 
   const updateClientRect = () => {
