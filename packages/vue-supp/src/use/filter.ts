@@ -1,6 +1,6 @@
-import { ref, computed, watch, PropType, SetupContext } from 'vue'
+import { ref, computed, watch, PropType } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 import getPropertyFromItem from '../utils/getPropertyFromItem'
 

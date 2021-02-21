@@ -7,10 +7,9 @@ import {
   onBeforeUnmount,
   inject,
   toRefs,
-  SetupContext,
 } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 export const useInputValidationProps = () => {
   return {

@@ -1,6 +1,6 @@
-import { ref, computed, onMounted, SetupContext } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 import deepEqual from '../utils/deepEqual'
 import wrapInArray from '../utils/wrapInArray'

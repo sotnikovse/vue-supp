@@ -3,10 +3,9 @@ import {
   ref,
   computed,
   onMounted,
-  SetupContext,
 } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 export const useInputProps = () => {
   return {

@@ -1,8 +1,18 @@
+import { Slots } from 'vue'
+
 export type Dictionary<T> = Record<string, T>
 
 export type ObjectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
 
 export type SetupProps = Record<string, any>
+
+export type Data = Record<string, unknown>
+
+export interface SetupContext {
+  attrs: Data
+  slots: Slots
+  emit: (event: string, ...args: unknown[]) => void
+}
 
 /* eslint-disable no-use-before-define */
 

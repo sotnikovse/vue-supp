@@ -1,6 +1,6 @@
-import { ref, watch, Ref, Prop, SetupContext } from 'vue'
+import { ref, watch, Ref, Prop } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 export interface ToggleProps {
   modelValue: Prop<any>

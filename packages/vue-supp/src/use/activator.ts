@@ -10,10 +10,9 @@ import {
   watch,
   PropType,
   VNode,
-  SetupContext,
 } from 'vue'
 
-import { SetupProps } from '../../types'
+import { SetupProps, SetupContext } from '../../types'
 
 import { toggle } from './toggle'
 
