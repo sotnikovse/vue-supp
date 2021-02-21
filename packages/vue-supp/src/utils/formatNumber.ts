@@ -59,7 +59,7 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
 
   // Do some calc:
   const negative = number < 0 ? '-' : ''
-  const base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + '' // eslint-disable-line
+  const base = parseInt(toFixed(Math.abs(number || 0), usePrecision), 10) + ''
   const mod = base.length > 3 ? base.length % 3 : 0
 
   // Format the number:
@@ -75,9 +75,9 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
  */
 const toFixed = (value: number, precision: number): string => {
   precision = checkPrecision(precision, 0)
-  const exponentialForm = Number(unformatNumber(value) + 'e' + precision) // eslint-disable-line
+  const exponentialForm = Number(unformatNumber(value) + 'e' + precision)
   const rounded = Math.round(exponentialForm)
-  const finalResult = Number(rounded + 'e-' + precision).toFixed(precision) // eslint-disable-line
+  const finalResult = Number(rounded + 'e-' + precision).toFixed(precision)
   return finalResult
 }
 

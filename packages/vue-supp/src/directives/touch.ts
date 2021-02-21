@@ -103,7 +103,7 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   const handlers = createHandlers(binding.value)
 
   target._touchHandlers = target._touchHandlers ?? Object.create(null)
-  target._touchHandlers![_uid] = handlers // eslint-disable-line
+  target._touchHandlers![_uid] = handlers // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
   Object.keys(handlers).forEach(eventName => {
     // @ts-ignore
