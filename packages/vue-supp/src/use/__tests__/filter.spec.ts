@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h, reactive, defineComponent, SetupContext } from 'vue'
+import { h, reactive, defineComponent } from 'vue'
 import { useFilterProps, useFilterEmits, useFilter } from '../filter'
 
 describe('Filter', () => {
@@ -41,7 +41,7 @@ describe('Filter', () => {
         getText,
         getValue,
         clearSearch,
-      } = useFilter(reactive(props), { emit } as SetupContext)
+      } = useFilter(reactive(props), { emit })
 
       return {
         search,

@@ -50,7 +50,7 @@ export interface InputProps {
  * @prop {string} [props.inputClass]
  * @param {Object} context The setup context.
  */
-export const useInput = (props: InputProps | SetupProps, { emit }: SetupContext) => {
+export const useInput = (props: InputProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const inputElement = ref<HTMLElement | null>(null)
   const internal = ref<InputValue>(props.modelValue)
   const isFocused = ref<boolean>(false)

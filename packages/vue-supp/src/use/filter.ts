@@ -48,7 +48,7 @@ export interface FilterProps {
   noFilter?: boolean
   filter: () => void
 }
-export const useFilter = (props: FilterProps | SetupProps, { emit }: SetupContext) => {
+export const useFilter = (props: FilterProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const search = ref<string | null | undefined>(props.search)
 
   const searchIsDirty = computed(() => {

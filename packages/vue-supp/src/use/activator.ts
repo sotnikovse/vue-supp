@@ -8,9 +8,9 @@ import {
   onUnmounted,
   nextTick,
   watch,
-  SetupContext,
   PropType,
   VNode,
+  SetupContext,
 } from 'vue'
 
 import { SetupProps } from '../../types'
@@ -67,7 +67,7 @@ export interface ActivatorProps {
  * @param {boolean} [props.openOnClick]
  * @param {boolean} [props.disableKeys]
  */
-export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }: SetupContext) => {
+export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }: Pick<SetupContext, 'slots'|'emit'>) => {
   const activatorNode = ref<any>(null)
   const activatorElement = ref<HTMLElement|null>(null)
   const _listeners = ref<any>({})
@@ -77,7 +77,7 @@ export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }
   const toggleProps = reactive({
     modelValue: computed(() => props.modelValue),
   })
-  const { isActive } = useToggle(toggleProps, { emit } as SetupContext)
+  const { isActive } = useToggle(toggleProps, { emit })
 
   watch([() => props.activator, () => props.openOnHover], () => {
     resetActivator()

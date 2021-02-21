@@ -39,7 +39,7 @@ export interface GroupProps {
  * @prop {number} [props.max]
  * @param {Object} context The setup context.
  */
-export const useGroup = (props: GroupProps | SetupProps, { emit }: SetupContext) => {
+export const useGroup = (props: GroupProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const items = ref<any[]>([])
 
   const internal = ref(props.modelValue)

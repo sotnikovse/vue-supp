@@ -57,7 +57,7 @@ export const useInputValidationProps = () => {
  * @param {Object} context The setup context.
  * @param {Symbol} injectKey The injection key.
  */
-export const useInputValidation = (props: SetupProps, { emit }: SetupContext, injectKey: symbol) => {
+export const useInputValidation = (props: SetupProps, { emit }: Pick<SetupContext, 'emit'>, injectKey: symbol) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
 
   const { internalValue } = toRefs(props)
