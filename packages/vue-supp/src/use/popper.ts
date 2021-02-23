@@ -10,6 +10,7 @@ import {
   withDirectives,
   vShow,
   reactive,
+  VNode,
 } from 'vue'
 
 import { SetupProps } from '../../types'
@@ -239,7 +240,7 @@ export const usePopper = (props: SetupProps) => {
     return undefined
   }
 
-  const genBox = (data: any = {}, children = []) => {
+  const genBox = (data: any = {}, children: (VNode | undefined)[] = []) => {
     const dataClasses = data.class && Array.isArray(data.class) ? data.class : data.class ? [data.class] : []
     const dataStyles = data.style ? data.style : {}
     const boxData = {
