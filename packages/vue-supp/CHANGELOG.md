@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/5cube/vue-supp/compare/v0.7.3...v0.7.4) (2021-03-08)
+
+
+### Bug Fixes
+
+* **clientRect:** DOMRectReadOnly type ([675bfdb](https://github.com/5cube/vue-supp/commit/675bfdb1f3f9127d457ec94898003ef25c36b525))
+* **filter:** filter prop type ([12fc2e2](https://github.com/5cube/vue-supp/commit/12fc2e20718a32360cabd50117d6471509a03c97))
+* **popper:** create args types ([6c1851c](https://github.com/5cube/vue-supp/commit/6c1851c13b7255f8214b55e4b39fbe3a28c7284b))
+* **popper:** genBox type ([d4d1ff4](https://github.com/5cube/vue-supp/commit/d4d1ff47bf524045c8d5c2e6517ddabf4d866f3a))
+* custom SetupContext type ([8da8336](https://github.com/5cube/vue-supp/commit/8da83360c4420f8874381b6a06c771d0ed9fc28c))
+* lazyContent interfaces ([f144ee5](https://github.com/5cube/vue-supp/commit/f144ee52314a11c4de32d267fc722e4d6e3d8a1e))
+* ref types ([98029d4](https://github.com/5cube/vue-supp/commit/98029d4b524e989ea69f90cec5408cc9f718c104))
+* SetupContext interface picks ([134197e](https://github.com/5cube/vue-supp/commit/134197ee199212bee34bfe3b39f2513d301d671a))
+
+
+
+
+
 ## [0.7.3](https://github.com/5cube/vue-supp/compare/v0.7.2...v0.7.3) (2021-02-04)
 
 
