@@ -29,7 +29,7 @@ export const useFilterProps = () => {
     },
     filter: {
       type: Function,
-      default: (_: any, queryText: string, itemText: string) => {
+      default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
     },
@@ -46,7 +46,7 @@ export interface FilterProps {
   itemText: string
   itemValue: string
   noFilter?: boolean
-  filter: () => void
+  filter: (item: any, queryText: string, itemText: string) => boolean
 }
 export const useFilter = (props: FilterProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const search = ref<string | null | undefined>(props.search)
