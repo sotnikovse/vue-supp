@@ -21,7 +21,7 @@ import parseEventName from '../utils/parseEventName'
 export const useActivatorProps = () => {
   return {
     modelValue: {
-      type: [Boolean, String, Number],
+      type: [Boolean, String, Number, Date],
       default: false,
     },
     activator: {
