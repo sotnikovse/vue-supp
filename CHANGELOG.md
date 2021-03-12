@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.6](https://github.com/5cube/vue-supp/compare/v0.7.5...v0.7.6) (2021-03-12)
+
+
+### Reverts
+
+* activator modelValue access Date ([31df25c](https://github.com/5cube/vue-supp/commit/31df25cedc2ba4e729db822a04a05b49f56e410c))
+
+
+
+
+
 ## [0.7.5](https://github.com/5cube/vue-supp/compare/v0.7.4...v0.7.5) (2021-03-09)
 
 
