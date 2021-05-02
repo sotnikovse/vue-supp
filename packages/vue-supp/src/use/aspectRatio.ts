@@ -3,9 +3,6 @@ import { computed, PropType, ComputedRef } from 'vue'
 export interface AspectRatioProps {
   aspectRatio?: string | number
 }
-export interface UseAspectRatioProps {
-  aspectRatio: string | number | undefined
-}
 export interface UseAspectRatio {
   computedAspectRatio: ComputedRef<number>
   aspectStyle: ComputedRef<Record<string, string> | undefined>

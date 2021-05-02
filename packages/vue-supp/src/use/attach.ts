@@ -1,21 +1,16 @@
-import { computed, Prop, ComputedRef } from 'vue'
+import { computed, ComputedRef, PropType } from 'vue'
 
 export interface AttachProps {
-  attach: string | boolean | undefined
-}
-export interface UseAttachProp {
-  attach: Prop<string | boolean | undefined>
+  attach: string | boolean | null | undefined
 }
 export interface UseAttach {
   target: ComputedRef<string | null>
 }
 
-export const useAttachProps = (
-  defaultValue: string | boolean = true
-): UseAttachProp => {
+export const useAttachProps = (defaultValue: string | boolean = true) => {
   return {
     attach: {
-      type: [String, Boolean],
+      type: [String, Boolean] as PropType<string | boolean | null | undefined>,
       default: defaultValue,
     },
   }
