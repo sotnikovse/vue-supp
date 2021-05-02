@@ -1,5 +1,5 @@
 <template>
-  <div class="container flex items-center space-x-4 border-b h-12">
+  <div class="container mx-auto flex items-center space-x-4 border-b h-12">
     <router-link
       v-for="item in items"
       :key="item.text"
@@ -16,20 +16,21 @@
       </span>
     </router-link>
   </div>
-  <div class="container py-8">
-    <router-view />
+  <div class="container mx-auto py-8">
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   name: 'App',
-  data () {
+  data() {
     return {
       items: [
         { text: 'Home', to: '/' },
         { text: 'Toggle', to: '/toggle' },
-        { text: 'Measure', to: '/measure' },
         { text: 'Activator', to: '/activator' },
       ],
     }

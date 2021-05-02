@@ -7,10 +7,10 @@
   </Modal>
 </template>
 
-<script>
-import { watch, ref, toRefs, onMounted } from 'vue'
-import Modal from '/~/components/Modal'
-export default {
+<script lang="ts">
+import { defineComponent, watch, ref, toRefs } from 'vue'
+import Modal from './Modal'
+export default defineComponent({
   components: { Modal },
 
   props: {
@@ -22,14 +22,14 @@ export default {
 
   emits: ['update:modelValue'],
 
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const activator = ref(null)
     const { modelValue } = toRefs(props)
     const internal = ref(modelValue.value)
-    watch(modelValue, val => {
+    watch(modelValue, (val) => {
       internal.value = val
     })
-    watch(internal, val => {
+    watch(internal, (val) => {
       emit('update:modelValue', val)
     })
 
@@ -38,5 +38,5 @@ export default {
       activator,
     }
   },
-}
+})
 </script>

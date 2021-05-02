@@ -1,16 +1,13 @@
-import {
-  h,
-  defineComponent,
-  SetupContext,
-  computed,
-} from 'vue'
+import { defineComponent, h, computed } from 'vue'
 
 export default defineComponent({
+  name: 'Btn',
+
   props: {
     small: Boolean,
   },
 
-  setup (props: Record<string, any>, { slots }: SetupContext) {
+  setup(props, { slots }) {
     const classes = computed(() => {
       return [
         'inline-flex items-center justify-center',
@@ -20,19 +17,11 @@ export default defineComponent({
       ]
     })
 
-    const genSlot = () => {
-      return slots.default ? slots.default() : undefined
-    }
-
-    return {
-      classes,
-      genSlot,
-    }
+    return () =>
+      h(
+        'button',
+        { class: classes.value },
+        slots.default ? slots.default() : undefined
+      )
   },
-
-  render () {
-    return h('button', {
-      class: this.classes,
-    }, this.genSlot())
-  }
 })

@@ -2,9 +2,7 @@
   <div>
     Toggle
     <div>
-      <Btn @click="toggle = !toggle">
-        Btn
-      </Btn>
+      <Btn @click="toggle = !toggle"> Btn </Btn>
       <div class="py-4">
         {{ isActive }}
       </div>
@@ -16,14 +14,14 @@
 import { reactive, ref, SetupContext } from 'vue'
 import { toggle } from 'vue-supp'
 
-import Btn from '/~/components/Btn'
+import Btn from '../../components/Btn'
 
 const { useToggle } = toggle()
 
 export default {
   name: 'Toggle',
   components: { Btn },
-  setup (props, { emit }) {
+  setup(props, { emit }) {
     const toggle = ref(false)
     const toggleProps = reactive({
       modelValue: toggle,
