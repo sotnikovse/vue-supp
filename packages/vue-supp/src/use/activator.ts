@@ -12,11 +12,21 @@ import {
   VNode,
 } from 'vue'
 
-import { SetupProps, SetupContext } from '../../types'
+import { SetupContext } from '../../types'
 
 import { toggle } from './toggle'
 
 import parseEventName from '../utils/parseEventName'
+
+export interface ActivatorProps {
+  modelValue: string | number | boolean | null | undefined
+  activator: any
+  disabled: boolean
+  openOnHover: boolean
+  openOnFocus: boolean
+  openOnClick: boolean
+  disableKeys: boolean
+}
 
 export const useActivatorProps = () => {
   return {
@@ -47,26 +57,7 @@ export const useActivatorProps = () => {
   }
 }
 
-export interface ActivatorProps {
-  modelValue: string | number | boolean | null | undefined
-  activator: any
-  disabled: boolean
-  openOnHover: boolean
-  openOnFocus: boolean
-  openOnClick: boolean
-  disableKeys: boolean
-}
-/**
- * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {string|number|boolean} [props.modelValue]
- * @param {string|Object|HTMLElement|Element} [props.activator]
- * @param {boolean} [props.disabled]
- * @param {boolean} [props.openOnHover]
- * @param {boolean} [props.openOnFocus]
- * @param {boolean} [props.openOnClick]
- * @param {boolean} [props.disableKeys]
- */
-export const useActivator = (props: ActivatorProps | SetupProps, { slots, emit }: Pick<SetupContext, 'slots'|'emit'>) => {
+export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupContext, 'slots'|'emit'>) => {
   const activatorNode = ref<any>()
   const activatorElement = ref<HTMLElement>()
   const _listeners = ref<any>({})

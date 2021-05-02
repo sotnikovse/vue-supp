@@ -5,7 +5,19 @@ import {
   onMounted,
 } from 'vue'
 
-import { SetupProps, SetupContext } from '../../types'
+import { SetupContext } from '../../types'
+
+export type InputValue = string | number | null | undefined
+export interface InputProps {
+  modelValue: InputValue
+  name?: string
+  required?: boolean
+  readonly?: boolean
+  disabled?: boolean
+  autofocus?: boolean
+  placeholder?: string
+  inputClass?: string
+}
 
 export const useInputProps = () => {
   return {
@@ -19,37 +31,11 @@ export const useInputProps = () => {
     disabled: Boolean,
     autofocus: Boolean,
     placeholder: String,
-    inputClass: {
-      type: String,
-      default: '',
-    },
+    inputClass: String,
   }
 }
 
-export type InputValue = string | number | null | undefined
-export interface InputProps {
-  modelValue: InputValue
-  name?: string
-  required?: boolean
-  readonly?: boolean
-  disabled?: boolean
-  autofocus?: boolean
-  placeholder?: string
-  inputClass?: string
-}
-/**
- * @param {Object} props The props of use-case.
- * @prop {string|number} [props.modelValue]
- * @prop {string} [props.name]
- * @prop {boolean} [props.required]
- * @prop {boolean} [props.readonly]
- * @prop {boolean} [props.disabled]
- * @prop {boolean} [props.autofocus]
- * @prop {string} [props.placeholder]
- * @prop {string} [props.inputClass]
- * @param {Object} context The setup context.
- */
-export const useInput = (props: InputProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
+export const useInput = (props: InputProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const inputElement = ref<HTMLElement>()
   const internal = ref<InputValue>(props.modelValue)
   const isFocused = ref<boolean>(false)
@@ -92,9 +78,7 @@ export const useInput = (props: InputProps | SetupProps, { emit }: Pick<SetupCon
       readonly: props.readonly,
       disabled: props.disabled,
       placeholder: props.placeholder,
-      class: {
-        [props.inputClass.trim()]: true,
-      },
+      class: props.inputClass ? props.inputClass.trim() : undefined,
       onFocus: onFocus,
       onBlur: onBlur,
       ...data,

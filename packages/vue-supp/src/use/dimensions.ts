@@ -2,6 +2,15 @@ import { computed, Prop } from 'vue'
 
 import convertToUnit from '../utils/convertToUnit'
 
+export interface DimensionProps {
+  height?: number | string
+  maxHeight?: number | string
+  maxWidth?: number | string
+  minHeight?: number | string
+  minWidth?: number | string
+  width?: number | string
+}
+
 const PROPS = {
   width: {
     type: [Number, String],

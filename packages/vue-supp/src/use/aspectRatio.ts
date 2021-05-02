@@ -1,25 +1,23 @@
-import { computed, Prop, ComputedRef } from 'vue'
+import { computed, PropType, ComputedRef } from 'vue'
 
-import { SetupProps } from '../../types'
-
-export interface UseAspectRatioProps {
-  aspectRatio: Prop<string | number | undefined>
-}
-export interface UseAspectRatioSetupProps {
+export interface AspectRatioProps {
   aspectRatio?: string | number
+}
+export interface UseAspectRatioProps {
+  aspectRatio: string | number | undefined
 }
 export interface UseAspectRatio {
   computedAspectRatio: ComputedRef<number>
   aspectStyle: ComputedRef<Record<string, string> | undefined>
 }
 
-export const useAspectRatioProps = (): UseAspectRatioProps => {
+export const useAspectRatioProps = () => {
   return {
-    aspectRatio: [String, Number],
+    aspectRatio: [String, Number] as PropType<string | number | undefined>,
   }
 }
 
-export const useAspectRatio = (props: UseAspectRatioSetupProps | SetupProps): UseAspectRatio => {
+export const useAspectRatio = (props: AspectRatioProps): UseAspectRatio => {
   const computedAspectRatio = computed(() => Number(props.aspectRatio))
 
   const aspectStyle = computed(() => {

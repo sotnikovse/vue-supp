@@ -1,28 +1,24 @@
 import { ref, computed, watch, Ref, ComputedRef, PropType, VNode } from 'vue'
 
-import { SetupProps } from '../../types'
-
 export interface LazyContentProps {
-  eager?: PropType<boolean>
-  disabled?: PropType<boolean>
-}
-export interface LazyContentSetupProps extends LazyContentProps {
-  isActive: PropType<boolean>
+  eager?: boolean
+  disabled?: boolean
+  isActive: boolean
 }
 export interface LazyContent {
   isBooted: Ref<boolean>
-  hasContent: ComputedRef<boolean>
+  hasContent: ComputedRef<boolean | undefined>
   showLazyContent: (content?: () => VNode | VNode[]) => VNode | VNode[] | undefined
 }
 
-export const useLazyContentProps = (): Required<LazyContentProps> => {
+export const useLazyContentProps = () => {
   return {
-    eager: Boolean,
-    disabled: Boolean,
+    eager: Boolean as PropType<boolean | undefined>,
+    disabled: Boolean as PropType<boolean | undefined>,
   }
 }
 
-export const useLazyContent = (props: LazyContentSetupProps | SetupProps): LazyContent => {
+export const useLazyContent = (props: LazyContentProps): LazyContent => {
   const isBooted = ref<boolean>(false)
 
   const hasContent = computed(() => {

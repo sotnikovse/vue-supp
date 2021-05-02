@@ -1,8 +1,17 @@
 import { ref, computed, watch, PropType } from 'vue'
 
-import { SetupProps, SetupContext } from '../../types'
+import { SetupContext } from '../../types'
 
 import getPropertyFromItem from '../utils/getPropertyFromItem'
+
+export interface FilterProps {
+  search: string | null | undefined
+  items: any[]
+  itemText: string
+  itemValue: string
+  noFilter?: boolean
+  filter: (item: any, queryText: string, itemText: string) => boolean
+}
 
 const EVENT = 'update:search'
 
@@ -16,7 +25,7 @@ export const useFilterProps = () => {
     noDataText: String,
     noResultText: String,
     items: {
-      type: Array,
+      type: Array as PropType<any[]>,
       default: () => [],
     },
     itemValue: {
@@ -28,7 +37,7 @@ export const useFilterProps = () => {
       default: 'text',
     },
     filter: {
-      type: Function,
+      type: Function as PropType<(item: any, queryText: string, itemText: string) => boolean>,
       default: (item: any, queryText: string, itemText: string) => {
         return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
       },
@@ -40,15 +49,7 @@ export const useFilterEmits = (): string[] => {
   return [EVENT]
 }
 
-export interface FilterProps {
-  search: string | null | undefined
-  items: any[]
-  itemText: string
-  itemValue: string
-  noFilter?: boolean
-  filter: (item: any, queryText: string, itemText: string) => boolean
-}
-export const useFilter = (props: FilterProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
+export const useFilter = (props: FilterProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const search = ref<string | null | undefined>(props.search)
 
   const searchIsDirty = computed(() => {

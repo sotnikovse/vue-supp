@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core'
+import { createPopper, VariationPlacement } from '@popperjs/core'
 import {
   h,
   ref,
@@ -11,21 +11,38 @@ import {
   vShow,
   reactive,
   VNode,
+  PropType,
 } from 'vue'
 
-import { SetupProps } from '../../types'
-
-import { useAttachProps, useAttach } from './attach'
-import { dimensions } from './dimensions'
+import { useAttachProps, useAttach, AttachProps } from './attach'
+import { dimensions, DimensionProps } from './dimensions'
 
 const { useDimensionsProps, useDimensions } = dimensions()
+
+export interface PopperProps extends AttachProps, DimensionProps {
+  placement?: VariationPlacement
+  left?: boolean
+  top?: boolean
+  right?: boolean
+  bottom?: boolean
+  fixed?: boolean
+  disabled?: boolean
+  allowOverflow: boolean
+  arrow: boolean
+  skidding: string | number
+  distance: string | number
+  transition?: string | Record<string, string>
+  origin?: string
+  zIndex?: string | number
+  boxClass?: string
+}
 
 export const usePopperProps = () => {
   return {
     ...useAttachProps(),
     ...useDimensionsProps(),
     placement: {
-      type: String,
+      type: String as PropType<VariationPlacement | undefined>,
       validator: (value: string) => {
         return [
           'auto',
@@ -61,15 +78,15 @@ export const usePopperProps = () => {
       default: true,
     },
     skidding: {
-      type: [String, Number],
+      type: [String, Number] as PropType<string | number>,
       default: 0,
     },
     distance: {
-      type: [String, Number],
+      type: [String, Number] as PropType<string | number>,
       default: 0,
     },
     transition: {
-      type: [String, Object],
+      type: [String, Object] as PropType<string | Record<string, string>>,
       default: {
         enterActiveClass: 'transition-opacity ease-quart duration-200',
         enterFromClass: 'opacity-0',
@@ -79,7 +96,7 @@ export const usePopperProps = () => {
     },
     origin: String,
     zIndex: {
-      type: [Number, String],
+      type: [Number, String] as PropType<number | string>,
       default: 10,
     },
     boxClass: {
@@ -89,31 +106,7 @@ export const usePopperProps = () => {
   }
 }
 
-/**
- * @param {Object} props The props of use-case, readonly/reactive proxy.
- * @param {string|number} [props.attach]
- * @param {string|number} [props.placement]
- * @param {string|number} [props.left]
- * @param {string|number} [props.top]
- * @param {string|number} [props.right]
- * @param {string|number} [props.bottom]
- * @param {string|number} [props.fixed]
- * @param {string|number} [props.skidding]
- * @param {string|number} [props.distance]
- * @param {string|number} [props.arrow]
- * @param {string|number} [props.allowOverflow]
- * @param {string|number} [props.boxClass]
- * @param {string|number} [props.transition]
- * @param {string|number} [props.origin]
- * @param {string|number} [props.zIndex]
- * @param {string|number} [props.width] The width.
- * @param {string|number} [props.height] The height.
- * @param {string|number} [props.maxWidth] The max width.
- * @param {string|number} [props.maxHeight] The max height.
- * @param {string|number} [props.minWidth] The min width.
- * @param {string|number} [props.minHeight] The min height.
- */
-export const usePopper = (props: SetupProps) => {
+export const usePopper = (props: PopperProps) => {
   const instance = ref<any>(null)
   const isVisible = ref<boolean>(false) // visibility for root element, for lazy content
   const isContentVisible = ref<boolean>(false) // visibility of content, for toggling animation
@@ -245,7 +238,7 @@ export const usePopper = (props: SetupProps) => {
     const dataStyles = data.style ? data.style : {}
     const boxData = {
       ...data,
-      class: ['popper__box', ...dataClasses, props.boxClass.trim()],
+      class: ['popper__box', ...dataClasses, props.boxClass ? props.boxClass.trim() : undefined],
       style: {
         ...dimensionsStyles.value,
         ...dataStyles,

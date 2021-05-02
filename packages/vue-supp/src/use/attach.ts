@@ -1,12 +1,10 @@
 import { computed, Prop, ComputedRef } from 'vue'
 
-import { SetupProps } from '../../types'
-
+export interface AttachProps {
+  attach: string | boolean | undefined
+}
 export interface UseAttachProp {
   attach: Prop<string | boolean | undefined>
-}
-export interface UseAttachSetupProps {
-  attach: string | boolean | undefined
 }
 export interface UseAttach {
   target: ComputedRef<string | null>
@@ -21,7 +19,7 @@ export const useAttachProps = (defaultValue: string | boolean = true): UseAttach
   }
 }
 
-export const useAttach = (props: UseAttachSetupProps | SetupProps, defaultTarget = '#app'): UseAttach => {
+export const useAttach = (props: AttachProps, defaultTarget = '#app'): UseAttach => {
   const target = computed(() => {
     if (props.attach === false) {
       return null

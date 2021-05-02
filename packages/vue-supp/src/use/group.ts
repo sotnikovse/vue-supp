@@ -1,9 +1,17 @@
 import { ref, computed, onMounted } from 'vue'
 
-import { SetupProps, SetupContext } from '../../types'
+import { SetupContext } from '../../types'
 
 import deepEqual from '../utils/deepEqual'
 import wrapInArray from '../utils/wrapInArray'
+
+export interface GroupProps {
+  modelValue: any
+  multiple?: boolean
+  mandatory?: boolean
+  continuous?: boolean
+  max?: number
+}
 
 export const useGroupProps = () => {
   return {
@@ -23,23 +31,7 @@ export const useGroupProps = () => {
   }
 }
 
-export interface GroupProps {
-  modelValue: any
-  multiple?: boolean
-  mandatory?: boolean
-  continuous?: boolean
-  max?: number
-}
-/**
- * @param {Object} props The props of use-case.
- * @prop {undefined} [props.modelValue]
- * @prop {boolean} [props.multiple]
- * @prop {boolean} [props.mandatory]
- * @prop {boolean} [props.continuous]
- * @prop {number} [props.max]
- * @param {Object} context The setup context.
- */
-export const useGroup = (props: GroupProps | SetupProps, { emit }: Pick<SetupContext, 'emit'>) => {
+export const useGroup = (props: GroupProps, { emit }: Pick<SetupContext, 'emit'>) => {
   const items = ref<any[]>([])
 
   const internal = ref(props.modelValue)

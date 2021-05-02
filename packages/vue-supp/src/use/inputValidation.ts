@@ -9,7 +9,27 @@ import {
   toRefs,
 } from 'vue'
 
-import { SetupProps, SetupContext } from '../../types'
+import { SetupContext } from '../../types'
+
+export interface InputValidationProps {
+  id: string // move to context
+  internalValue: any // Mutable, should be ref, move to context
+  isFocused: boolean // move to context
+  rules: any[]
+  pattern?: string
+  patternMessage?: string
+  validateOnBlur?: boolean
+  forceValidate?: boolean
+  error?: boolean
+  errorMessages: any[]
+  messagesOnFocused?: boolean
+  hideDetails?: string | boolean
+  errorCount: number
+  // extend from input props
+  readonly?: boolean
+  disabled?: boolean
+  stateIcon?: boolean
+}
 
 export const useInputValidationProps = () => {
   return {
@@ -38,25 +58,7 @@ export const useInputValidationProps = () => {
   }
 }
 
-/**
- * @param {Object} props The props of use-case.
- * @prop {string} [props.id]
- * @prop {number|string|boolean} [props.internalValue] // Mutable, should be ref
- * @prop {boolean} [props.isFocused]
- * @prop {Array} [props.rules]
- * @prop {string} [props.pattern]
- * @prop {string} [props.patternMessage]
- * @prop {boolean} [props.validateOnBlur]
- * @prop {boolean} [props.forceValidate]
- * @prop {boolean} [props.error]
- * @prop {Array} [props.errorMessages]
- * @prop {boolean} [props.messagesOnFocused]
- * @prop {string|boolean} [props.hideDetails]
- * @prop {number} [props.errorCount]
- * @param {Object} context The setup context.
- * @param {Symbol} injectKey The injection key.
- */
-export const useInputValidation = (props: SetupProps, { emit }: Pick<SetupContext, 'emit'>, injectKey: symbol) => {
+export const useInputValidation = (props: InputValidationProps, { emit }: Pick<SetupContext, 'emit'>, injectKey: symbol) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
 
   const { internalValue } = toRefs(props)
