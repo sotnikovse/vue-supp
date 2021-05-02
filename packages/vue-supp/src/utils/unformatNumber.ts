@@ -4,7 +4,10 @@
  * @param {string} decimal
  * @returns {number}
  */
-export const unformatNumber = (value: string | number, decimal?: string): number | null => {
+export const unformatNumber = (
+  value: string | number,
+  decimal?: string
+): number | null => {
   if (value === null) return null
   // Fails silently (need decent errors):
   value = value || 0
@@ -21,7 +24,7 @@ export const unformatNumber = (value: string | number, decimal?: string): number
     ('' + value)
       .replace(/\((?=\d+)(.*)\)/, '-$1') // replace bracketed values with negatives
       .replace(regex, '') // strip out any cruft
-      .replace(',', '.'), // make sure decimal point is standard
+      .replace(',', '.') // make sure decimal point is standard
   )
 
   // This will fail silently which may cause trouble, let's wait and see:

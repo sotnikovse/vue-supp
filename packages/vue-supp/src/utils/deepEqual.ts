@@ -1,11 +1,7 @@
 export const deepEqual = (a: any, b: any): boolean => {
   if (a === b) return true
 
-  if (
-    a instanceof Date &&
-    b instanceof Date &&
-    a.getTime() !== b.getTime()
-  ) {
+  if (a instanceof Date && b instanceof Date && a.getTime() !== b.getTime()) {
     // If the values are Date, compare them as timestamps
     return false
   }
@@ -22,7 +18,7 @@ export const deepEqual = (a: any, b: any): boolean => {
     return false
   }
 
-  return props.every(p => deepEqual(a[p], b[p]))
+  return props.every((p) => deepEqual(a[p], b[p]))
 }
 
 export default deepEqual

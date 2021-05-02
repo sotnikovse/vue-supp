@@ -18,7 +18,7 @@ describe('Lazy content', () => {
         ...useLazyContentProps(),
         isActive: Boolean,
       },
-      setup (props) {
+      setup(props) {
         const { isBooted, hasContent, showLazyContent } = useLazyContent(props)
 
         return {

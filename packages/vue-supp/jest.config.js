@@ -3,11 +3,7 @@ module.exports = {
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
-  testMatch: [
-    '**/__tests__/**/*.spec.ts',
-  ],
+  testMatch: ['**/__tests__/**/*.spec.ts'],
   // serializer for snapshots
-  snapshotSerializers: [
-    'jest-serializer-vue',
-  ],
+  snapshotSerializers: ['jest-serializer-vue'],
 }

@@ -25,7 +25,14 @@ describe('dimensions', () => {
   it('should default to all props when given no props', () => {
     const { useDimensions } = dimensions()
 
-    const props = { width: 100, height: 200, maxWidth: 300, maxHeight: 400, minWidth: 500, minHeight: 600 }
+    const props = {
+      width: 100,
+      height: 200,
+      maxWidth: 300,
+      maxHeight: 400,
+      minWidth: 500,
+      minHeight: 600,
+    }
     const { dimensionsStyles } = useDimensions(props)
 
     expect(dimensionsStyles.value.width).toBeDefined()
@@ -42,7 +49,10 @@ describe('useDimensions', () => {
     [{ width: 100 }, { width: '100px' }],
     [{ width: 100, height: '' }, { width: '100px' }],
     [{ width: 100, height: null }, { width: '100px' }],
-    [{ width: 100, height: '200' }, { width: '100px', height: '200px' }],
+    [
+      { width: 100, height: '200' },
+      { width: '100px', height: '200px' },
+    ],
   ])('should have proper styles', (input, expected) => {
     const { useDimensions } = dimensions()
 
@@ -51,7 +61,10 @@ describe('useDimensions', () => {
 
   it('should be reactive', () => {
     const { useDimensions } = dimensions()
-    const props: { width?: number | string, height?: number | string } = reactive({ width: 100 })
+    const props: {
+      width?: number | string
+      height?: number | string
+    } = reactive({ width: 100 })
     const { dimensionsStyles } = useDimensions(props)
 
     expect(dimensionsStyles.value).toEqual({

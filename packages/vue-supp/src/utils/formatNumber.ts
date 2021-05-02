@@ -22,7 +22,10 @@ export interface FormatNumberOption {
   fallback?: number
 }
 
-export const formatNumber = (number: any, options: FormatNumberOption = {}): string | null => {
+export const formatNumber = (
+  number: any,
+  options: FormatNumberOption = {}
+): string | null => {
   // Build options object, extending defaults:
   const opts = {
     precision: options.precision ?? 0,
@@ -30,7 +33,7 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
     decimal: options.decimal ?? ',',
     fixed: options.fixed ?? false,
   }
-  if ((number === null || number === '')) {
+  if (number === null || number === '') {
     if (isNumber(options.fallback)) {
       number = options.fallback
     } else {
@@ -40,19 +43,25 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
   const stringVal = isString(number)
     ? number.replace('.', opts.decimal)
     : toStr(number).replace('.', opts.decimal)
-  const hasDelemiter = stringVal.slice(-1) === opts.decimal && opts.precision > 0
+  const hasDelemiter =
+    stringVal.slice(-1) === opts.decimal && opts.precision > 0
 
   // Clean up number:
   number = unformatNumber(stringVal, opts.decimal)
   // for check zero input after decimal
   const stringDecimal = stringVal.split(opts.decimal)[1] || ''
   let numberDecimal = number.toString().split('.')[1] || ''
-  if (!opts.fixed && numberDecimal.length === 0 && stringDecimal.split('').every((el: any) => el === '0')) {
+  if (
+    !opts.fixed &&
+    numberDecimal.length === 0 &&
+    stringDecimal.split('').every((el: any) => el === '0')
+  ) {
     numberDecimal = stringDecimal
   }
-  const numberPrecision = (numberDecimal.length > opts.precision) || opts.fixed
-    ? opts.precision
-    : numberDecimal.length
+  const numberPrecision =
+    numberDecimal.length > opts.precision || opts.fixed
+      ? opts.precision
+      : numberDecimal.length
 
   // Clean up precision
   const usePrecision = checkPrecision(numberPrecision, opts.precision)
@@ -63,7 +72,13 @@ export const formatNumber = (number: any, options: FormatNumberOption = {}): str
   const mod = base.length > 3 ? base.length % 3 : 0
 
   // Format the number:
-  const formatted = negative + (mod ? base.substr(0, mod) + opts.thousand : '') + base.substr(mod).replace(/(\d{3})(?=\d)/g, '$1' + opts.thousand) + (usePrecision ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1] : '')
+  const formatted =
+    negative +
+    (mod ? base.substr(0, mod) + opts.thousand : '') +
+    base.substr(mod).replace(/(\d{3})(?=\d)/g, '$1' + opts.thousand) +
+    (usePrecision
+      ? opts.decimal + toFixed(Math.abs(number), usePrecision).split('.')[1]
+      : '')
   return hasDelemiter && !opts.fixed ? `${formatted}${opts.decimal}` : formatted
 }
 

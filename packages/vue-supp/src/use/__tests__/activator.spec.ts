@@ -5,7 +5,9 @@ describe('Activator', () => {
 
   it.todo('should add custom attrs/listeners and match snapshot')
 
-  it.todo('should add attrs and listeners only to first element of activator slot and match snapshot')
+  it.todo(
+    'should add attrs and listeners only to first element of activator slot and match snapshot'
+  )
 
   // Selector/Element/Component
   it.todo('should set correct activator element from prop')

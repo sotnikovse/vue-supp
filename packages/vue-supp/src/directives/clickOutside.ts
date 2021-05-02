@@ -10,14 +10,21 @@ interface ClickOutsideDirectiveBinding extends DirectiveBinding {
   value: ((e: Event) => void) | ClickOutsideBindingArgs
 }
 
-function defaultConditional () {
+function defaultConditional() {
   return true
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): void {
-  const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
+function directive(
+  e: PointerEvent,
+  el: HTMLElement,
+  binding: ClickOutsideDirectiveBinding
+): void {
+  const handler =
+    typeof binding.value === 'function' ? binding.value : binding.value.handler
 
-  const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
+  const isActive =
+    (typeof binding.value === 'object' && binding.value.closeConditional) ||
+    defaultConditional
 
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
@@ -25,7 +32,10 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()
+  const elements = (
+    (typeof binding.value === 'object' && binding.value.include) ||
+    (() => [])
+  )()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -34,9 +44,10 @@ function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirec
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
-  !elements.some(el => el.contains(e.target as Node)) && setTimeout(() => {
-    isActive(e) && handler && handler(e)
-  }, 0)
+  !elements.some((el) => el.contains(e.target as Node)) &&
+    setTimeout(() => {
+      isActive(e) && handler && handler(e)
+    }, 0)
 }
 
 export const ClickOutside = {
@@ -45,21 +56,19 @@ export const ClickOutside = {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
+  mounted(el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as PointerEvent, el, binding)
     // iOS does not recognize click events on document
     // or body, this is the entire purpose of '#app'
-    const app = document.querySelector('#app') ??
-      document.body // This is only for unit tests
+    const app = document.querySelector('#app') ?? document.body // This is only for unit tests
     app.addEventListener('click', onClick, true)
     el._clickOutside = onClick
   },
 
-  unmounted (el: HTMLElement) {
+  unmounted(el: HTMLElement) {
     if (!el._clickOutside) return
 
-    const app = document.querySelector('#app') ??
-      document.body // This is only for unit tests
+    const app = document.querySelector('#app') ?? document.body // This is only for unit tests
     app?.removeEventListener('click', el._clickOutside, true)
     delete el._clickOutside
   },

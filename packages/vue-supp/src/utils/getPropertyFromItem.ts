@@ -6,13 +6,14 @@ import getObjectValueByPath from './getObjectValueByPath'
 export const getPropertyFromItem = (
   item: Record<string, unknown>,
   property: ObjectItemKey,
-  fallback?: any,
+  fallback?: any
 ): any => {
   if (property == null) return item === undefined ? fallback : item
 
   if (item !== Object(item)) return fallback === undefined ? item : fallback
 
-  if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
+  if (typeof property === 'string')
+    return getObjectValueByPath(item, property, fallback)
 
   if (Array.isArray(property)) return getNestedValue(item, property, fallback)
 

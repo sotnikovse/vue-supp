@@ -4,7 +4,7 @@ import json from '@rollup/plugin-json'
 import pkg from './package.json'
 
 const outputConfigs = {
-  'esm': {
+  esm: {
     file: pkg.module,
     format: 'es',
     plugins: [analyze({ summaryOnly: true })],
@@ -15,11 +15,13 @@ const outputConfigs = {
   },
 }
 
-const packageConfigs = ['esm', 'cjs'].map(format => createConfig(format, outputConfigs[format]))
+const packageConfigs = ['esm', 'cjs'].map((format) =>
+  createConfig(format, outputConfigs[format])
+)
 
 export default packageConfigs
 
-function createConfig (format, output, plugins = []) {
+function createConfig(format, output, plugins = []) {
   if (!output) {
     console.log(require('chalk').yellow(`invalid format: "${format}"`))
     process.exit(1)
@@ -38,11 +40,7 @@ function createConfig (format, output, plugins = []) {
     },
   })
 
-  const external = [
-    'vue',
-    '@popperjs/core',
-    'tslib',
-  ]
+  const external = ['vue', '@popperjs/core', 'tslib']
 
   const nodePlugins =
     format !== 'cjs'
@@ -72,6 +70,6 @@ function createConfig (format, output, plugins = []) {
     output,
     treeshake: {
       moduleSideEffects: false,
-    }
+    },
   }
 }

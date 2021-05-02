@@ -1,12 +1,5 @@
-import type {
-  DirectiveBinding,
-  ObjectDirective,
-} from 'vue'
-import type {
-  TouchHandlers,
-  TouchValue,
-  TouchWrapper,
-} from '../../types'
+import type { DirectiveBinding, ObjectDirective } from 'vue'
+import type { TouchHandlers, TouchValue, TouchWrapper } from '../../types'
 
 import uid from '../utils/uid'
 
@@ -28,17 +21,23 @@ const handleGesture = (wrapper: TouchWrapper) => {
   wrapper.offsetY = touchendY - touchstartY
 
   if (Math.abs(wrapper.offsetY) < dirRatio * Math.abs(wrapper.offsetX)) {
-    wrapper.left && (touchendX < touchstartX - minDistance) && wrapper.left(wrapper)
-    wrapper.right && (touchendX > touchstartX + minDistance) && wrapper.right(wrapper)
+    wrapper.left &&
+      touchendX < touchstartX - minDistance &&
+      wrapper.left(wrapper)
+    wrapper.right &&
+      touchendX > touchstartX + minDistance &&
+      wrapper.right(wrapper)
   }
 
   if (Math.abs(wrapper.offsetX) < dirRatio * Math.abs(wrapper.offsetY)) {
-    wrapper.up && (touchendY < touchstartY - minDistance) && wrapper.up(wrapper)
-    wrapper.down && (touchendY > touchstartY + minDistance) && wrapper.down(wrapper)
+    wrapper.up && touchendY < touchstartY - minDistance && wrapper.up(wrapper)
+    wrapper.down &&
+      touchendY > touchstartY + minDistance &&
+      wrapper.down(wrapper)
   }
 }
 
-function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
+function touchstart(event: TouchEvent, wrapper: TouchWrapper) {
   const touch = event.changedTouches[0]
   wrapper.touchstartX = touch.clientX
   wrapper.touchstartY = touch.clientY
@@ -46,7 +45,7 @@ function touchstart (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.start?.({ ...event, ...wrapper })
 }
 
-function touchend (event: TouchEvent, wrapper: TouchWrapper) {
+function touchend(event: TouchEvent, wrapper: TouchWrapper) {
   const touch = event.changedTouches[0]
   wrapper.touchendX = touch.clientX
   wrapper.touchendY = touch.clientY
@@ -56,7 +55,7 @@ function touchend (event: TouchEvent, wrapper: TouchWrapper) {
   handleGesture(wrapper)
 }
 
-function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
+function touchmove(event: TouchEvent, wrapper: TouchWrapper) {
   const touch = event.changedTouches[0]
   wrapper.touchmoveX = touch.clientX
   wrapper.touchmoveY = touch.clientY
@@ -64,7 +63,7 @@ function touchmove (event: TouchEvent, wrapper: TouchWrapper) {
   wrapper.move?.({ ...event, ...wrapper })
 }
 
-function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
+function createHandlers(value: TouchHandlers = {}): TouchStoredHandlers {
   const wrapper = {
     touchstartX: 0,
     touchstartY: 0,
@@ -90,7 +89,7 @@ function createHandlers (value: TouchHandlers = {}): TouchStoredHandlers {
   }
 }
 
-function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
+function mounted(el: HTMLElement, binding: TouchDirectiveBinding) {
   const value = binding.value
   const target = value?.parent ? el.parentElement : el
   const options = value?.options ?? { passive: true }
@@ -105,13 +104,13 @@ function mounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   target._touchHandlers = target._touchHandlers ?? Object.create(null)
   target._touchHandlers![_uid] = handlers // eslint-disable-line @typescript-eslint/no-non-null-assertion
 
-  Object.keys(handlers).forEach(eventName => {
+  Object.keys(handlers).forEach((eventName) => {
     // @ts-ignore
     target.addEventListener(eventName, handlers[eventName], options)
   })
 }
 
-function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
+function unmounted(el: HTMLElement, binding: TouchDirectiveBinding) {
   const target = binding.value?.parent ? el.parentElement : el
   const _uid = el.id
 
@@ -119,7 +118,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
 
   const handlers = target._touchHandlers[_uid]
 
-  Object.keys(handlers).forEach(eventName => {
+  Object.keys(handlers).forEach((eventName) => {
     // @ts-ignore
     target.removeEventListener(eventName, handlers[eventName])
   })

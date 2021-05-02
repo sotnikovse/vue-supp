@@ -36,7 +36,9 @@ type PropValue = string | number | null | undefined
 type PropNames = keyof typeof PROPS
 
 export const dimensions = <S extends PropNames>(...possibleProps: S[]) => {
-  const selectedProps = possibleProps.length ? possibleProps : Object.keys(PROPS) as S[]
+  const selectedProps = possibleProps.length
+    ? possibleProps
+    : (Object.keys(PROPS) as S[])
 
   const useDimensionsProps = (defaults?: Partial<Record<S, PropValue>>) => {
     const props = selectedProps.reduce((acc, key) => {

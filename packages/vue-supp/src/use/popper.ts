@@ -113,7 +113,15 @@ export const usePopper = (props: PopperProps) => {
   const wrapperElement = ref<HTMLElement>()
   const boxOffsetElement = ref<HTMLElement>()
 
-  const { attach, width, minWidth, maxWidth, height, minHeight, maxHeight } = toRefs(props)
+  const {
+    attach,
+    width,
+    minWidth,
+    maxWidth,
+    height,
+    minHeight,
+    maxHeight,
+  } = toRefs(props)
 
   const attachProps = reactive({
     attach,
@@ -133,15 +141,15 @@ export const usePopper = (props: PopperProps) => {
     return props.placement
       ? props.placement
       : props.left
-        ? 'left'
-        : props.right
-          ? 'right'
-          : props.bottom
-            ? 'bottom'
-            : 'top'
+      ? 'left'
+      : props.right
+      ? 'right'
+      : props.bottom
+      ? 'bottom'
+      : 'top'
   })
 
-  const strategy = computed(() => props.fixed ? 'fixed' : 'absolute')
+  const strategy = computed(() => (props.fixed ? 'fixed' : 'absolute'))
 
   const offset = computed(() => {
     const skidding = parseInt(props.skidding) || 0
@@ -156,7 +164,10 @@ export const usePopper = (props: PopperProps) => {
     destroy()
   })
 
-  const create = (reference: HTMLElement | undefined, popper: HTMLElement | undefined) => {
+  const create = (
+    reference: HTMLElement | undefined,
+    popper: HTMLElement | undefined
+  ) => {
     destroy()
     if (!reference || !popper) return
     const options = {
@@ -195,19 +206,22 @@ export const usePopper = (props: PopperProps) => {
   const genBoxOffset = () => {
     const offsetValue = offset.value[1]
     if (offsetValue) {
-      const referenceElement = instance.value && instance.value.state.elements.reference
+      const referenceElement =
+        instance.value && instance.value.state.elements.reference
       if (!referenceElement) return undefined
-      const statePlacement = (instance.value && instance.value.state.placement) || placement.value
+      const statePlacement =
+        (instance.value && instance.value.state.placement) || placement.value
       const basePlacement = statePlacement.split('-')[0]
-      const styleProp = basePlacement === 'top'
-        ? 'bottom'
-        : basePlacement === 'bottom'
+      const styleProp =
+        basePlacement === 'top'
+          ? 'bottom'
+          : basePlacement === 'bottom'
           ? 'top'
           : basePlacement === 'left'
-            ? 'right'
-            : basePlacement === 'right'
-              ? 'top'
-              : undefined
+          ? 'right'
+          : basePlacement === 'right'
+          ? 'top'
+          : undefined
       const styles: any = {
         position: 'absolute',
         top: 0,
@@ -224,7 +238,10 @@ export const usePopper = (props: PopperProps) => {
         style: styles,
         onMouseleave: (e: MouseEvent) => {
           if (!referenceElement.value) return
-          if (!referenceElement.value.contains(e?.relatedTarget) && !wrapperElement.value?.contains(e.relatedTarget as HTMLElement)) {
+          if (
+            !referenceElement.value.contains(e?.relatedTarget) &&
+            !wrapperElement.value?.contains(e.relatedTarget as HTMLElement)
+          ) {
             isContentVisible.value = false
           }
         },
@@ -234,69 +251,86 @@ export const usePopper = (props: PopperProps) => {
   }
 
   const genBox = (data: any = {}, children: (VNode | undefined)[] = []) => {
-    const dataClasses = data.class && Array.isArray(data.class) ? data.class : data.class ? [data.class] : []
+    const dataClasses =
+      data.class && Array.isArray(data.class)
+        ? data.class
+        : data.class
+        ? [data.class]
+        : []
     const dataStyles = data.style ? data.style : {}
     const boxData = {
       ...data,
-      class: ['popper__box', ...dataClasses, props.boxClass ? props.boxClass.trim() : undefined],
+      class: [
+        'popper__box',
+        ...dataClasses,
+        props.boxClass ? props.boxClass.trim() : undefined,
+      ],
       style: {
         ...dimensionsStyles.value,
         ...dataStyles,
       },
     }
 
-    const transition = typeof props.transition === 'string'
-      ? { name: props.transition }
-      : props.transition
+    const transition =
+      typeof props.transition === 'string'
+        ? { name: props.transition }
+        : props.transition
         ? { ...props.transition }
         : {}
 
-    return h(Transition, {
-      onBeforeEnter (el: any) {
-        if (props.origin) {
-          el.style.transformOrigin = props.origin
-          el.style.webkitTransformOrigin = props.origin
-        }
+    return h(
+      Transition,
+      {
+        onBeforeEnter(el: any) {
+          if (props.origin) {
+            el.style.transformOrigin = props.origin
+            el.style.webkitTransformOrigin = props.origin
+          }
+        },
+        onAfterLeave() {
+          // hide popper container after transition end
+          isVisible.value = false
+          destroy()
+        },
+        ...transition,
       },
-      onAfterLeave () {
-        // hide popper container after transition end
-        isVisible.value = false
-        destroy()
-      },
-      ...transition,
-    }, {
-      default: () => {
-        return withDirectives(
-          h('div', boxData, [
-            ...children,
-            genArrow(),
-          ]),
-          [
+      {
+        default: () => {
+          return withDirectives(h('div', boxData, [...children, genArrow()]), [
             [vShow, isContentVisible.value],
-          ],
-        )
-      },
-    })
+          ])
+        },
+      }
+    )
   }
 
-  const genWrapper = (data: any = {}, children: any, directives: any[] = []) => {
-    return h(Teleport, {
-      to: target.value,
-      disabled: !target.value,
-    }, withDirectives(
-      h('div', {
-        ...data,
-        ref: wrapperElement,
-        style: {
-          zIndex: props.zIndex,
-        },
-        'data-popper-root': '',
-      }, children),
-      [
-        ...directives,
-        [vShow, isVisible.value],
-      ],
-    ))
+  const genWrapper = (
+    data: any = {},
+    children: any,
+    directives: any[] = []
+  ) => {
+    return h(
+      Teleport,
+      {
+        to: target.value,
+        disabled: !target.value,
+      },
+      withDirectives(
+        h(
+          'div',
+          {
+            ...data,
+            ref: wrapperElement,
+            style: {
+              zIndex: props.zIndex,
+            },
+            'data-popper-root': '',
+          },
+          children
+        ),
+        [...directives, [vShow, isVisible.value]]
+      )
+    )
   }
 
   return {
@@ -322,7 +356,7 @@ const applyArrowHide = {
   name: 'applyArrowHide',
   enabled: true,
   phase: 'write',
-  fn (data: any) {
+  fn(data: any) {
     const state = data.state as any
     const { arrow, reference, popper } = state.elements
 
@@ -338,10 +372,23 @@ const applyArrowHide = {
         const leftDistance = basePlacement === 'right' ? offsetData.left.x : 0
         const rightDistance = basePlacement === 'left' ? offsetData.right.x : 0
         const exceedsLeft = popperRect.left + leftDistance - interactiveBorder
-        const exceedsRight = popperRect.right + rightDistance + interactiveBorder
-        const arrowXPosition = basePlacement === 'left' ? referenceRect.left : basePlacement === 'right' ? referenceRect.right : 0
-        const popperXPosition = basePlacement === 'left' ? exceedsRight : basePlacement === 'right' ? exceedsLeft : 0
-        isCenterY = popperXPosition - 8 < arrowXPosition && popperXPosition + 8 > arrowXPosition
+        const exceedsRight =
+          popperRect.right + rightDistance + interactiveBorder
+        const arrowXPosition =
+          basePlacement === 'left'
+            ? referenceRect.left
+            : basePlacement === 'right'
+            ? referenceRect.right
+            : 0
+        const popperXPosition =
+          basePlacement === 'left'
+            ? exceedsRight
+            : basePlacement === 'right'
+            ? exceedsLeft
+            : 0
+        isCenterY =
+          popperXPosition - 8 < arrowXPosition &&
+          popperXPosition + 8 > arrowXPosition
       }
       if (state.modifiersData.arrow.centerOffset !== 0 || !isCenterY) {
         arrow.setAttribute('data-hide', '')
@@ -382,12 +429,15 @@ const genModifiers = (options: any) => {
     },
   ]
   if (options.arrow) {
-    modifiers.push({
-      name: 'arrow',
-      options: {
-        padding: 8,
+    modifiers.push(
+      {
+        name: 'arrow',
+        options: {
+          padding: 8,
+        },
       },
-    }, applyArrowHide)
+      applyArrowHide
+    )
   }
   return modifiers
 }

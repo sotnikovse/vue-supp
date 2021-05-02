@@ -18,14 +18,14 @@ export const useClientRect = (props: ClientRectProps) => {
 
     return !props.shouldRound
       ? rect
-      : {
-        top: Math.round(rect.top),
-        left: Math.round(rect.left),
-        bottom: Math.round(rect.bottom),
-        right: Math.round(rect.right),
-        width: Math.round(rect.width),
-        height: Math.round(rect.height),
-      } as DOMRectReadOnly
+      : ({
+          top: Math.round(rect.top),
+          left: Math.round(rect.left),
+          bottom: Math.round(rect.bottom),
+          right: Math.round(rect.right),
+          width: Math.round(rect.width),
+          height: Math.round(rect.height),
+        } as DOMRectReadOnly)
   }
 
   const updateClientRect = () => {

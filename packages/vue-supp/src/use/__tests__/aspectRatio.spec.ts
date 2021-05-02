@@ -1,5 +1,9 @@
 import { reactive } from 'vue'
-import { useAspectRatioProps, useAspectRatio, UseAspectRatioSetupProps } from '../aspectRatio'
+import {
+  useAspectRatioProps,
+  useAspectRatio,
+  UseAspectRatioSetupProps,
+} from '../aspectRatio'
 
 describe('Aspect ratio', () => {
   describe('useAspectRatioProps', () => {

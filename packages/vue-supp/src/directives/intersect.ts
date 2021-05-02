@@ -1,63 +1,61 @@
 // Types
-import type {
-  DirectiveBinding,
-  ObjectDirective,
-} from 'vue'
+import type { DirectiveBinding, ObjectDirective } from 'vue'
 
 type ObserveHandler = (
   entries: IntersectionObserverEntry[],
   observer: IntersectionObserver,
-  isIntersecting: boolean,
+  isIntersecting: boolean
 ) => void
 
 interface ObserveDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
-  value: ObserveHandler | { handler: ObserveHandler, options?: IntersectionObserverInit }
+  value:
+    | ObserveHandler
+    | { handler: ObserveHandler; options?: IntersectionObserverInit }
   modifiers: {
     once?: boolean
     quiet?: boolean
   }
 }
 
-function mounted (el: HTMLElement, binding: ObserveDirectiveBinding) {
+function mounted(el: HTMLElement, binding: ObserveDirectiveBinding) {
   const modifiers = binding.modifiers || {}
   const value = binding.value
-  const { handler, options } = typeof value === 'object'
-    ? value
-    : { handler: value, options: {} }
+  const { handler, options } =
+    typeof value === 'object' ? value : { handler: value, options: {} }
 
-  const observer = new IntersectionObserver((
-    entries: IntersectionObserverEntry[] = [],
-    observer: IntersectionObserver,
-  ) => {
-    /* istanbul ignore if */
-    if (!el._observe) return // Just in case, should never fire
+  const observer = new IntersectionObserver(
+    (
+      entries: IntersectionObserverEntry[] = [],
+      observer: IntersectionObserver
+    ) => {
+      /* istanbul ignore if */
+      if (!el._observe) return // Just in case, should never fire
 
-    // If is not quiet or has already been
-    // initted, invoke the user callback
-    if (
-      handler && (
-        !modifiers.quiet ||
-        el._observe.init
-      )
-    ) {
-      const isIntersecting = Boolean(entries.find(entry => entry.isIntersecting))
+      // If is not quiet or has already been
+      // initted, invoke the user callback
+      if (handler && (!modifiers.quiet || el._observe.init)) {
+        const isIntersecting = Boolean(
+          entries.find((entry) => entry.isIntersecting)
+        )
 
-      handler(entries, observer, isIntersecting)
-    }
+        handler(entries, observer, isIntersecting)
+      }
 
-    // If has already been initted and
-    // has the once modifier, unmounted
-    if (el._observe.init && modifiers.once) unmounted(el)
-    // Otherwise, mark the observer as initted
-    else (el._observe.init = true)
-  }, options)
+      // If has already been initted and
+      // has the once modifier, unmounted
+      if (el._observe.init && modifiers.once) unmounted(el)
+      // Otherwise, mark the observer as initted
+      else el._observe.init = true
+    },
+    options
+  )
 
   el._observe = { init: false, observer }
 
   observer.observe(el)
 }
 
-function unmounted (el: HTMLElement) {
+function unmounted(el: HTMLElement) {
   /* istanbul ignore if */
   if (!el._observe) return
 

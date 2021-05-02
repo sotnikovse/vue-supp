@@ -33,7 +33,7 @@ describe('Filter', () => {
   const component = defineComponent({
     props: useFilterProps(),
     emits: useFilterEmits(),
-    setup (props, { emit }) {
+    setup(props, { emit }) {
       const {
         search,
         searchIsDirty,
@@ -78,7 +78,7 @@ describe('Filter', () => {
   })
 
   it('should filter array items', async () => {
-    const items = mockItems.map(item => item.text)
+    const items = mockItems.map((item) => item.text)
     const props = reactive<Record<string, any>>({
       search: undefined,
       items,
@@ -133,7 +133,7 @@ describe('Filter', () => {
   it('should filter array of objects with custom text and value', async () => {
     const props = reactive<Record<string, any>>({
       search: undefined,
-      items: mockItems.map(item => {
+      items: mockItems.map((item) => {
         return {
           name: item.text,
           code: item.value,

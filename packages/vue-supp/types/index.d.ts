@@ -2,7 +2,10 @@ import { Slots } from 'vue'
 
 export type Dictionary<T> = Record<string, T>
 
-export type ObjectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+export type ObjectItemKey =
+  | string
+  | (string | number)[]
+  | ((item: Dictionary<any>, fallback?: any) => any)
 
 export type Data = Record<string, unknown>
 

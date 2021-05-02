@@ -5,7 +5,9 @@ const optionsModifierRE = /(?:Once|Passive|Capture)$/
  * @param {string} name The value to parse.
  * @returns {Array} Returns an array that contains type and modifiers.
  */
-export const parseEventName = (name: string): [string, AddEventListenerOptions | undefined] => {
+export const parseEventName = (
+  name: string
+): [string, AddEventListenerOptions | undefined] => {
   let options: AddEventListenerOptions | undefined
   if (optionsModifierRE.test(name)) {
     options = {}

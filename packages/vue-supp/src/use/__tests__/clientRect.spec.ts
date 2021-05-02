@@ -14,7 +14,7 @@ describe('Dimensions', () => {
       hasResizeListener: Boolean,
       shouldRound: Boolean,
     },
-    setup (props) {
+    setup(props) {
       const { element, hasResizeListener, shouldRound } = toRefs(props)
 
       const useCaseProps = readonly({

@@ -8,7 +8,9 @@ export interface LazyContentProps {
 export interface LazyContent {
   isBooted: Ref<boolean>
   hasContent: ComputedRef<boolean | undefined>
-  showLazyContent: (content?: () => VNode | VNode[]) => VNode | VNode[] | undefined
+  showLazyContent: (
+    content?: () => VNode | VNode[]
+  ) => VNode | VNode[] | undefined
 }
 
 export const useLazyContentProps = () => {
@@ -25,13 +27,18 @@ export const useLazyContent = (props: LazyContentProps): LazyContent => {
     return isBooted.value || props.isActive || props.eager
   })
 
-  watch(() => props.isActive, () => {
-    if (props.disabled) return
-    isBooted.value = true
-  })
+  watch(
+    () => props.isActive,
+    () => {
+      if (props.disabled) return
+      isBooted.value = true
+    }
+  )
 
-  const showLazyContent = (content?: () => VNode | VNode[]): VNode | VNode[] | undefined => {
-    return (hasContent.value && content) ? content() : undefined
+  const showLazyContent = (
+    content?: () => VNode | VNode[]
+  ): VNode | VNode[] | undefined => {
+    return hasContent.value && content ? content() : undefined
   }
 
   return {

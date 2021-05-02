@@ -13,7 +13,10 @@ export interface UseToggle {
 export interface Toggle {
   useToggleProps: () => UseToggleProps
   useToggleEmits: () => UseToggleEmits
-  useToggle: (props: ToggleProps, context: Pick<SetupContext, 'emit'>) => UseToggle
+  useToggle: (
+    props: ToggleProps,
+    context: Pick<SetupContext, 'emit'>
+  ) => UseToggle
 }
 
 export const toggle = (prop = 'modelValue', event = 'update:modelValue') => {
@@ -29,12 +32,18 @@ export const toggle = (prop = 'modelValue', event = 'update:modelValue') => {
     return [event]
   }
 
-  const useToggle = (props: ToggleProps, { emit }: Pick<SetupContext, 'emit'>): UseToggle => {
+  const useToggle = (
+    props: ToggleProps,
+    { emit }: Pick<SetupContext, 'emit'>
+  ): UseToggle => {
     const isActive = ref<boolean>(!!props.modelValue)
 
-    watch(() => props.modelValue, (val) => {
-      isActive.value = !!val
-    })
+    watch(
+      () => props.modelValue,
+      (val) => {
+        isActive.value = !!val
+      }
+    )
 
     watch(isActive, (val) => {
       emit(event, val)

@@ -10,7 +10,9 @@ export interface UseAttach {
   target: ComputedRef<string | null>
 }
 
-export const useAttachProps = (defaultValue: string | boolean = true): UseAttachProp => {
+export const useAttachProps = (
+  defaultValue: string | boolean = true
+): UseAttachProp => {
   return {
     attach: {
       type: [String, Boolean],
@@ -19,7 +21,10 @@ export const useAttachProps = (defaultValue: string | boolean = true): UseAttach
   }
 }
 
-export const useAttach = (props: AttachProps, defaultTarget = '#app'): UseAttach => {
+export const useAttach = (
+  props: AttachProps,
+  defaultTarget = '#app'
+): UseAttach => {
   const target = computed(() => {
     if (props.attach === false) {
       return null

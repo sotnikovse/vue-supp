@@ -37,9 +37,14 @@ export const useFilterProps = () => {
       default: 'text',
     },
     filter: {
-      type: Function as PropType<(item: any, queryText: string, itemText: string) => boolean>,
+      type: Function as PropType<
+        (item: any, queryText: string, itemText: string) => boolean
+      >,
       default: (item: any, queryText: string, itemText: string) => {
-        return itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) > -1
+        return (
+          itemText.toLocaleLowerCase().indexOf(queryText.toLocaleLowerCase()) >
+          -1
+        )
       },
     },
   }
@@ -49,7 +54,10 @@ export const useFilterEmits = (): string[] => {
   return [EVENT]
 }
 
-export const useFilter = (props: FilterProps, { emit }: Pick<SetupContext, 'emit'>) => {
+export const useFilter = (
+  props: FilterProps,
+  { emit }: Pick<SetupContext, 'emit'>
+) => {
   const search = ref<string | null | undefined>(props.search)
 
   const searchIsDirty = computed(() => {
@@ -71,9 +79,12 @@ export const useFilter = (props: FilterProps, { emit }: Pick<SetupContext, 'emit
     })
   })
 
-  watch(() => props.search, (val) => {
-    search.value = val
-  })
+  watch(
+    () => props.search,
+    (val) => {
+      search.value = val
+    }
+  )
 
   watch(search, (val) => {
     emit(EVENT, val)

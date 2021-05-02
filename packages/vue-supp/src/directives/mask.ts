@@ -9,7 +9,12 @@ const tokens = {
   '!': { escape: true },
 }
 
-function masker (value: string, mask: string, masked = true, tokens: Record<string, any>) {
+function masker(
+  value: string,
+  mask: string,
+  masked = true,
+  tokens: Record<string, any>
+) {
   value = value || ''
   mask = mask || ''
   let iMask = 0
@@ -38,7 +43,8 @@ function masker (value: string, mask: string, masked = true, tokens: Record<stri
 
   // fix mask that ends with a char: (#)
   let restOutput = ''
-  while (iMask < mask.length && masked) { // eslint-disable-line no-unmodified-loop-condition
+  while (iMask < mask.length && masked) {
+    // eslint-disable-line no-unmodified-loop-condition
     const cMask = mask[iMask]
     if (tokens[cMask]) {
       restOutput = ''
@@ -52,7 +58,7 @@ function masker (value: string, mask: string, masked = true, tokens: Record<stri
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events#The_old-fashioned_way
-function event (name: string) {
+function event(name: string) {
   const evt = document.createEvent('Event')
   evt.initEvent(name, true, true)
   return evt
@@ -95,7 +101,10 @@ export const Mask = function (el: HTMLInputElement, binding: DirectiveBinding) {
     const digit = el.value[position - 1]
     el.value = masker(el.value, config.mask, true, config.tokens)
     // if the digit was changed, increment position until find the digit again
-    while (position < el.value.length && el.value.charAt(position - 1) !== digit) {
+    while (
+      position < el.value.length &&
+      el.value.charAt(position - 1) !== digit
+    ) {
       position++
     }
     if (el === document.activeElement) {

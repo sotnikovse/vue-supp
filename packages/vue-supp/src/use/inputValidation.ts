@@ -35,7 +35,7 @@ export const useInputValidationProps = () => {
   return {
     rules: {
       type: Array,
-      default: () => ([]),
+      default: () => [],
     },
     pattern: String,
     patternMessage: String,
@@ -58,7 +58,11 @@ export const useInputValidationProps = () => {
   }
 }
 
-export const useInputValidation = (props: InputValidationProps, { emit }: Pick<SetupContext, 'emit'>, injectKey: symbol) => {
+export const useInputValidation = (
+  props: InputValidationProps,
+  { emit }: Pick<SetupContext, 'emit'>,
+  injectKey: symbol
+) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
 
   const { internalValue } = toRefs(props)
@@ -71,8 +75,8 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
   const isResetting = ref<boolean>(false)
   const isPatternMismatch = ref<boolean>(false)
 
-  const isDisabled = computed(() => props.disabled || (!!formApi?.disabled))
-  const isReadonly = computed(() => props.readonly || (!!formApi?.readonly))
+  const isDisabled = computed(() => props.disabled || !!formApi?.disabled)
+  const isReadonly = computed(() => props.readonly || !!formApi?.readonly)
 
   const isInteractive = computed(() => {
     return !isDisabled.value && !isReadonly.value
@@ -84,17 +88,21 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
 
   const hasError = computed(() => {
     return (
-      errorBucket.value.length > 0 ||
-      internalErrorMessages.value.length > 0
+      errorBucket.value.length > 0 || internalErrorMessages.value.length > 0
     )
   })
 
   const hasMessages = computed(() => {
-    return errorMessages.value.length > 0 || internalErrorMessages.value.length > 0
+    return (
+      errorMessages.value.length > 0 || internalErrorMessages.value.length > 0
+    )
   })
 
   const showDetails = computed(() => {
-    return props.hideDetails === false || (props.hideDetails === 'auto' && hasMessages.value)
+    return (
+      props.hideDetails === false ||
+      (props.hideDetails === 'auto' && hasMessages.value)
+    )
   })
 
   const errorMessages = computed(() => {
@@ -115,7 +123,7 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
 
     return props.validateOnBlur
       ? hasFocused.value
-      : (hasInput.value || hasFocused.value)
+      : hasInput.value || hasFocused.value
   })
 
   const hasSuccess = computed(() => {
@@ -125,10 +133,7 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
   const hasState = computed(() => {
     if (isDisabled.value || !props.stateIcon) return false
 
-    return (
-      hasSuccess.value ||
-      (shouldValidate.value && hasError.value)
-    )
+    return hasSuccess.value || (shouldValidate.value && hasError.value)
   })
 
   const validationState = computed(() => {
@@ -142,15 +147,15 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
   })
 
   // validate on blur
-  watch(() => props.isFocused, (val) => {
-    if (
-      !val &&
-      !isDisabled.value
-    ) {
-      hasFocused.value = true
-      props.validateOnBlur && nextTick(validate)
+  watch(
+    () => props.isFocused,
+    (val) => {
+      if (!val && !isDisabled.value) {
+        hasFocused.value = true
+        props.validateOnBlur && nextTick(validate)
+      }
     }
-  })
+  )
 
   watch(isResetting, () => {
     setTimeout(() => {
@@ -178,9 +183,7 @@ export const useInputValidation = (props: InputValidationProps, { emit }: Pick<S
 
   const reset = () => {
     isResetting.value = true
-    internalValue.value = Array.isArray(internalValue.value)
-      ? []
-      : undefined
+    internalValue.value = Array.isArray(internalValue.value) ? [] : undefined
   }
 
   const resetValidation = () => {

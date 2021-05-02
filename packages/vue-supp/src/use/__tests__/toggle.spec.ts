@@ -22,7 +22,7 @@ describe('Toggle', () => {
         const component = defineComponent({
           props,
           emits,
-          setup (props, { emit }) {
+          setup(props, { emit }) {
             const propsRefs = toRefs(props)
             const useCaseProps = readonly({
               modelValue: propsRefs[prop],

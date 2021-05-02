@@ -1,9 +1,4 @@
-import {
-  h,
-  ref,
-  computed,
-  onMounted,
-} from 'vue'
+import { h, ref, computed, onMounted } from 'vue'
 
 import { SetupContext } from '../../types'
 
@@ -35,14 +30,19 @@ export const useInputProps = () => {
   }
 }
 
-export const useInput = (props: InputProps, { emit }: Pick<SetupContext, 'emit'>) => {
+export const useInput = (
+  props: InputProps,
+  { emit }: Pick<SetupContext, 'emit'>
+) => {
   const inputElement = ref<HTMLElement>()
   const internal = ref<InputValue>(props.modelValue)
   const isFocused = ref<boolean>(false)
   const badInput = ref<boolean>(false)
 
   const isDirty = computed(() => {
-    return (internal.value && internal.value.toString().length > 0) || badInput.value
+    return (
+      (internal.value && internal.value.toString().length > 0) || badInput.value
+    )
   })
 
   onMounted(() => {

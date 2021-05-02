@@ -20,22 +20,26 @@ import parseEventName from '../utils/parseEventName'
 
 export interface ActivatorProps {
   modelValue: string | number | boolean | null | undefined
-  activator: any
-  disabled: boolean
+  activator?: any
+  disabled?: boolean
   openOnHover: boolean
   openOnFocus: boolean
   openOnClick: boolean
-  disableKeys: boolean
+  disableKeys?: boolean
 }
 
 export const useActivatorProps = () => {
   return {
     modelValue: {
-      type: [Boolean, String, Number],
+      type: [Boolean, String, Number] as PropType<
+        string | number | boolean | null | undefined
+      >,
       default: false,
     },
     activator: {
-      default: null as unknown as PropType<string | HTMLElement | VNode | Element | null>,
+      default: (null as unknown) as PropType<
+        string | HTMLElement | VNode | Element | null
+      >,
       validator: (val: string | Record<string, unknown>) => {
         return ['string', 'object'].includes(typeof val)
       },
@@ -57,7 +61,10 @@ export const useActivatorProps = () => {
   }
 }
 
-export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupContext, 'slots'|'emit'>) => {
+export const useActivator = (
+  props: ActivatorProps,
+  { slots, emit }: Pick<SetupContext, 'slots' | 'emit'>
+) => {
   const activatorNode = ref<any>()
   const activatorElement = ref<HTMLElement>()
   const _listeners = ref<any>({})
@@ -81,9 +88,12 @@ export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupC
     genActivatorListeners()
   })
 
-  watch(() => props.disabled, (val) => {
-    if (val) isActive.value = false
-  })
+  watch(
+    () => props.disabled,
+    (val) => {
+      if (val) isActive.value = false
+    }
+  )
 
   onBeforeMount(() => {
     nextTick(() => {
@@ -104,11 +114,14 @@ export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupC
   }
 
   const genActivatorAttributes = ($attrs?: any) => {
-    return Object.assign({
-      role: 'button',
-      'aria-haspopup': true,
-      'aria-expanded': isActive.value ? true : undefined,
-    }, $attrs)
+    return Object.assign(
+      {
+        role: 'button',
+        'aria-haspopup': true,
+        'aria-expanded': isActive.value ? true : undefined,
+      },
+      $attrs
+    )
   }
 
   const genActivatorListeners = ($listeners?: any) => {
@@ -165,7 +178,9 @@ export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupC
       acc[type] = listeners[key]
       return acc
     }, {} as Record<string, any>)
-    const node = slots.activator ? slots.activator({ attrs, listeners: listenersParsed }) : []
+    const node = slots.activator
+      ? slots.activator({ attrs, listeners: listenersParsed })
+      : []
 
     // Auto merge data only in first node,
     // in other case set manually on v-slot attrs and listeners
@@ -177,37 +192,36 @@ export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupC
 
   const addActivatorEvents = () => {
     const _activator: any = getActivator()
-    if (
-      !props.activator ||
-      props.disabled ||
-      !_activator
-    ) return
+    if (!props.activator || props.disabled || !_activator) return
 
-    const keys = Object.keys(_listeners.value)
-      .map(key => {
-        const [type, modifiers] = parseEventName(key)
-        return [key, type, modifiers]
-      })
+    const keys = Object.keys(_listeners.value).map((key) => {
+      const [type, modifiers] = parseEventName(key)
+      return [key, type, modifiers]
+    })
 
     for (const [key, type, modifiers] of keys) {
-      _activator.addEventListener(type as any, _listeners.value[key as string], modifiers)
+      _activator.addEventListener(
+        type as any,
+        _listeners.value[key as string],
+        modifiers
+      )
     }
   }
 
   const removeActivatorEvents = () => {
-    if (
-      !props.activator ||
-      !activatorElement.value
-    ) return
+    if (!props.activator || !activatorElement.value) return
 
-    const keys = Object.keys(_listeners.value)
-      .map(key => {
-        const [type, modifiers] = parseEventName(key)
-        return [key, type, modifiers]
-      })
+    const keys = Object.keys(_listeners.value).map((key) => {
+      const [type, modifiers] = parseEventName(key)
+      return [key, type, modifiers]
+    })
 
     for (const [key, type, modifiers] of keys) {
-      activatorElement.value.removeEventListener(type as any, _listeners.value[key as string], modifiers as any)
+      activatorElement.value.removeEventListener(
+        type as any,
+        _listeners.value[key as string],
+        modifiers as any
+      )
     }
 
     _listeners.value = {}
@@ -231,7 +245,11 @@ export const useActivator = (props: ActivatorProps, { slots, emit }: Pick<SetupC
         // HTMLElement | Element
         _activator = props.activator
       }
-    } else if (activatorNode.value && activatorNode.value.key === '_activator' && activatorNode.value.children.length) {
+    } else if (
+      activatorNode.value &&
+      activatorNode.value.key === '_activator' &&
+      activatorNode.value.children.length
+    ) {
       // set correct element on nested activator slot
       // TODO: select element recursively if element type is 'Symbol' or 'text'
       _activator = activatorNode.value.children[0].el
