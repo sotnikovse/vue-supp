@@ -1,8 +1,9 @@
 /**
  * Unformat number.
- * @param {string|number} value
- * @param {string} decimal
- * @returns {number}
+ *
+ * @param value - The value to unformat.
+ * @param decimal - The decimal.
+ * @returns Returns number.
  */
 export const unformatNumber = (
   value: string | number,

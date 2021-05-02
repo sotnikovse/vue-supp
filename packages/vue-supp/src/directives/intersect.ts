@@ -1,4 +1,3 @@
-// Types
 import type { DirectiveBinding, ObjectDirective } from 'vue'
 
 type ObserveHandler = (

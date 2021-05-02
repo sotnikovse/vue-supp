@@ -1,3 +1,10 @@
+/**
+ * Deep comparison between two values.
+ *
+ * @param a - The value to compare.
+ * @param b - The other value to compare.
+ * @returns Returns `true` if the values are equivalent, else `false`.
+ */
 export const deepEqual = (a: any, b: any): boolean => {
   if (a === b) return true
 

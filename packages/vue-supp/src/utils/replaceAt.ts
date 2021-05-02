@@ -1,9 +1,10 @@
 /**
- * Replace char at index
- * @param {string} str source string
- * @param {number} index destination classes
- * @param {string} replacement replace value
- * @returns {string} result
+ * Replace char at index.
+ *
+ * @param str - The source string.
+ * @param index - The index for replacement.
+ * @param replacement - The replace value.
+ * @returns Returns result of manupulations.
  */
 export const replaceAt = (
   str: string,

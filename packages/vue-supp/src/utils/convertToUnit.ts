@@ -1,8 +1,9 @@
 /**
  * Convert to unit.
- * @param {string,number,null,undefined} value The value to convert.
- * @param {string} [unit=px] The unit value.
- * @returns {string,undefined} Returns the converted value.
+ *
+ * @param value - The value to convert.
+ * @param unit - The unit value.
+ * @returns Returns the converted value.
  */
 export const convertToUnit = (
   value: string | number | null | undefined,

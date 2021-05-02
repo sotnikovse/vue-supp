@@ -1,8 +1,9 @@
 /**
  * Set cursor of input.
- * @param {HTMLInputElement} el
- * @param {number} position
- * @returns {Event}
+ *
+ * @param el - The input element.
+ * @param position - Set position.
+ * @returns
  */
 export const setCursor = (el: HTMLInputElement, position: number): void => {
   const setSelectionRange = (): void => {

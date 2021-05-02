@@ -2,18 +2,6 @@ import isNumber from './isNumber'
 import isString from './isString'
 import unformatNumber from './unformatNumber'
 
-/**
- * Format number.
- * @param {number} number
- * @param {Object} options
- * @param {number|string|null} options.precision default value 0
- * @param {string} options.thousand default value ''
- * @param {string} options.decimal default value ','
- * @param {boolean} options.fixed default value false, for fixed decimals
- * @param {number} options.fallback default fallback value
- * @returns {string}
- */
-
 export interface FormatNumberOption {
   precision?: number | null
   thousand?: string
@@ -22,6 +10,13 @@ export interface FormatNumberOption {
   fallback?: number
 }
 
+/**
+ * Format number.
+ *
+ * @param number - The value to format.
+ * @param options - options {@link FormatNumberOption}.
+ * @returns Returns formatted value.
+ */
 export const formatNumber = (
   number: any,
   options: FormatNumberOption = {}
@@ -84,9 +79,10 @@ export const formatNumber = (
 
 /**
  * Fixed number string.
- * @param {number} value
- * @param {number} precision
- * @returns {string}
+ *
+ * @param value - The number to format.
+ * @param precision - The precision.
+ * @returns Returns formatted value.
  */
 const toFixed = (value: number, precision: number): string => {
   precision = checkPrecision(precision, 0)
@@ -98,9 +94,10 @@ const toFixed = (value: number, precision: number): string => {
 
 /**
  * Check precision of number.
- * @param {number} val
- * @param {number} base
- * @returns {number}
+ *
+ * @param val - The value to check.
+ * @param base - The default value.
+ * @returns Returns precision.
  */
 const checkPrecision = (val: number, base: number): number => {
   val = Math.round(Math.abs(val))
@@ -109,8 +106,9 @@ const checkPrecision = (val: number, base: number): number => {
 
 /**
  * Convert to string.
- * @param {string|number} value
- * @returns {string}
+ *
+ * @param value - The value to convert.
+ * @returns Returns converted value.
  */
 const toStr = (value: string | number): string => {
   return value ? value.toString() : ''

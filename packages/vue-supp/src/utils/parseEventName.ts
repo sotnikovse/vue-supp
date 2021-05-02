@@ -2,8 +2,9 @@ const optionsModifierRE = /(?:Once|Passive|Capture)$/
 
 /**
  * Parse event name to type and modifiers.
- * @param {string} name The value to parse.
- * @returns {Array} Returns an array that contains type and modifiers.
+ *
+ * @param name - The value to parse.
+ * @returns Returns an array that contains type and modifiers.
  */
 export const parseEventName = (
   name: string
