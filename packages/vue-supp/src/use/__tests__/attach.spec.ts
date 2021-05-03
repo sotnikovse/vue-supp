@@ -1,14 +1,14 @@
 import { reactive } from 'vue'
-import { useAttachProps, useAttach } from '../attach'
+import { useAttachProps, useAttach, AttachProps } from '../attach'
 
 describe('Attach', () => {
   it('shoud set correct props', () => {
-    expect((useAttachProps().attach as any).default).toBe(true)
-    expect((useAttachProps('body').attach as any).default).toBe('body')
+    expect(useAttachProps().attach.default).toBe(true)
+    expect(useAttachProps('body').attach.default).toBe('body')
   })
 
   it('shoud compute correct target', () => {
-    const props = reactive<Record<string, any>>({
+    const props = reactive<AttachProps>({
       attach: true,
     })
     const { target } = useAttach(props)
@@ -25,7 +25,7 @@ describe('Attach', () => {
   })
 
   it('shoud use default target', () => {
-    const props = reactive({
+    const props = reactive<AttachProps>({
       attach: true,
     })
     const { target } = useAttach(props, 'body')
@@ -37,7 +37,7 @@ describe('Attach', () => {
     el.setAttribute('id', 'custom-attach')
     document.body.appendChild(el)
 
-    const props = reactive({
+    const props = reactive<AttachProps>({
       attach: '#not-valid',
     })
     const { target } = useAttach(props)
