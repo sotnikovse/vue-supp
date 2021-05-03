@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h, defineComponent, reactive } from 'vue'
+import { h, defineComponent, reactive, toRef } from 'vue'
 import { useLazyContentProps, useLazyContent } from '../lazyContent'
 
 describe('Lazy content', () => {
@@ -19,7 +19,12 @@ describe('Lazy content', () => {
         isActive: Boolean,
       },
       setup(props) {
-        const { isBooted, hasContent, showLazyContent } = useLazyContent(props)
+        const isActive = toRef(props, 'isActive')
+
+        const { isBooted, hasContent, showLazyContent } = useLazyContent(
+          props,
+          { isActive }
+        )
 
         return {
           isBooted,
