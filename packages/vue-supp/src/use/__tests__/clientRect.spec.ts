@@ -1,8 +1,8 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h, defineComponent, readonly, toRefs, PropType } from 'vue'
+import { h, defineComponent, PropType } from 'vue'
 import { useClientRect } from '../clientRect'
 
-describe('Dimensions', () => {
+describe('useClientRect', () => {
   let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
 
   const component = defineComponent({
@@ -15,15 +15,7 @@ describe('Dimensions', () => {
       shouldRound: Boolean,
     },
     setup(props) {
-      const { element, hasResizeListener, shouldRound } = toRefs(props)
-
-      const useCaseProps = readonly({
-        element,
-        hasResizeListener,
-        shouldRound,
-      })
-
-      const { clientRect, updateClientRect } = useClientRect(useCaseProps)
+      const { clientRect, updateClientRect } = useClientRect(props)
 
       return {
         clientRect,
@@ -52,6 +44,8 @@ describe('Dimensions', () => {
             left: 0,
             right: 100,
             bottom: 100,
+            x: 0,
+            y: 0,
           }
         },
       },
@@ -66,6 +60,8 @@ describe('Dimensions', () => {
       left: 0,
       right: 1000,
       bottom: 1000,
+      x: 0,
+      y: 0,
     }
 
     await wrapper.setProps({
@@ -91,6 +87,8 @@ describe('Dimensions', () => {
             left: 0.987,
             right: 100.45,
             bottom: 100.5,
+            x: 0.1,
+            y: 0.6,
           }
         },
       },
@@ -106,6 +104,8 @@ describe('Dimensions', () => {
       left: 1,
       right: 100,
       bottom: 101,
+      x: 0,
+      y: 1,
     })
   })
 

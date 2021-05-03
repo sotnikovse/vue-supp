@@ -1,12 +1,16 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, Ref } from 'vue'
 
 export interface ClientRectProps {
   element: Element | HTMLElement
   hasResizeListener?: boolean
   shouldRound?: boolean
 }
+export interface UseClientRect {
+  clientRect: Ref<DOMRectReadOnly | undefined>
+  updateClientRect: () => void
+}
 
-export const useClientRect = (props: ClientRectProps) => {
+export const useClientRect = (props: ClientRectProps): UseClientRect => {
   const options: AddEventListenerOptions = {
     passive: true,
   }
@@ -25,11 +29,13 @@ export const useClientRect = (props: ClientRectProps) => {
           right: Math.round(rect.right),
           width: Math.round(rect.width),
           height: Math.round(rect.height),
+          x: Math.round(rect.x),
+          y: Math.round(rect.y),
         } as DOMRectReadOnly)
   }
 
   const updateClientRect = () => {
-    if (!props.element || !props.element) return
+    if (!props.element) return
     clientRect.value = getBoundedClientRect(props.element)
   }
 
