@@ -1,6 +1,4 @@
-import { h, ref, computed, onMounted } from 'vue'
-
-import { SetupContext } from '../../types'
+import { h, ref, computed, onMounted, SetupContext } from 'vue'
 
 export type InputValue = string | number | null | undefined
 export interface InputProps {
@@ -30,10 +28,7 @@ export const useInputProps = () => {
   }
 }
 
-export const useInput = (
-  props: InputProps,
-  { emit }: Pick<SetupContext, 'emit'>
-) => {
+export const useInput = (props: InputProps, { emit }: SetupContext) => {
   const inputElement = ref<HTMLElement>()
   const internal = ref<InputValue>(props.modelValue)
   const isFocused = ref<boolean>(false)

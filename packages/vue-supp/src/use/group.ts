@@ -1,6 +1,4 @@
-import { ref, computed, onMounted } from 'vue'
-
-import { SetupContext } from '../../types'
+import { ref, computed, onMounted, SetupContext } from 'vue'
 
 import deepEqual from '../utils/deepEqual'
 import wrapInArray from '../utils/wrapInArray'
@@ -31,10 +29,7 @@ export const useGroupProps = () => {
   }
 }
 
-export const useGroup = (
-  props: GroupProps,
-  { emit }: Pick<SetupContext, 'emit'>
-) => {
+export const useGroup = (props: GroupProps, { emit }: SetupContext) => {
   const items = ref<any[]>([])
 
   const internal = ref(props.modelValue)

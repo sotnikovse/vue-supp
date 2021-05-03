@@ -1,7 +1,5 @@
 import {
   ref,
-  reactive,
-  computed,
   cloneVNode,
   onMounted,
   onBeforeMount,
@@ -10,9 +8,8 @@ import {
   watch,
   PropType,
   VNode,
+  SetupContext,
 } from 'vue'
-
-import { SetupContext } from '../../types'
 
 import { useModel } from './model'
 
@@ -63,7 +60,7 @@ export const useActivatorProps = () => {
 
 export const useActivator = (
   props: ActivatorProps,
-  { slots, emit }: Pick<SetupContext, 'slots' | 'emit'>
+  { slots }: SetupContext
 ) => {
   const activatorNode = ref<any>()
   const activatorElement = ref<HTMLElement>()
@@ -79,16 +76,16 @@ export const useActivator = (
     nextTick(addActivatorEvents)
   })
 
-  onMounted(() => {
-    genActivatorListeners()
-  })
-
   watch(
     () => props.disabled,
     (val) => {
       if (val) isActive.value = false
     }
   )
+
+  onMounted(() => {
+    genActivatorListeners()
+  })
 
   onBeforeMount(() => {
     nextTick(() => {

@@ -9,14 +9,6 @@ export type ObjectItemKey =
 
 export type Data = Record<string, unknown>
 
-export type EmitFn = (event: string, ...args: unknown[]) => void
-
-export interface SetupContext {
-  attrs: Data
-  slots: Slots
-  emit: (event: string, ...args: unknown[]) => void
-}
-
 /* eslint-disable no-use-before-define */
 
 export interface TouchHandlers {

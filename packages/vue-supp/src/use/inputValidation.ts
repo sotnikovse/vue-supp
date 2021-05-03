@@ -7,9 +7,8 @@ import {
   onBeforeUnmount,
   inject,
   toRefs,
+  SetupContext,
 } from 'vue'
-
-import { SetupContext } from '../../types'
 
 export interface InputValidationProps {
   id: string // move to context
@@ -60,7 +59,7 @@ export const useInputValidationProps = () => {
 
 export const useInputValidation = (
   props: InputValidationProps,
-  { emit }: Pick<SetupContext, 'emit'>,
+  { emit }: SetupContext,
   injectKey: symbol
 ) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
@@ -204,7 +203,9 @@ export const useInputValidation = (
         _errorBucket.push(valid || '')
       } else if (typeof valid !== 'boolean') {
         // eslint-disable-next-line
-        console.log(`Rules should return a string or boolean, received '${typeof valid}' instead`)
+        console.log(
+          `Rules should return a string or boolean, received '${typeof valid}' instead`
+        )
       }
     }
 
