@@ -14,7 +14,7 @@ import {
 
 import { SetupContext } from '../../types'
 
-import { toggle } from './toggle'
+import { useModel } from './model'
 
 import parseEventName from '../utils/parseEventName'
 
@@ -69,12 +69,7 @@ export const useActivator = (
   const activatorElement = ref<HTMLElement>()
   const _listeners = ref<any>({})
 
-  const { useToggle } = toggle()
-
-  const toggleProps = reactive({
-    modelValue: computed(() => props.modelValue),
-  })
-  const { isActive } = useToggle(toggleProps, { emit })
+  const isActive = useModel(props, 'modelValue')
 
   watch([() => props.activator, () => props.openOnHover], () => {
     resetActivator()
