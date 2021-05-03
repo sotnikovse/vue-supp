@@ -1,3 +1,3 @@
-describe('Input validation', () => {
+describe('inputValidation.ts', () => {
   it.todo('should validate')
 })

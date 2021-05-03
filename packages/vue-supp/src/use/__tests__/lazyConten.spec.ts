@@ -2,7 +2,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { h, defineComponent, reactive, toRef } from 'vue'
 import { useLazyContentProps, useLazyContent } from '../lazyContent'
 
-describe('Lazy content', () => {
+describe('lazyContent.ts', () => {
   describe('useLazyContentProps', () => {
     it('shoud set correct props', () => {
       expect(useLazyContentProps().eager).toBeDefined()

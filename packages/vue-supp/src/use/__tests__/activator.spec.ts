@@ -1,4 +1,4 @@
-describe('Activator', () => {
+describe('activator.ts', () => {
   it.todo('should render activator with slot and match snapshot')
 
   it.todo('should render correct attrs/listeners and match snapshot')

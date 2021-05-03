@@ -2,7 +2,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { h, reactive, defineComponent } from 'vue'
 import { useFilterProps, useFilterEmits, useFilter } from '../filter'
 
-describe('Filter', () => {
+describe('filter.ts', () => {
   let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
   const mockItems = [
     {

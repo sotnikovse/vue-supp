@@ -5,7 +5,7 @@ import {
   AspectRatioProps,
 } from '../aspectRatio'
 
-describe('Aspect ratio', () => {
+describe('aspectRatio.ts', () => {
   describe('useAspectRatioProps', () => {
     it('shoud set correct props', () => {
       expect(useAspectRatioProps().aspectRatio).toBeDefined()

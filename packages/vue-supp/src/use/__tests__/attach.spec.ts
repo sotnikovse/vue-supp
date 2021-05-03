@@ -1,7 +1,7 @@
 import { reactive } from 'vue'
 import { useAttachProps, useAttach, AttachProps } from '../attach'
 
-describe('Attach', () => {
+describe('attach.ts', () => {
   it('shoud set correct props', () => {
     expect(useAttachProps().attach.default).toBe(true)
     expect(useAttachProps('body').attach.default).toBe('body')

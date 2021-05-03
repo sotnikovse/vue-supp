@@ -2,7 +2,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { h, defineComponent, PropType } from 'vue'
 import { useClientRect } from '../clientRect'
 
-describe('useClientRect', () => {
+describe('clientRect.ts', () => {
   let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
 
   const component = defineComponent({

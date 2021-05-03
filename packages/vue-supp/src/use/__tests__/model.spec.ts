@@ -2,7 +2,7 @@ import { mount, VueWrapper } from '@vue/test-utils'
 import { h, defineComponent, nextTick } from 'vue'
 import { useModel } from '../model'
 
-describe('useModel', () => {
+describe('model.ts', () => {
   let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
 
   beforeEach(() => {
