@@ -33,7 +33,7 @@ describe('filter.ts', () => {
   const component = defineComponent({
     props: useFilterProps(),
     emits: useFilterEmits(),
-    setup(props, { emit }) {
+    setup(props) {
       const {
         search,
         searchIsDirty,
@@ -41,7 +41,7 @@ describe('filter.ts', () => {
         getText,
         getValue,
         clearSearch,
-      } = useFilter(reactive(props), { emit })
+      } = useFilter(reactive(props))
 
       return {
         search,

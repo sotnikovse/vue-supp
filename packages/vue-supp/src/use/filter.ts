@@ -1,14 +1,16 @@
-import { ref, computed, watch, PropType } from 'vue'
-
-import { SetupContext } from '../../types'
+import { computed, PropType } from 'vue'
 
 import getPropertyFromItem from '../utils/getPropertyFromItem'
+
+import { useModel } from './model'
 
 export interface FilterProps {
   search: string | null | undefined
   items: any[]
   itemText: string
   itemValue: string
+  noDataText?: string
+  noResultText?: string
   noFilter?: boolean
   filter: (item: any, queryText: string, itemText: string) => boolean
 }
@@ -54,11 +56,8 @@ export const useFilterEmits = (): string[] => {
   return [EVENT]
 }
 
-export const useFilter = (
-  props: FilterProps,
-  { emit }: Pick<SetupContext, 'emit'>
-) => {
-  const search = ref<string | null | undefined>(props.search)
+export const useFilter = (props: FilterProps) => {
+  const search = useModel(props, 'search')
 
   const searchIsDirty = computed(() => {
     return search.value != null && search.value !== ''
@@ -77,17 +76,6 @@ export const useFilter = (
 
       return props.filter(item, queryText, text)
     })
-  })
-
-  watch(
-    () => props.search,
-    (val) => {
-      search.value = val
-    }
-  )
-
-  watch(search, (val) => {
-    emit(EVENT, val)
   })
 
   const getText = (item: any) => {
