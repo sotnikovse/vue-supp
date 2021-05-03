@@ -4,7 +4,6 @@ export interface AspectRatioProps {
   aspectRatio?: string | number
 }
 export interface UseAspectRatio {
-  computedAspectRatio: ComputedRef<number>
   aspectStyle: ComputedRef<Record<string, string> | undefined>
 }
 
@@ -15,16 +14,13 @@ export const useAspectRatioProps = () => {
 }
 
 export const useAspectRatio = (props: AspectRatioProps): UseAspectRatio => {
-  const computedAspectRatio = computed(() => Number(props.aspectRatio))
-
-  const aspectStyle = computed(() => {
-    return computedAspectRatio.value
-      ? { paddingBottom: (1 / computedAspectRatio.value) * 100 + '%' }
-      : undefined
-  })
-
   return {
-    computedAspectRatio,
-    aspectStyle,
+    aspectStyle: computed(() => {
+      const ratio = Number(props.aspectRatio)
+
+      return ratio
+        ? { paddingBottom: String((1 / ratio) * 100) + '%' }
+        : undefined
+    }),
   }
 }
