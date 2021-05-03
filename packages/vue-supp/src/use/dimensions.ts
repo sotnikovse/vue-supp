@@ -11,73 +11,46 @@ export interface DimensionProps {
   width?: number | string
 }
 
-const PROPS = {
-  width: {
-    type: [Number, String],
-  },
-  height: {
-    type: [Number, String],
-  },
-  maxWidth: {
-    type: [Number, String],
-  },
-  maxHeight: {
-    type: [Number, String],
-  },
-  minWidth: {
-    type: [Number, String],
-  },
-  minHeight: {
-    type: [Number, String],
-  },
+type PropNames = keyof DimensionProps
+
+export function useDimensionProps(defaults?: DimensionProps) {
+  const props = {
+    height: [Number, String],
+    maxHeight: [Number, String],
+    maxWidth: [Number, String],
+    minHeight: [Number, String],
+    minWidth: [Number, String],
+    width: [Number, String],
+  } as Record<PropNames, Prop<number | string | undefined>>
+
+  if (defaults) {
+    return Object.keys(props).reduce<any>((obj, prop) => {
+      const definition = props[prop as PropNames]
+      if (prop in defaults) {
+        obj[prop] = {
+          type: definition,
+          default: defaults[prop as PropNames],
+        }
+      } else {
+        obj[prop] = definition
+      }
+
+      return obj
+    }, {})
+  } else {
+    return props
+  }
 }
 
-type PropValue = string | number | null | undefined
-type PropNames = keyof typeof PROPS
+export function useDimension(props: DimensionProps) {
+  const dimensionStyles = computed(() => ({
+    height: convertToUnit(props.height),
+    maxHeight: convertToUnit(props.maxHeight),
+    maxWidth: convertToUnit(props.maxWidth),
+    minHeight: convertToUnit(props.minHeight),
+    minWidth: convertToUnit(props.minWidth),
+    width: convertToUnit(props.width),
+  }))
 
-export const dimensions = <S extends PropNames>(...possibleProps: S[]) => {
-  const selectedProps = possibleProps.length
-    ? possibleProps
-    : (Object.keys(PROPS) as S[])
-
-  const useDimensionsProps = (defaults?: Partial<Record<S, PropValue>>) => {
-    const props = selectedProps.reduce((acc, key) => {
-      acc[key] = PROPS[key]
-      return acc
-    }, {} as Record<S, Prop<PropValue>>)
-
-    if (defaults) {
-      return selectedProps.reduce((acc, key) => {
-        const prop = props[key] as Record<S, Prop<PropValue>>
-        acc[key] = {
-          ...prop,
-          default: defaults[key],
-        }
-        return acc
-      }, {} as Record<S, Prop<PropValue>>)
-    } else {
-      return props
-    }
-  }
-
-  const useDimensions = (props: Partial<Record<S, PropValue>>) => {
-    const dimensionsStyles = computed(() => {
-      return selectedProps.reduce((acc, key) => {
-        const value: PropValue = props[key]
-        if (value) {
-          acc[key] = convertToUnit(value)
-        }
-        return acc
-      }, {} as Record<S, string | undefined>)
-    })
-
-    return {
-      dimensionsStyles,
-    }
-  }
-
-  return {
-    useDimensionsProps,
-    useDimensions,
-  }
+  return { dimensionStyles }
 }
