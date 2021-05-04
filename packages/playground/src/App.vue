@@ -30,7 +30,6 @@ export default {
     return {
       items: [
         { text: 'Home', to: '/' },
-        { text: 'Toggle', to: '/toggle' },
         { text: 'Activator', to: '/activator' },
       ],
     }

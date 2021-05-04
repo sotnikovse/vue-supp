@@ -1,8 +1,6 @@
 import {
   h,
   ref,
-  reactive,
-  toRefs,
   defineComponent,
   Transition,
   Teleport,
@@ -18,18 +16,19 @@ import {
   useLazyContentProps,
   useAttach,
   useAttachProps,
-  dimensions,
+  useDimensionProps,
+  useDimension,
   ClickOutside,
 } from 'vue-supp'
 
-const { useDimensionsProps, useDimensions } = dimensions('width', 'maxWidth')
-
 export default defineComponent({
+  name: 'Modal',
+
   props: {
     ...useActivatorProps(),
     ...useLazyContentProps(),
     ...useAttachProps(),
-    ...useDimensionsProps(),
+    ...useDimensionProps(),
     openOnHover: {
       type: Boolean,
       default: false,
@@ -42,34 +41,20 @@ export default defineComponent({
     fullscreen: Boolean,
   },
 
-  setup(props, { emit, slots }) {
-    const contentElement = ref<HTMLElement | null>(null)
-    const overlayElement = ref<HTMLElement | null>(null)
-    const contentWrapperElement = ref<HTMLElement | null>(null)
-
-    const { disabled, attach, width, maxWidth } = toRefs(props)
+  setup(props, { slots }) {
+    const contentElement = ref<HTMLElement>()
+    const overlayElement = ref<HTMLElement>()
+    const contentWrapperElement = ref<HTMLElement>()
 
     const { isActive, genActivator, getActivator } = useActivator(props, {
-      emit,
       slots,
     } as SetupContext)
 
-    const lazyContentProps = reactive({
-      isActive: isActive,
-      disabled,
-    })
-    const { showLazyContent } = useLazyContent(lazyContentProps)
+    const { showLazyContent } = useLazyContent(props, { isActive })
 
-    const attachProps = reactive({
-      attach,
-    })
-    const { target } = useAttach(attachProps)
+    const { target } = useAttach(props)
 
-    const dimensionsProps = reactive({
-      width,
-      maxWidth,
-    })
-    const { dimensionsStyles } = useDimensions(dimensionsProps)
+    const { dimensionStyles } = useDimension(props)
 
     const genContent = () => {
       const content = genInnerContent()
@@ -115,7 +100,7 @@ export default defineComponent({
       }
 
       if (!props.fullscreen) {
-        data.style = dimensionsStyles.value
+        data.style = dimensionStyles.value
       }
 
       return withDirectives(
