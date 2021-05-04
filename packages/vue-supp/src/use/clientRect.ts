@@ -1,16 +1,12 @@
-import { ref, onMounted, onUnmounted, Ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 export interface ClientRectProps {
   element: Element | HTMLElement
   hasResizeListener?: boolean
   shouldRound?: boolean
 }
-export interface UseClientRect {
-  clientRect: Ref<DOMRectReadOnly | undefined>
-  updateClientRect: () => void
-}
 
-export const useClientRect = (props: ClientRectProps): UseClientRect => {
+export const useClientRect = (props: ClientRectProps) => {
   const options: AddEventListenerOptions = {
     passive: true,
   }

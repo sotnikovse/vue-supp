@@ -1,4 +1,4 @@
-import { ref, computed, watch, Ref, ComputedRef, PropType, VNode } from 'vue'
+import { ref, computed, watch, Ref, PropType, VNode } from 'vue'
 
 export interface LazyContentProps {
   eager?: boolean
@@ -6,13 +6,6 @@ export interface LazyContentProps {
 }
 export interface LazyContentContext {
   isActive: Ref<string | number | boolean | null | undefined>
-}
-export interface LazyContent {
-  isBooted: Ref<boolean>
-  hasContent: ComputedRef<boolean>
-  showLazyContent: (
-    content?: () => VNode | VNode[]
-  ) => VNode | VNode[] | undefined
 }
 
 export const useLazyContentProps = () => {
@@ -25,7 +18,7 @@ export const useLazyContentProps = () => {
 export const useLazyContent = (
   props: LazyContentProps,
   { isActive }: LazyContentContext
-): LazyContent => {
+) => {
   const isBooted = ref<boolean>(false)
 
   const hasContent = computed(() => {
