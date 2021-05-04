@@ -2,22 +2,18 @@ import { createPopper, VariationPlacement } from '@popperjs/core'
 import {
   h,
   ref,
-  toRefs,
   computed,
   onUnmounted,
   Teleport,
   Transition,
   withDirectives,
   vShow,
-  reactive,
   VNode,
   PropType,
 } from 'vue'
 
 import { useAttachProps, useAttach, AttachProps } from './attach'
-import { dimensions, DimensionProps } from './dimensions'
-
-const { useDimensionsProps, useDimensions } = dimensions()
+import { useDimensionProps, useDimension, DimensionProps } from './dimensions'
 
 export interface PopperProps extends AttachProps, DimensionProps {
   placement?: VariationPlacement
@@ -40,7 +36,7 @@ export interface PopperProps extends AttachProps, DimensionProps {
 export const usePopperProps = () => {
   return {
     ...useAttachProps(),
-    ...useDimensionsProps(),
+    ...useDimensionProps(),
     placement: {
       type: String as PropType<VariationPlacement | undefined>,
       validator: (value: string) => {
@@ -113,29 +109,8 @@ export const usePopper = (props: PopperProps) => {
   const wrapperElement = ref<HTMLElement>()
   const boxOffsetElement = ref<HTMLElement>()
 
-  const {
-    attach,
-    width,
-    minWidth,
-    maxWidth,
-    height,
-    minHeight,
-    maxHeight,
-  } = toRefs(props)
-
-  const attachProps = reactive({
-    attach,
-  })
-  const { target } = useAttach(attachProps)
-  const measureProps = reactive({
-    width,
-    minWidth,
-    maxWidth,
-    height,
-    minHeight,
-    maxHeight,
-  })
-  const { dimensionsStyles } = useDimensions(measureProps)
+  const { target } = useAttach(props)
+  const { dimensionStyles } = useDimension(props)
 
   const placement = computed(() => {
     return props.placement
@@ -266,7 +241,7 @@ export const usePopper = (props: PopperProps) => {
         props.boxClass ? props.boxClass.trim() : undefined,
       ],
       style: {
-        ...dimensionsStyles.value,
+        ...dimensionStyles.value,
         ...dataStyles,
       },
     }
