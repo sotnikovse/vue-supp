@@ -1,4 +1,4 @@
-import { computed, Prop } from 'vue'
+import { computed } from 'vue'
 
 import convertToUnit from '../utils/convertToUnit'
 
@@ -21,22 +21,22 @@ export function useDimensionProps(defaults?: DimensionProps) {
     minHeight: [Number, String],
     minWidth: [Number, String],
     width: [Number, String],
-  } as Record<PropNames, Prop<number | string | undefined>>
+  }
 
   if (defaults) {
-    return Object.keys(props).reduce<any>((obj, prop) => {
+    return Object.keys(props).reduce((obj, prop) => {
       const definition = props[prop as PropNames]
       if (prop in defaults) {
-        obj[prop] = {
+        obj[prop as PropNames] = {
           type: definition,
           default: defaults[prop as PropNames],
         }
       } else {
-        obj[prop] = definition
+        obj[prop as PropNames] = definition
       }
 
       return obj
-    }, {})
+    }, {} as { [K in PropNames]: typeof props[K] | { type: typeof props[K]; default: DimensionProps[K] } })
   } else {
     return props
   }
