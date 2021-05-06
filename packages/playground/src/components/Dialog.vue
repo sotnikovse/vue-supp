@@ -8,9 +8,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref, toRefs } from 'vue'
+import { defineComponent } from 'vue'
+import { useModel } from 'vue-supp'
 import Modal from './Modal'
+
 export default defineComponent({
+  name: 'Dialog',
+
   components: { Modal },
 
   props: {
@@ -22,20 +26,11 @@ export default defineComponent({
 
   emits: ['update:modelValue'],
 
-  setup(props, { emit }) {
-    const activator = ref(null)
-    const { modelValue } = toRefs(props)
-    const internal = ref(modelValue.value)
-    watch(modelValue, (val) => {
-      internal.value = val
-    })
-    watch(internal, (val) => {
-      emit('update:modelValue', val)
-    })
+  setup(props) {
+    const internal = useModel(props, 'modelValue')
 
     return {
       internal,
-      activator,
     }
   },
 })

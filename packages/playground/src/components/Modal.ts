@@ -46,7 +46,7 @@ export default defineComponent({
     const overlayElement = ref<HTMLElement>()
     const contentWrapperElement = ref<HTMLElement>()
 
-    const { isActive, genActivator, getActivator } = useActivator(props, {
+    const { isActive, genActivator, focusActivator } = useActivator(props, {
       slots,
     } as SetupContext)
 
@@ -94,8 +94,7 @@ export default defineComponent({
         style: {},
         onKeydown: () => {
           isActive.value = false
-          const activator = getActivator()
-          nextTick(() => activator && activator.focus())
+          nextTick(focusActivator)
         },
       }
 
@@ -196,6 +195,7 @@ export default defineComponent({
   },
 
   render() {
-    return h('div', {}, [this.genActivator(), this.genModal()])
+    const activator = this.genActivator() || []
+    return h('div', {}, [...activator, this.genModal()])
   },
 })
