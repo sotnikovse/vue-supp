@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/5cube/vue-supp/compare/v0.7.6...v0.8.0) (2021-05-06)
+
+
+### Bug Fixes
+
+* **dimensions:** useDimensionProps type ([f2b7349](https://github.com/5cube/vue-supp/commit/f2b734975ab14ad87926cc4c6414221a07331915))
+* **lazyContent:** isActive type ([9ea4798](https://github.com/5cube/vue-supp/commit/9ea47986154a5583ca481806223ecfc53cc7bd34))
+* removed custom SetupContext & EmitFn types ([ad92970](https://github.com/5cube/vue-supp/commit/ad9297056965ad04265201ac9c4bd46ebf317270))
+* **dimensions:** refactored ([63bcf01](https://github.com/5cube/vue-supp/commit/63bcf013302c8a25c0501b7abc334a0ad77eae75))
+* **lazyContent:** props refactored ([2afabc5](https://github.com/5cube/vue-supp/commit/2afabc5cc3b58a78ca9ac23e5cec58d6af50815e))
+* props types ([be17768](https://github.com/5cube/vue-supp/commit/be1776859a537e2aeb72f00c7bcab1fef1cf8af0))
+
+
+### Features
+
+* added model use ([0a14918](https://github.com/5cube/vue-supp/commit/0a14918db46b64f61890bde6d4d34bdbb8db1eac))
+* added resizeObserver use ([c5276aa](https://github.com/5cube/vue-supp/commit/c5276aa94c616666a2911c792fb113c9babfac9b))
+* added transition use ([005f39e](https://github.com/5cube/vue-supp/commit/005f39ec48112e0e24e42007fa7a00fc2a6b1c39))
+* popper simplified with watchEffect ([0c48046](https://github.com/5cube/vue-supp/commit/0c48046acca0b8ce4836a124a428bf92036eb9ae))
+
+
+### BREAKING CHANGES
+
+* options and modifiers should be passed manually
+* **dimensions:** removed factory function
+
+useDimensionsProps -> useDimensionsProp
+useDimensions -> useDimension
+dimensionsStyles -> dimensionStyles
+* **lazyContent:** isActive moved from props to context
+* removed toggle use, should be replaced by useModel
+
+
+
+
+
 ## [0.7.6](https://github.com/5cube/vue-supp/compare/v0.7.5...v0.7.6) (2021-03-12)
 
 
