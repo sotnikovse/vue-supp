@@ -31,6 +31,7 @@ export default {
       items: [
         { text: 'Home', to: '/' },
         { text: 'Activator', to: '/activator' },
+        { text: 'Resize Observer', to: '/resize-observer' },
       ],
     }
   },
