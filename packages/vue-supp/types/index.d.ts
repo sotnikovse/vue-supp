@@ -9,6 +9,8 @@ export type ObjectItemKey =
 
 export type Data = Record<string, unknown>
 
+export type MaybeRef<T> = T | Ref<T> | ComputedRef<T>
+
 /* eslint-disable no-use-before-define */
 
 export interface TouchHandlers {
