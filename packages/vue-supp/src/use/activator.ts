@@ -1,5 +1,6 @@
 import {
   ref,
+  reactive,
   cloneVNode,
   onMounted,
   onBeforeMount,
@@ -8,16 +9,19 @@ import {
   watch,
   PropType,
   VNode,
+  ComponentPublicInstance,
   SetupContext,
 } from 'vue'
+
+import { Data } from '../../types'
 
 import { useModel } from './model'
 
 import parseEventName from '../utils/parseEventName'
 
 export interface ActivatorProps {
-  modelValue: string | number | boolean | null | undefined
-  activator?: any
+  modelValue: any
+  activator?: string | HTMLElement | Element | ComponentPublicInstance | null
   disabled?: boolean
   openOnHover: boolean
   openOnFocus: boolean
@@ -25,19 +29,19 @@ export interface ActivatorProps {
   disableKeys?: boolean
 }
 
+type Listeners = Record<string, (e?: any) => void>
+
+type Options = { attrs: Data; listeners: Listeners }
+
 export const useActivatorProps = () => {
   return {
     modelValue: {
-      type: [Boolean, String, Number] as PropType<
-        string | number | boolean | null | undefined
-      >,
+      type: [Boolean, String, Number] as PropType<ActivatorProps['activator']>,
       default: false,
     },
     activator: {
-      default: (null as unknown) as PropType<
-        string | HTMLElement | VNode | Element | null
-      >,
-      validator: (val: string | Record<string, unknown>) => {
+      type: [String, Object] as PropType<ActivatorProps['activator']>,
+      validator: (val: unknown) => {
         return ['string', 'object'].includes(typeof val)
       },
     },
@@ -62,19 +66,35 @@ export const useActivator = (
   props: ActivatorProps,
   { slots }: SetupContext
 ) => {
-  const activatorNode = ref<any>()
-  const activatorElement = ref<HTMLElement>()
-  const _listeners = ref<any>({})
+  const _activatorNode = ref<VNode[]>()
+  const _activatorElement = ref<HTMLElement | null>(null)
+  const _listeners = ref<Listeners>({})
+  // override or add extra attributes and listeners
+  const _options = reactive<Options>({
+    attrs: {},
+    listeners: {},
+  })
 
   const isActive = useModel(props, 'modelValue')
 
-  watch([() => props.activator, () => props.openOnHover], () => {
-    resetActivator()
-  })
+  watch(
+    () => props.activator,
+    () => {
+      resetActivator()
+    }
+  )
 
-  watch(_listeners, () => {
-    nextTick(addActivatorEvents)
-  })
+  watch(
+    [
+      () => props.openOnHover,
+      () => props.openOnFocus,
+      () => props.openOnClick,
+      () => props.disableKeys,
+    ],
+    () => {
+      genActivatorListeners()
+    }
+  )
 
   watch(
     () => props.disabled,
@@ -84,7 +104,17 @@ export const useActivator = (
   )
 
   onMounted(() => {
-    genActivatorListeners()
+    if (props.activator) {
+      genActivatorListeners()
+    }
+    watch(
+      _listeners,
+      (val, oldVal) => {
+        _removeActivatorEvents(oldVal)
+        _addActivatorEvents(val)
+      },
+      { immediate: true }
+    )
   })
 
   onBeforeMount(() => {
@@ -94,32 +124,41 @@ export const useActivator = (
   })
 
   onUnmounted(() => {
-    removeActivatorEvents()
+    _removeActivatorEvents()
   })
 
-  // Functions
   const resetActivator = () => {
-    removeActivatorEvents()
-    activatorElement.value = undefined
-    getActivator()
+    _removeActivatorEvents()
+    _activatorElement.value = null
+    _getActivator()
+    _addActivatorEvents()
+  }
+
+  const setActivatorAttrs = (attrs: Data = {}) => {
+    _options.attrs = attrs
+  }
+
+  const setActivatorListeners = (listeners: Listeners = {}) => {
+    _options.listeners = listeners
     genActivatorListeners()
   }
 
-  const genActivatorAttributes = ($attrs?: any) => {
+  const genActivatorAttributes = ($attrs?: Data) => {
     return Object.assign(
       {
         role: 'button',
         'aria-haspopup': true,
         'aria-expanded': isActive.value ? true : undefined,
       },
+      _options.attrs,
       $attrs
     )
   }
 
-  const genActivatorListeners = ($listeners?: any) => {
+  const genActivatorListeners = ($listeners?: Listeners) => {
     if (props.disabled) return {}
 
-    const listeners: any = {}
+    const listeners: Listeners = {}
 
     if (props.openOnHover) {
       listeners.onMouseenter = () => {
@@ -128,7 +167,7 @@ export const useActivator = (
       listeners.onMouseleave = () => {
         isActive.value = false
       }
-    } else {
+    } else if (props.openOnClick) {
       listeners.onClick = (e: MouseEvent) => {
         e.stopPropagation()
 
@@ -138,7 +177,7 @@ export const useActivator = (
 
     if (props.openOnFocus) {
       listeners.onFocus = () => {
-        isActive.value = true
+        isActive.value = !isActive.value
       }
     }
 
@@ -150,14 +189,16 @@ export const useActivator = (
       }
     }
 
-    Object.assign(listeners, $listeners)
+    Object.assign(listeners, _options.listeners, $listeners)
 
     _listeners.value = listeners
 
     return _listeners.value
   }
 
-  const genActivator = ($attrs?: any, $listeners?: any) => {
+  const genActivator = ($attrs?: Data, $listeners?: Listeners) => {
+    if (props.activator) return
+
     const attrs = genActivatorAttributes($attrs)
     const listeners = genActivatorListeners($listeners)
     const data = {
@@ -169,99 +210,124 @@ export const useActivator = (
       const [type] = parseEventName(key)
       acc[type] = listeners[key]
       return acc
-    }, {} as Record<string, any>)
-    const node = slots.activator
-      ? slots.activator({ attrs, listeners: listenersParsed })
-      : []
+    }, {} as Listeners)
 
-    // Auto merge data only in first node,
+    // Auto merge data only if not nested slot,
     // in other case set manually on v-slot attrs and listeners
-    const [firstNode, ...others] = node
-    const transformedNode = firstNode ? cloneVNode(firstNode, data) : undefined
-    activatorNode.value = transformedNode
-    return firstNode ? [transformedNode, ...others] : undefined
+    const node = slots.activator?.({ attrs: attrs, listeners: listenersParsed })
+    if (node && !node.some((n) => n.key === '_activator')) {
+      _activatorNode.value = node.map((n) => cloneVNode(n, data))
+    } else {
+      _activatorNode.value = node
+    }
+    return _activatorNode.value
   }
 
-  const addActivatorEvents = () => {
-    const _activator: any = getActivator()
+  const focusActivator = () => {
+    if (_activatorElement.value) {
+      _activatorElement.value.focus()
+    } else {
+      // Focus first Element with role="button" or aria-haspopup="true"
+      if (_activatorNode.value?.length) {
+        let element
+        for (const n of _activatorNode.value) {
+          let el = n.el
+          while (el && el.nextSibling) {
+            /* ELEMENT */
+            if (
+              el.nodeType === 1 &&
+              (el.getAttribute('role') === 'button' ||
+                el.getAttribute('aria-haspopup') === 'true')
+            ) {
+              element = el
+              break
+            } else {
+              el = el.nextSibling
+            }
+          }
+          if (element) {
+            element.focus()
+            break
+          }
+        }
+        return element
+      }
+    }
+  }
+
+  const _addActivatorEvents = ($listeners?: Listeners) => {
+    const _activator = _getActivator()
     if (!props.activator || props.disabled || !_activator) return
 
-    const keys = Object.keys(_listeners.value).map((key) => {
+    const listeners = $listeners || _listeners.value
+
+    const keys = Object.keys(listeners).map((key) => {
       const [type, modifiers] = parseEventName(key)
       return [key, type, modifiers]
     })
 
     for (const [key, type, modifiers] of keys) {
       _activator.addEventListener(
-        type as any,
-        _listeners.value[key as string],
-        modifiers
+        type as string,
+        listeners[key as string],
+        modifiers as AddEventListenerOptions
       )
     }
   }
 
-  const removeActivatorEvents = () => {
-    if (!props.activator || !activatorElement.value) return
+  const _removeActivatorEvents = ($listeners?: Listeners) => {
+    if (!props.activator || !_activatorElement.value) return
 
-    const keys = Object.keys(_listeners.value).map((key) => {
+    const listeners = $listeners || _listeners.value
+
+    const keys = Object.keys(listeners).map((key) => {
       const [type, modifiers] = parseEventName(key)
       return [key, type, modifiers]
     })
 
     for (const [key, type, modifiers] of keys) {
-      activatorElement.value.removeEventListener(
-        type as any,
-        _listeners.value[key as string],
-        modifiers as any
+      _activatorElement.value.removeEventListener(
+        type as string,
+        listeners[key as string],
+        modifiers as AddEventListenerOptions
       )
     }
-
-    _listeners.value = {}
   }
 
-  const getActivator = () => {
-    if (activatorElement.value) return activatorElement.value
+  const _getActivator = () => {
+    if (_activatorElement.value) return _activatorElement.value
 
-    let _activator = null
+    if (!props.activator) return
 
-    if (props.activator) {
-      const target = document
+    let _activator: HTMLElement | null = null
 
-      if (typeof props.activator === 'string') {
-        // Selector
-        _activator = target.querySelector(props.activator)
-      } else if (props.activator.$el) {
-        // Component
-        _activator = props.activator.$el
-      } else {
-        // HTMLElement | Element
-        _activator = props.activator
-      }
-    } else if (
-      activatorNode.value &&
-      activatorNode.value.key === '_activator' &&
-      activatorNode.value.children.length
-    ) {
-      // set correct element on nested activator slot
-      // TODO: select element recursively if element type is 'Symbol' or 'text'
-      _activator = activatorNode.value.children[0].el
-    } else if (activatorNode.value) {
-      _activator = activatorNode.value.el
+    if (typeof props.activator === 'string') {
+      // Selector
+      _activator = document.querySelector(props.activator)
+    } else if (_isElement((props.activator as ComponentPublicInstance).$el)) {
+      // Component
+      _activator = (props.activator as ComponentPublicInstance).$el
+    } else if (_isElement(props.activator)) {
+      // HTMLElement | Element
+      _activator = props.activator as HTMLElement
     }
 
-    activatorElement.value = _activator
+    _activatorElement.value = _activator
 
-    return activatorElement.value
+    return _activator
+  }
+
+  const _isElement = (el: unknown) => {
+    return el && (el instanceof HTMLElement || el instanceof Element)
   }
 
   return {
     isActive,
-    activatorElement,
+    setActivatorAttrs,
+    setActivatorListeners,
     genActivatorAttributes,
     genActivatorListeners,
     genActivator,
-    addActivatorEvents,
-    removeActivatorEvents,
-    getActivator,
+    focusActivator,
   }
 }

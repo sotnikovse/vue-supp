@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`activator.ts should pass correct data to v-slot, { attrs, listeners } 1`] = `<button role="button" aria-haspopup="true">{"role":"button","aria-haspopup":true},mouseenter,mouseleave,focus,keydown</button>`;
+
+exports[`activator.ts should render activator with slot and match snapshot 1`] = `<button role="button" aria-haspopup="true">Activator</button>`;
+
+exports[`activator.ts should render correct attrs/listeners and match snapshot 1`] = `<button role="button" aria-haspopup="true" custom="custom-attr">Activator</button>`;
