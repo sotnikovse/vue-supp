@@ -6,8 +6,14 @@ describe('activator.ts', () => {
   const component = defineComponent({
     props: {
       ...useActivatorProps(),
-      attrs: Object,
-      listeners: Object,
+      attrs: {
+        type: Object,
+        default: () => ({}),
+      },
+      listeners: {
+        type: Object,
+        default: () => ({}),
+      },
     },
 
     setup(props, ctx) {
@@ -53,7 +59,7 @@ describe('activator.ts', () => {
           custom: 'custom-attr',
         },
         listeners: {
-          onKeypress: () => {},
+          onKeypress: () => undefined,
         },
       },
       slots: {
@@ -72,7 +78,7 @@ describe('activator.ts', () => {
           custom: 'custom-attr',
         },
         listeners: {
-          onKeypress: () => {},
+          onKeypress: () => undefined,
         },
       },
       slots: {
@@ -84,7 +90,7 @@ describe('activator.ts', () => {
       more: 'more-attr',
     })
     const listeners = wrapper.vm.genActivatorListeners({
-      onKeyup: () => {},
+      onKeyup: () => undefined,
     })
     expect(attrs).toHaveProperty('more')
     expect(listeners).toHaveProperty('onKeyup')

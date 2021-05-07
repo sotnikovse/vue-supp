@@ -9,10 +9,7 @@ import { createPopper, Options, VirtualElement, Instance } from '@popperjs/core'
 
 export type PopperOptions = Options
 
-export function usePopper(
-  options?: Partial<PopperOptions>,
-  isVirtual: boolean = false
-) {
+export function usePopper(options?: Partial<PopperOptions>, isVirtual = false) {
   const instance = shallowRef<Instance>()
   const reference = ref<Element | VirtualElement | ComponentPublicInstance>()
   const popper = ref<HTMLElement | ComponentPublicInstance>()

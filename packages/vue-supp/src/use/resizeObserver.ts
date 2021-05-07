@@ -66,7 +66,7 @@ export function useResizeObserver(
 
       if (isSupported && window && el) {
         observer = new window.ResizeObserver(callback)
-        observer!.observe(el, options)
+        observer!.observe(el, options) // eslint-disable-line @typescript-eslint/no-non-null-assertion
       }
     },
     { immediate: true, flush: 'post' }

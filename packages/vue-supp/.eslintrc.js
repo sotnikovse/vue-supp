@@ -40,6 +40,7 @@ module.exports = {
       },
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
+        'vue/one-component-per-file': 'off',
       },
     },
   ],
