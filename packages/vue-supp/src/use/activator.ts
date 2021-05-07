@@ -10,6 +10,7 @@ import {
   PropType,
   VNode,
   Slots,
+  Ref,
   ComponentPublicInstance,
 } from 'vue'
 
@@ -64,7 +65,13 @@ export const useActivatorProps = () => {
 
 export const useActivator = (
   props: ActivatorProps,
-  { slots }: { slots: Slots }
+  {
+    slots,
+    reference,
+  }: {
+    slots: Slots
+    reference?: Ref
+  }
 ) => {
   const _activatorNode = ref<VNode[]>()
   const _activatorElement = ref<HTMLElement | null>(null)
@@ -204,6 +211,7 @@ export const useActivator = (
     const data = {
       ...attrs,
       ...listeners,
+      ref: reference,
     }
 
     const listenersParsed = Object.keys(listeners).reduce((acc, key) => {
@@ -212,10 +220,19 @@ export const useActivator = (
       return acc
     }, {} as Listeners)
 
-    // Auto merge data only if not nested slot,
-    // in other case set manually on v-slot attrs and listeners
-    const node = slots.activator?.({ attrs: attrs, listeners: listenersParsed })
-    if (node && !node.some((n) => n.key === '_activator')) {
+    // Auto merge data only if node length eq 1 and not nested slot,
+    // in other case set manually on v-slot ref, attrs and listeners
+    const node = slots.activator?.({
+      attrs: attrs,
+      listeners: listenersParsed,
+      ref: reference,
+    })
+    // TODO: skip Symbol(Comment) in dev
+    if (
+      node &&
+      node.length === 1 &&
+      !node.some((n) => n.key === '_activator')
+    ) {
       _activatorNode.value = node.map((n) => cloneVNode(n, data))
     } else {
       _activatorNode.value = node

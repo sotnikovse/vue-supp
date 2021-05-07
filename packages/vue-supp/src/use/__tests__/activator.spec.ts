@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { h, defineComponent } from 'vue'
 import { useActivatorProps, useActivator } from '../activator'
+import { Data } from '../../../types'
 
 describe('activator.ts', () => {
   const component = defineComponent({
@@ -96,7 +97,7 @@ describe('activator.ts', () => {
     expect(listeners).toHaveProperty('onKeyup')
   })
 
-  it('should pass correct data to v-slot, { attrs, listeners }', () => {
+  it('should pass correct data to v-slot', () => {
     const wrapper = mountFunction({
       slots: {
         activator: ({ attrs, listeners }: any) =>
@@ -109,10 +110,6 @@ describe('activator.ts', () => {
 
     expect(wrapper.html()).toMatchSnapshot()
   })
-
-  it.todo(
-    'should auto merge attrs and listeners when activator slot is not nested and match snapshot'
-  )
 
   it('should set correct activator element from prop', async () => {
     const wrapperComponent = defineComponent({
@@ -237,17 +234,30 @@ describe('activator.ts', () => {
   it('should focus first element with role="button" or aria-haspopup="true"', () => {
     const wrapper = mountFunction({
       slots: {
-        activator: () => [
+        activator: ({ attrs }: { attrs: Data }) => [
           h('button', { id: 'btn-1' }, 'Button 1'),
-          h('button', { id: 'btn-2' }, 'Button 2'),
+          h('button', { id: 'btn-2', ...attrs }, 'Button 2'),
         ],
       },
       attachTo: '#app',
     })
 
-    const btn1 = wrapper.get('#btn-1')
-    expect(document.activeElement).not.toEqual(btn1.element)
+    const btn2 = wrapper.get('#btn-2')
+    expect(document.activeElement).not.toEqual(btn2.element)
     wrapper.vm.focusActivator()
-    expect(document.activeElement).toEqual(btn1.element)
+    expect(document.activeElement).toEqual(btn2.element)
+  })
+
+  it('should not auto merge data when vnode length gt 1 and is nested slot and match snapshot', () => {
+    const wrapper = mountFunction({
+      slots: {
+        activator: () => [
+          h('button', { id: 'btn-1' }, 'Button 1'),
+          h('button', { id: 'btn-2' }, 'Button 2'),
+        ],
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
   })
 })
