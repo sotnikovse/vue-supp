@@ -1,7 +1,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 export interface ClientRectProps {
-  element: Element | HTMLElement
+  element?: Element | HTMLElement
   hasResizeListener?: boolean
   shouldRound?: boolean
 }
