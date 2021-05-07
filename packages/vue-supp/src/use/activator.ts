@@ -223,9 +223,9 @@ export const useActivator = (
     return _activatorNode.value
   }
 
-  const focusActivator = () => {
+  const focusActivator = (options?: FocusOptions) => {
     if (_activatorElement.value) {
-      _activatorElement.value.focus()
+      _activatorElement.value.focus(options)
     } else {
       // Focus first Element with role="button" or aria-haspopup="true"
       if (_activatorNode.value?.length) {
@@ -246,7 +246,7 @@ export const useActivator = (
             }
           }
           if (element) {
-            element.focus()
+            element.focus(options)
             break
           }
         }
