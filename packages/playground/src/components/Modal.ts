@@ -6,7 +6,6 @@ import {
   withDirectives,
   vShow,
   nextTick,
-  SetupContext,
 } from 'vue'
 import {
   useActivator,
@@ -77,7 +76,7 @@ export default defineComponent({
 
     const { isActive, genActivator, focusActivator } = useActivator(props, {
       slots,
-    } as SetupContext)
+    })
 
     const { showLazyContent } = useLazyContent(props, { isActive })
 

@@ -9,8 +9,8 @@ import {
   watch,
   PropType,
   VNode,
+  Slots,
   ComponentPublicInstance,
-  SetupContext,
 } from 'vue'
 
 import { Data } from '../../types'
@@ -64,7 +64,7 @@ export const useActivatorProps = () => {
 
 export const useActivator = (
   props: ActivatorProps,
-  { slots }: SetupContext
+  { slots }: { slots: Slots }
 ) => {
   const _activatorNode = ref<VNode[]>()
   const _activatorElement = ref<HTMLElement | null>(null)

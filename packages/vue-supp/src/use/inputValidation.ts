@@ -7,8 +7,9 @@ import {
   onBeforeUnmount,
   inject,
   toRefs,
-  SetupContext,
 } from 'vue'
+
+import { EmitFn } from '../../types'
 
 export interface InputValidationProps {
   id: string // move to context
@@ -59,7 +60,7 @@ export const useInputValidationProps = () => {
 
 export const useInputValidation = (
   props: InputValidationProps,
-  { emit }: SetupContext,
+  { emit }: { emit: EmitFn },
   injectKey: symbol
 ) => {
   const formApi: any = injectKey ? inject(injectKey, null) : undefined
