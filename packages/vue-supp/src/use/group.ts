@@ -4,7 +4,7 @@ import deepEqual from '../utils/deepEqual'
 import wrapInArray from '../utils/wrapInArray'
 
 export interface GroupProps {
-  modelValue: any
+  modelValue?: any
   multiple?: boolean
   mandatory?: boolean
   continuous?: boolean
@@ -22,10 +22,7 @@ export const useGroupProps = () => {
       default: true,
     },
     continuous: Boolean,
-    max: {
-      type: [Number, String],
-      default: null,
-    },
+    max: Number,
   }
 }
 
