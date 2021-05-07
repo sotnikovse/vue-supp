@@ -37,7 +37,9 @@ type Options = { attrs: Data; listeners: Listeners }
 export const useActivatorProps = () => {
   return {
     modelValue: {
-      type: [Boolean, String, Number] as PropType<ActivatorProps['activator']>,
+      type: [Boolean, String, Number] as PropType<
+        boolean | string | number | null | undefined
+      >,
       default: false,
     },
     activator: {
