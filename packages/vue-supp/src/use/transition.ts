@@ -16,7 +16,7 @@ export const useTransitionProps = (defaultValue?: _TransitionProps) => {
     transition: defaultValue
       ? {
           type,
-          default: defaultValue,
+          default: () => defaultValue,
         }
       : type,
   }
