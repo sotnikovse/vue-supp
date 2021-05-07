@@ -1,10 +1,19 @@
-import { ref, onMounted, watchEffect, ComponentPublicInstance } from 'vue'
-import { createPopper, Options, VirtualElement } from '@popperjs/core'
+import {
+  ref,
+  shallowRef,
+  onMounted,
+  watchEffect,
+  ComponentPublicInstance,
+} from 'vue'
+import { createPopper, Options, VirtualElement, Instance } from '@popperjs/core'
+
+export type PopperOptions = Options
 
 export function usePopper(
-  options?: Partial<Options>,
+  options?: Partial<PopperOptions>,
   isVirtual: boolean = false
 ) {
+  const instance = shallowRef<Instance>()
   const reference = ref<Element | VirtualElement | ComponentPublicInstance>()
   const popper = ref<HTMLElement | ComponentPublicInstance>()
 
@@ -15,18 +24,16 @@ export function usePopper(
         if (!reference.value) return
 
         const popperEl =
-          (popper.value as ComponentPublicInstance).$el || popper.value
+          (popper.value as ComponentPublicInstance)?.$el || popper.value
         const referenceEl =
-          (reference.value as ComponentPublicInstance).$el || reference.value
+          (reference.value as ComponentPublicInstance)?.$el || reference.value
 
         if (!(popperEl instanceof HTMLElement)) return
         if (!(!isVirtual && referenceEl instanceof Element)) return
 
-        const { destroy } = createPopper(referenceEl, popperEl, options)
+        instance.value = createPopper(referenceEl, popperEl, options)
 
-        onInvalidate(() => {
-          destroy && destroy()
-        })
+        onInvalidate(instance.value?.destroy)
       },
       // fire after component updates so you can access the updated DOM
       { flush: 'post' }
@@ -36,5 +43,6 @@ export function usePopper(
   return {
     reference,
     popper,
+    instance,
   }
 }
