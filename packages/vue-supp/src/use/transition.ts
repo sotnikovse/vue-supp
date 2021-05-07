@@ -11,7 +11,7 @@ export interface TransitionProps {
 }
 
 export const useTransitionProps = (defaultValue?: _TransitionProps) => {
-  const type = Object as PropType<_TransitionProps>
+  const type = Object as PropType<_TransitionProps | null>
   return {
     transition: defaultValue
       ? {
