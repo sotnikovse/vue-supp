@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/5cube/vue-supp/compare/v0.8.0...v0.8.1) (2021-05-08)
+
+
+### Bug Fixes
+
+* **activator:** added refrence prop to context ([4400709](https://github.com/5cube/vue-supp/commit/4400709db1c7c3c5f57c0cf4a4214304872c741c))
+* **activator:** focusActivator options ([1e1babc](https://github.com/5cube/vue-supp/commit/1e1babc2d0168eddd81c478ee22ce6b1d0547482))
+* **activator:** modelValue prop type ([9290e31](https://github.com/5cube/vue-supp/commit/9290e31ade7a446411b3e5ea37d0241bcef173b6))
+* **clientRect:** props type ([32db1fa](https://github.com/5cube/vue-supp/commit/32db1faba29d5e58655a0a2874c9e9bdba66a1c4))
+* **group:** props type & max prop type ([09eaa8e](https://github.com/5cube/vue-supp/commit/09eaa8eb729f73189b754c78e327c5b3e21542a0))
+* **popper:** create & destroy methods ([6de5f62](https://github.com/5cube/vue-supp/commit/6de5f62395e3008279884ef51c0d44db076a3166))
+* **popper:** instance, options type ([89c6135](https://github.com/5cube/vue-supp/commit/89c61354a9fd90d5c9c2ebee2d8b57340e289122))
+* **transition:** removed genTransition ([7d065ee](https://github.com/5cube/vue-supp/commit/7d065ee7b9ee9c8a49e0f45966db795e79a5c1bc))
+* **transition:** transition prop type ([600e352](https://github.com/5cube/vue-supp/commit/600e3524fb5a9dcaf2244157191e688db332a193))
+* SetupContext replaced by Slots & EmitFn ([6518ac5](https://github.com/5cube/vue-supp/commit/6518ac5b2a1e75e2b93a1a15358d79f51300e2f8))
+* **transition:** use props default value ([38cf0c4](https://github.com/5cube/vue-supp/commit/38cf0c4122eac7afabeb1e3c5f49e79a35a5d8c7))
+
+
+
+
+
 # [0.8.0](https://github.com/5cube/vue-supp/compare/v0.7.6...v0.8.0) (2021-05-06)
 
 
