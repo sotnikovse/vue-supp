@@ -6,6 +6,7 @@ import {
   withDirectives,
   vShow,
   nextTick,
+  Transition,
 } from 'vue'
 import {
   useActivator,
@@ -46,33 +47,22 @@ export default defineComponent({
     const contentWrapperElement = ref<HTMLElement>()
 
     const contentTransitionProps = {
-      transition: {
-        appear: true,
-        enterActiveClass: 'transition ease-out-quart duration-300',
-        enterFromClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-        enterToClass: 'opacity-100 translate-y-0 sm:scale-100',
-        leaveActiveClass: 'transition ease-out-quart duration-200',
-        leaveFromClass: 'opacity-100 translate-y-0 sm:scale-100',
-        leaveToClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-      },
+      appear: true,
+      enterActiveClass: 'transition ease-out-quart duration-300',
+      enterFromClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+      enterToClass: 'opacity-100 translate-y-0 sm:scale-100',
+      leaveActiveClass: 'transition ease-out-quart duration-200',
+      leaveFromClass: 'opacity-100 translate-y-0 sm:scale-100',
+      leaveToClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
     }
     const overlayTransitionProps = {
-      transition: {
-        enterActiveClass: 'transition ease-out-quart duration-300',
-        enterFromClass: 'opacity-0',
-        enterToClass: 'opacity-100',
-        leaveActiveClass: 'transition ease-out-quart duration-200',
-        leaveFromClass: 'opacity-100',
-        leaveToClass: 'opacity-0',
-      },
+      enterActiveClass: 'transition ease-out-quart duration-300',
+      enterFromClass: 'opacity-0',
+      enterToClass: 'opacity-100',
+      leaveActiveClass: 'transition ease-out-quart duration-200',
+      leaveFromClass: 'opacity-100',
+      leaveToClass: 'opacity-0',
     }
-
-    const { genTransition: genContentTransition } = useTransition(
-      contentTransitionProps
-    )
-    const { genTransition: genOverlayTransition } = useTransition(
-      overlayTransitionProps
-    )
 
     const { isActive, genActivator, focusActivator } = useActivator(props, {
       slots,
@@ -84,7 +74,8 @@ export default defineComponent({
 
     const { dimensionStyles } = useDimension(props)
 
-    const genContent = () => genContentTransition(genInnerContent())
+    const genContent = () =>
+      h(Transition, contentTransitionProps, genInnerContent)
 
     const genInnerContent = () => {
       const data = {
@@ -151,7 +142,7 @@ export default defineComponent({
         h('div', { class: 'absolute inset-0 bg-gray-500 opacity-75' })
       )
 
-      return genOverlayTransition(
+      return h(Transition, overlayTransitionProps, () =>
         withDirectives(overlay, [[vShow, isActive.value]])
       )
     }
