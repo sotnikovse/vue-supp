@@ -32,9 +32,7 @@ export function usePopper(options?: Partial<PopperOptions>, isVirtual = false) {
     }
   }
 
-  onUnmounted(() => {
-    destroy()
-  })
+  onUnmounted(destroy)
 
   return {
     reference,
