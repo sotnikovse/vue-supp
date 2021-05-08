@@ -333,6 +333,10 @@ export const useActivator = (
 
     _activatorElement.value = _activator
 
+    if (reference) {
+      reference.value = _activator
+    }
+
     return _activator
   }
 
