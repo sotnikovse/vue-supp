@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/5cube/vue-supp/compare/v0.8.1...v0.8.2) (2021-05-08)
+
+
+### Bug Fixes
+
+* **activator:** set reference on activator props ([f8ee241](https://github.com/5cube/vue-supp/commit/f8ee241154b7a5339d6f7b0aae8a81c387293f5a))
+
+
+
+
+
 ## [0.8.1](https://github.com/5cube/vue-supp/compare/v0.8.0...v0.8.1) (2021-05-08)
 
 

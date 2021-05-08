@@ -1,6 +1,6 @@
 {
   "name": "@vue-supp/playground",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue-router": "^4.0.6",
-    "vue-supp": "^0.8.1"
+    "vue-supp": "^0.8.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.2",
