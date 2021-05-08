@@ -1,40 +1,36 @@
 <template>
   <div>Home</div>
-  <div class="p-8">
-    <Btn ref="trigger" @click="toggle">Activator</Btn>
-    <teleport to="body">
-      <transition
-        enter-active-class="transition-opacity ease-quart duration-200"
-        enter-from-class="opacity-0"
-        leave-active-class="transition-opacity ease-quart duration-150"
-        leave-to-class="opacity-0"
+  <div style="max-width: 200px; max-height: 200px" class="overflow-auto">
+    <div style="width: 500px; height: 500px" class="text-center0 bg-gray-100">
+      <Btn
+        ref="trigger"
+        @focus="setIsOpen(true)"
+        @mouseenter="setIsOpen(true)"
+        @mouseleave="setIsOpen(false)"
+        >Activator</Btn
       >
-        <div
-          v-if="isOpen"
-          class="fixed inset-0 bg-black bg-opacity-50"
-          @click="setIsOpen(false)"
-        ></div>
-      </transition>
-      <div v-if="isBooted" ref="container" class="popper-wrapper">
-        <div class="popper-box">
+      <teleport to="body">
+        <div v-if="isBooted" ref="container" class="popper__wrapper">
           <transition
             enter-active-class="transition-opacity ease-quart duration-500"
             enter-from-class="opacity-0"
             leave-active-class="transition-opacity ease-quart duration-500"
             leave-to-class="opacity-0"
+            @after-leave="destroyPopper"
           >
-            <div v-show="isVisible" class="relative">
-              <div class="bg-red-500 p-5">
+            <div v-show="isVisible" class="popper__box bg-red-500 px-16">
+              <div class="popper__content">
                 <div>Test</div>
                 <div>
                   <Btn @click="setIsOpen(false)">Close</Btn>
                 </div>
               </div>
+              <div class="popper__arrow" data-popper-arrow></div>
             </div>
           </transition>
         </div>
-      </div>
-    </teleport>
+      </teleport>
+    </div>
   </div>
 </template>
 
@@ -60,19 +56,58 @@ export default defineComponent({
     })
 
     watch(isOpen, (val) => {
-      requestAnimationFrame(() => {
+      if (val) {
+        requestAnimationFrame(() => {
+          isVisible.value = val
+          createPopper()
+        })
+      } else {
         isVisible.value = val
-      })
+      }
     })
 
     const options = {
       placement: 'top-start' as const,
       strategy: 'fixed' as const,
-      modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
+      modifiers: [
+        { name: 'offset', options: { offset: [0, 4] } },
+        {
+          name: 'preventOverflow',
+          options: {
+            altAxis: true,
+            rootBoundary: 'document',
+            padding: {
+              top: 2,
+              bottom: 2,
+              left: 5,
+              right: 5,
+            },
+          },
+        },
+        {
+          name: 'flip',
+          enabled: true,
+          options: {
+            padding: 0,
+          },
+        },
+        {
+          name: 'arrow',
+          options: {
+            padding: 8,
+          },
+        },
+      ],
     }
-    const { reference: trigger, popper: container } = usePopper(options)
+    const {
+      reference: trigger,
+      popper: container,
+      create: createPopper,
+      destroy: destroyPopper,
+    } = usePopper(options)
 
     return {
+      destroyPopper,
       toggle: () => {
         isOpen.value = !isOpen.value
       },
