@@ -17,7 +17,6 @@ import {
   useAttachProps,
   useDimensionProps,
   useDimension,
-  useTransition,
   ClickOutside,
 } from 'vue-supp'
 
