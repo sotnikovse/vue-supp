@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/5cube/vue-supp/compare/v0.8.2...v0.8.3) (2021-06-13)
+
+
+### Bug Fixes
+
+* vue, vite versions update ([bc88a10](https://github.com/5cube/vue-supp/commit/bc88a10f819f29392e8a7a5e454711f354e50c33))
+
+
+
+
+
 ## [0.8.2](https://github.com/5cube/vue-supp/compare/v0.8.1...v0.8.2) (2021-05-08)
 
 **Note:** Version bump only for package @vue-supp/playground
