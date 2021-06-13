@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/5cube/vue-supp/compare/v0.8.3...v0.9.0) (2021-06-13)
+
+
+### Features
+
+* **transition:** added MaybeTransition func comp ([44f3ae4](https://github.com/5cube/vue-supp/commit/44f3ae443c358d00bd4a8e431fda464d2830aca6))
+
+
+
+
+
 ## [0.8.2](https://github.com/5cube/vue-supp/compare/v0.8.1...v0.8.2) (2021-05-08)
 
 
