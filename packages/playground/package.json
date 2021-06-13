@@ -9,16 +9,16 @@
     "lint": "eslint src -f codeframe"
   },
   "dependencies": {
-    "vue-router": "^4.0.6",
+    "vue-router": "^4.0.8",
     "vue-supp": "^0.8.2"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.2",
-    "@vitejs/plugin-vue-jsx": "^1.1.3",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vitejs/plugin-vue-jsx": "^1.1.5",
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.13",
     "tailwindcss": "^2.1.2",
-    "vite": "^2.2.4",
+    "vite": "^2.3.7",
     "vue-tsc": "^0.0.25"
   }
 }
