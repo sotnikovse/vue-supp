@@ -1,5 +1,5 @@
 import { h, Transition, mergeProps } from 'vue'
-import type { PropType, TransitionProps, FunctionalComponent, VNode } from 'vue'
+import type { PropType, TransitionProps, FunctionalComponent } from 'vue'
 
 export const useTransitionProps = (defaultValue?: TransitionProps) => {
   const type = Object as PropType<TransitionProps | null>
