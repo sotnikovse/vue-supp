@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/5cube/vue-supp/compare/v0.9.0...v0.9.1) (2021-07-08)
+
+
+### Bug Fixes
+
+* eslint ([63f7d35](https://github.com/5cube/vue-supp/commit/63f7d355c5f6d19700988e35445e0247e7193e24))
+* jest config testEnvironment setted to 'jsdom' ([43c3189](https://github.com/5cube/vue-supp/commit/43c31899d016f650924861ec49c55b061fac020d))
+* packages upgrade ([fa1e0ff](https://github.com/5cube/vue-supp/commit/fa1e0ff344c97e66df582fcc021e2fa5216324ce))
+
+
+
+
+
 # [0.9.0](https://github.com/5cube/vue-supp/compare/v0.8.3...v0.9.0) (2021-06-13)
 
 
