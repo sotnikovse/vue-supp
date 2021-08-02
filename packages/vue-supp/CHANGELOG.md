@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.2](https://github.com/5cube/vue-supp/compare/v0.9.1...v0.9.2) (2021-08-02)
+
+
+### Bug Fixes
+
+* packages upgrade ([ea03089](https://github.com/5cube/vue-supp/commit/ea03089997b6c13d440f251f777b1311d869fd33))
+
+
+
+
+
 ## [0.9.1](https://github.com/5cube/vue-supp/compare/v0.9.0...v0.9.1) (2021-07-08)
 
 
