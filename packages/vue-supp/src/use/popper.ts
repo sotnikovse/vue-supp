@@ -1,5 +1,8 @@
-import { ref, shallowRef, onUnmounted, ComponentPublicInstance } from 'vue'
-import { createPopper, VirtualElement, Instance, Options } from '@popperjs/core'
+import { ref, shallowRef, onUnmounted } from 'vue'
+import { createPopper } from '@popperjs/core'
+
+import type { ComponentPublicInstance } from 'vue'
+import type { VirtualElement, Instance, Options } from '@popperjs/core'
 
 export type PopperOptions = Options
 
