@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/5cube/vue-supp/compare/v0.10.0...v0.11.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* packages upgrade ([083bcc6](https://github.com/5cube/vue-supp/commit/083bcc617f79b5e9e524b59254869e5b9ea73040))
+
+
+### Features
+
+* delay composable from vuetify ([3bc2f76](https://github.com/5cube/vue-supp/commit/3bc2f763a7569817c4eaa8432d7e1f0fdd37c604))
+* form composable from vuetify ([a11aaee](https://github.com/5cube/vue-supp/commit/a11aaee9d9caa5945cf93e6de42991ba8e63e700))
+* preventBlur composable ([c287690](https://github.com/5cube/vue-supp/commit/c28769097eb3eaab33c09c6850cf73ce7f453c63))
+* propsFactory, getCurrentInstance, globals ([1d8a316](https://github.com/5cube/vue-supp/commit/1d8a316e5c149c785ba477133a2d7356ed8e58d6))
+* validation composable from vuetify ([40b1c7f](https://github.com/5cube/vue-supp/commit/40b1c7fe48fb0a99563ca0df56d5acb373de6c6b))
+
+
+
+
+
 # [0.10.0](https://github.com/5cube/vue-supp/compare/v0.9.2...v0.10.0) (2021-08-12)
 
 
