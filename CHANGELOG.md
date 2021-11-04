@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/5cube/vue-supp/compare/v0.11.0...v0.11.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* packages upgrade ([6683f6b](https://github.com/5cube/vue-supp/commit/6683f6b5d08acf24340e7a4a291a5aaf6525dbb3))
+* removed inputValidation ([8c5b1f9](https://github.com/5cube/vue-supp/commit/8c5b1f9da2425db8f8299ee95a1ba75efdfa846e))
+
+
+
+
+
 # [0.11.0](https://github.com/5cube/vue-supp/compare/v0.10.0...v0.11.0) (2021-11-04)
 
 
