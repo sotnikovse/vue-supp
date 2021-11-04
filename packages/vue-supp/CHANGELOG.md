@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.2](https://github.com/5cube/vue-supp/compare/v0.11.1...v0.11.2) (2021-11-04)
+
+
+### Bug Fixes
+
+* delay, form, validation, preventBlur export ([b915f2c](https://github.com/5cube/vue-supp/commit/b915f2ce9d9a2717f8eed25cb3e4010eed806e81))
+
+
+
+
+
 ## [0.11.1](https://github.com/5cube/vue-supp/compare/v0.11.0...v0.11.1) (2021-11-04)
 
 
