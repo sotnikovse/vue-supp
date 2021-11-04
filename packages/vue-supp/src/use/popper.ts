@@ -1,4 +1,4 @@
-import { ref, shallowRef, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { createPopper } from '@popperjs/core'
 
 import type { ComponentPublicInstance } from 'vue'
@@ -7,7 +7,7 @@ import type { VirtualElement, Instance, Options } from '@popperjs/core'
 export type PopperOptions = Options
 
 export function usePopper(options?: Partial<PopperOptions>, isVirtual = false) {
-  const instance = shallowRef<Instance>()
+  const instance = ref<Instance>()
   const reference = ref<Element | VirtualElement | ComponentPublicInstance>()
   const popper = ref<HTMLElement | ComponentPublicInstance>()
 
