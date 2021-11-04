@@ -25,3 +25,8 @@ export * from './upperFirst'
 export * from './convertToUnit'
 export * from './parseEventName'
 export * from './replaceAt'
+export * from './getCurrentInstance'
+export * from './propsFactory'
+
+// globals
+export * from './globals'
