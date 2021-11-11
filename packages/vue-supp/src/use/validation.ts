@@ -97,7 +97,6 @@ export function useValidation(props: ValidationProps, id?: string) {
   async function validate() {
     const results = []
 
-    errorMessages.value = []
     isValidating.value = true
 
     for (const rule of props.rules) {
