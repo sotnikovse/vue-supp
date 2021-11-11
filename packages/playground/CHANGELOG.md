@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.3](https://github.com/5cube/vue-supp/compare/v0.11.2...v0.11.3) (2021-11-11)
+
+**Note:** Version bump only for package @vue-supp/playground
+
+
+
+
+
 ## [0.11.2](https://github.com/5cube/vue-supp/compare/v0.11.1...v0.11.2) (2021-11-04)
 
 **Note:** Version bump only for package @vue-supp/playground
