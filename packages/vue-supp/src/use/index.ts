@@ -1,4 +1,3 @@
-export * from './activator'
 export * from './aspectRatio'
 export * from './attach'
 export * from './dimensions'

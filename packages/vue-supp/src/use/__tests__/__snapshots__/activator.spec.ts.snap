@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`activator.ts should not auto merge data when vnode length gt 1 and is nested slot and match snapshot 1`] = `<button id="btn-1">Button 1</button><button id="btn-2">Button 2</button>`;
-
-exports[`activator.ts should pass correct data to v-slot 1`] = `<button role="button" aria-haspopup="true">{"role":"button","aria-haspopup":true},mouseenter,mouseleave,focus,keydown</button>`;
-
-exports[`activator.ts should render activator with slot and match snapshot 1`] = `<button role="button" aria-haspopup="true">Activator</button>`;
-
-exports[`activator.ts should render correct attrs/listeners and match snapshot 1`] = `<button role="button" aria-haspopup="true" custom="custom-attr">Activator</button>`;
