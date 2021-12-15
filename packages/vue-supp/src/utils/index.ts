@@ -9,13 +9,9 @@ export * from './setCursor'
 export * from './formatNumber'
 export * from './unformatNumber'
 
-// array
-export * from './wrapInArray'
-
 // helpers
 export * from './uid'
 export * from './wait'
-export * from './deepEqual'
 export * from './upperFirst'
 export * from './convertToUnit'
 export * from './replaceAt'
