@@ -1,35 +1,31 @@
 import { mount, VueWrapper } from '@vue/test-utils'
 import { h, defineComponent, reactive, toRef } from 'vue'
-import { useLazyContentProps, useLazyContent } from '../lazyContent'
+import { makeLazyProps, useLazy } from '../lazy'
 
 describe('lazyContent.ts', () => {
-  describe('useLazyContentProps', () => {
-    it('shoud set correct props', () => {
-      expect(useLazyContentProps().eager).toBeDefined()
-      expect(useLazyContentProps().disabled).toBeDefined()
+  describe('makeLazyProps', () => {
+    it('should set correct props', () => {
+      expect(makeLazyProps().eager).toBeDefined()
     })
   })
 
-  describe('useLazyContent', () => {
+  describe('useLazy', () => {
     let mountFunction: (options?: Record<string, unknown>) => VueWrapper<any>
 
     const component = defineComponent({
       props: {
-        ...useLazyContentProps(),
+        ...makeLazyProps(),
         isActive: Boolean,
       },
       setup(props) {
         const isActive = toRef(props, 'isActive')
 
-        const { isBooted, hasContent, showLazyContent } = useLazyContent(
-          props,
-          { isActive }
-        )
+        const { isBooted, hasContent, onAfterLeave } = useLazy(props, isActive)
 
         return {
           isBooted,
           hasContent,
-          showLazyContent,
+          onAfterLeave,
         }
       },
       render: () => h('div'),
@@ -43,7 +39,7 @@ describe('lazyContent.ts', () => {
       }
     })
 
-    it('should watch isActive prop and activate isBooted and content', async () => {
+    it('should activate isBooted and content', async () => {
       const props = reactive({
         isActive: false,
       })
@@ -71,20 +67,6 @@ describe('lazyContent.ts', () => {
 
       expect(wrapper.vm.isBooted).toBe(false)
       expect(wrapper.vm.hasContent).toBe(true)
-    })
-
-    it('should not boot on disabled prop', async () => {
-      const props = reactive({
-        isActive: false,
-        disabled: true,
-      })
-
-      const wrapper = mountFunction({ props })
-      expect(wrapper.vm.isBooted).toBe(false)
-
-      await wrapper.setProps({ isActive: true, disabled: true })
-
-      expect(wrapper.vm.isBooted).toBe(false)
     })
   })
 })
