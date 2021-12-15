@@ -1,4 +1,3 @@
-export * from './aspectRatio'
 export * from './attach'
 export * from './dimensions'
 export * from './clientRect'
