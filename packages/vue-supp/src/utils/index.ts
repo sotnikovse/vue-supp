@@ -5,10 +5,6 @@ export * from './isNumber'
 // dom
 export * from './setCursor'
 
-// format number
-export * from './formatNumber'
-export * from './unformatNumber'
-
 // helpers
 export * from './uid'
 export * from './wait'
