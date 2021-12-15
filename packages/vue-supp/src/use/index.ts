@@ -1,7 +1,6 @@
 export * from './attach'
 export * from './dimensions'
 export * from './clientRect'
-export * from './filter'
 export * from './group'
 export * from './input'
 export * from './lazyContent'

@@ -9,11 +9,6 @@ export * from './setCursor'
 export * from './formatNumber'
 export * from './unformatNumber'
 
-// object
-export * from './getNestedValue'
-export * from './getObjectValueByPath'
-export * from './getPropertyFromItem'
-
 // array
 export * from './wrapInArray'
 
