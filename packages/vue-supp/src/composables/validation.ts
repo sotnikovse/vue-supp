@@ -1,6 +1,6 @@
 // https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/validation.ts
 
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref, warn } from 'vue'
 import { getCurrentInstance, getUid, propsFactory } from '../utils'
 import { useForm } from './form'
 
@@ -16,8 +16,9 @@ export type ValidationRule =
 export interface ValidationProps {
   disabled?: boolean
   error?: boolean
-  errorMessages?: string[]
+  errorMessages?: string | string[]
   maxErrors?: string | number
+  id?: string
   readonly?: boolean
   rules: ValidationRule[]
   modelValue?: any
@@ -27,25 +28,23 @@ export const makeValidationProps = propsFactory({
   disabled: Boolean,
   error: Boolean,
   errorMessages: {
-    type: Array as PropType<string[]>,
+    type: [Array, String] as PropType<string | string[]>,
     default: () => [],
   },
   maxErrors: {
     type: [Number, String],
     default: 1,
   },
+  id: String,
   readonly: Boolean,
   rules: {
     type: Array as PropType<ValidationRule[]>,
     default: () => [],
   },
-  modelValue: {
-    type: null,
-    default: undefined as any,
-  },
+  modelValue: null,
 })
 
-export function useValidation(props: ValidationProps, id?: string) {
+export function useValidation(props: ValidationProps) {
   const form = useForm()
   const errorMessages = ref<string[]>([])
   const isPristine = ref(true)
@@ -66,14 +65,9 @@ export function useValidation(props: ValidationProps, id?: string) {
     return isPristine.value ? null : true
   })
   const isValidating = ref(false)
-  const validationClasses = computed(() => ({
-    input_error: isValid.value === false,
-    input_disabled: isDisabled.value,
-    input_readonly: isReadonly.value,
-  }))
 
   const vm = getCurrentInstance('useValidation')
-  const uid = computed(() => id ?? getUid())
+  const uid = computed(() => props.id ?? getUid())
 
   onBeforeMount(() => {
     form?.register(uid.value, validate, reset, resetValidation)
@@ -110,8 +104,7 @@ export function useValidation(props: ValidationProps, id?: string) {
       if (result === true) continue
 
       if (typeof result !== 'string') {
-        // eslint-disable-next-line no-console
-        console.warn(
+        warn(
           `${result} is not a valid value. Rule functions must return boolean true or a string.`
         )
 
@@ -138,6 +131,5 @@ export function useValidation(props: ValidationProps, id?: string) {
     reset,
     resetValidation,
     validate,
-    validationClasses,
   }
 }
