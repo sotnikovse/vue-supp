@@ -1,3 +1,5 @@
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/focus.ts
+
 import { ref } from 'vue'
 
 export const useFocus = () => {

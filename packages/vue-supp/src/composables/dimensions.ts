@@ -1,3 +1,5 @@
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/dimensions.ts
+
 import { computed } from 'vue'
 import { convertToUnit, propsFactory } from '../utils'
 

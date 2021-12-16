@@ -1,3 +1,5 @@
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/intersectionObserver.ts
+
 import { onBeforeUnmount, ref, watch } from 'vue'
 
 export function useIntersectionObserver(

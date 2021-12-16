@@ -1,3 +1,5 @@
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/resizeObserver.ts
+
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
 import type { DeepReadonly, Ref } from 'vue'
 

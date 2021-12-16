@@ -1,3 +1,5 @@
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/lazy.ts
+
 import { computed, ref, watch } from 'vue'
 import { propsFactory } from '../utils'
 
