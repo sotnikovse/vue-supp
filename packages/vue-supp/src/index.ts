@@ -1,4 +1,4 @@
-export * from './use'
+export * from './composables'
 
 export * from './directives'
 
