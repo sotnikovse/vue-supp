@@ -3,10 +3,11 @@ const uidCounter: Record<string, number> = {}
 /**
  * Generates a unique id.
  *
+ * @category Util
  * @param prefix - The value to prefix the id with.
  * @returns Returns the unique id.
  */
-export const uid = (prefix = '$default'): string => {
+export function uid(prefix = '$default') {
   if (!uidCounter[prefix]) {
     uidCounter[prefix] = 0
   }
@@ -18,5 +19,3 @@ export const uid = (prefix = '$default'): string => {
 
   return `${prefix}${id}`
 }
-
-export default uid

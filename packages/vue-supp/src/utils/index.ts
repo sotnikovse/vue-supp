@@ -1,18 +1,29 @@
-// check
+/* Array */
+export * from './range'
+export * from './remove'
+
+/* Object */
+export * from './omit'
+export * from './pick'
+
+/* Function */
+export * from './debounce'
+
+/* String */
 export * from './isString'
+export * from './kebabCase'
+export * from './replaceAt'
+export * from './upperFirst'
+
+/* Number */
+export * from './clamp'
 export * from './isNumber'
 
-// dom
+/* Util */
+export * from './convertToUnit'
+export * from './getCurrentInstance'
+export * from './isBrowser'
+export * from './propsFactory'
 export * from './setCursor'
-
-// helpers
 export * from './uid'
 export * from './wait'
-export * from './upperFirst'
-export * from './convertToUnit'
-export * from './replaceAt'
-export * from './getCurrentInstance'
-export * from './propsFactory'
-
-// globals
-export * from './globals'

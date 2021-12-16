@@ -1,6 +1,6 @@
 import { computed } from 'vue'
 
-import convertToUnit from '../utils/convertToUnit'
+import { convertToUnit } from '../utils'
 
 export interface DimensionProps {
   height?: number | string

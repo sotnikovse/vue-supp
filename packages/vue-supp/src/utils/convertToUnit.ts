@@ -1,21 +1,25 @@
 /**
- * Convert to unit.
+ * Format value with given unit.
  *
- * @param value - The value to convert.
- * @param unit - The unit value.
+ * @category Util
  * @returns Returns the converted value.
  */
-export const convertToUnit = (
-  value: string | number | null | undefined,
+export function convertToUnit(str: number, unit?: string): string
+export function convertToUnit(
+  str: string | number | null | undefined,
+  unit?: string
+): string | undefined
+export function convertToUnit(
+  str: string | number | null | undefined,
   unit = 'px'
-): string | undefined => {
-  if (value == null || value === '') {
+): string | undefined {
+  if (str == null || str === '') {
     return undefined
-  } else if (isNaN(+value)) {
-    return String(value)
+  } else if (isNaN(+str!)) {
+    return String(str)
+  } else if (!isFinite(+str!)) {
+    return undefined
   } else {
-    return `${Number(value)}${unit}`
+    return `${Number(str)}${unit}`
   }
 }
-
-export default convertToUnit

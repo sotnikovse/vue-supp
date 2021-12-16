@@ -27,7 +27,6 @@ import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
  *   },
  * }
  */
-
 export function propsFactory<PropsOptions extends ComponentObjectPropsOptions>(
   props: PropsOptions,
   source?: string

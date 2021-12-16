@@ -1,7 +1,7 @@
 import type { DirectiveBinding, ObjectDirective } from 'vue'
 import type { TouchHandlers, TouchValue, TouchWrapper } from '../../types'
 
-import uid from '../utils/uid'
+import { uid } from '../utils'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void

@@ -1,20 +1,16 @@
 /**
  * Set cursor of input.
  *
+ * @category Util
  * @param el - The input element.
  * @param position - Set position.
- * @returns
  */
-export const setCursor = (el: HTMLInputElement, position: number): void => {
-  const setSelectionRange = (): void => {
+export function setCursor(el: HTMLInputElement, position: number) {
+  const setSelectionRange = () => {
     el.setSelectionRange(position, position)
   }
   if (el === document.activeElement) {
     setSelectionRange()
     setTimeout(setSelectionRange, 1) // Android Fix
   }
-}
-
-export default {
-  setCursor,
 }
