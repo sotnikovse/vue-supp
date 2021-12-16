@@ -1,1 +1,0 @@
-export { ClickOutside } from './clickOutside'

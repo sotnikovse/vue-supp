@@ -27,7 +27,7 @@ export function useDelay(props: DelayProps, cb?: (value: boolean) => void) {
     delete delays.openDelay
 
     return new Promise((resolve) => {
-      const delay = parseInt(props[prop] ?? 0, 10)
+      const delay = parseInt(String(props[prop]) ?? 0, 10)
 
       delays[prop] = window.setTimeout(() => {
         cb?.(active)
