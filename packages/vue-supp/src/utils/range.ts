@@ -13,6 +13,7 @@ export function range(...args: any): number[] {
     step = 1
     ;[stop] = args
   } else {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;[start, stop, step = 1] = args
   }
 

@@ -27,11 +27,11 @@ import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
  *   },
  * }
  */
+
 export function propsFactory<PropsOptions extends ComponentObjectPropsOptions>(
   props: PropsOptions,
   source?: string
 ) {
-  // eslint-disable-next-line @typescript-eslint/ban-types
   return <Defaults extends PartialKeys<PropsOptions> = {}>(
     defaults?: Defaults
   ): AppendDefault<PropsOptions, Defaults> => {
