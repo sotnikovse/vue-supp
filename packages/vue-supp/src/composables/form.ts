@@ -32,7 +32,7 @@ interface FormValidationResult {
   errorMessages: string[]
 }
 
-export const FormKey: InjectionKey<FormProvide> = Symbol.for('form')
+export const FormKey: InjectionKey<FormProvide> = Symbol.for('vs:form')
 
 export interface FormProps {
   disabled: boolean

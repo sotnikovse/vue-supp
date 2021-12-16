@@ -1,6 +1,7 @@
 export * from './clientRect'
 export * from './delay'
 export * from './dimensions'
+export * from './display'
 export * from './focus'
 export * from './form'
 export * from './intersectionObserver'

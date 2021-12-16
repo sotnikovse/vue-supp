@@ -1,10 +1,10 @@
 /**
  * String type check.
  *
- * @category String
+ * @category Util
  * @param val - The value to check.
  * @returns Returns `true` if the value is string, else `false`.
  */
-export function isString(val: any) {
+export function isString(val: any): val is string {
   return typeof val === 'string' || val instanceof String
 }
