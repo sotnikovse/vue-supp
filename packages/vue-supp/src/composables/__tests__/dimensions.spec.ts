@@ -1,16 +1,16 @@
 import { reactive } from 'vue'
 
-import { useDimensionProps, useDimension, DimensionProps } from '../dimensions'
+import { makeDimensionProps, useDimension, DimensionProps } from '../dimensions'
 
 describe('dimensions.ts', () => {
-  describe('useDimensionProps', () => {
+  describe('makeDimensionProps', () => {
     it('should allow setting default values', () => {
-      expect(useDimensionProps({ width: 100 }).width).toEqual({
+      expect(makeDimensionProps({ width: 100 }).width).toEqual({
         type: [Number, String],
         default: 100,
       })
 
-      expect(useDimensionProps({ height: '200px' }).height).toEqual({
+      expect(makeDimensionProps({ height: '200px' }).height).toEqual({
         type: [Number, String],
         default: '200px',
       })
