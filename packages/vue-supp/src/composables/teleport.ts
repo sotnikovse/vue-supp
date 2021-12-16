@@ -1,5 +1,5 @@
 import { computed, warn } from 'vue'
-import { isBrowser, propsFactory } from '../utils'
+import { inBrowser, propsFactory } from '../utils'
 
 import type { PropType } from 'vue'
 
@@ -18,7 +18,7 @@ export function useTeleport(props: TeleportProps) {
   const teleportTarget = computed(() => {
     const target = props.teleport
 
-    if (target === false || !isBrowser) return undefined
+    if (target === false || !inBrowser) return undefined
 
     const targetElement =
       target === true

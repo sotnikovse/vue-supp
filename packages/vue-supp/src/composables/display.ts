@@ -1,12 +1,12 @@
 // https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/display.ts
 
 import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
-import { isBrowser, mergeDeep } from '../utils'
+import { inBrowser, mergeDeep } from '../utils'
 
 import type { InjectionKey, ToRefs } from 'vue'
 
 export const SUPPORTS_TOUCH =
-  isBrowser && ('ontouchstart' in window || window.navigator.maxTouchPoints > 0)
+  inBrowser && ('ontouchstart' in window || window.navigator.maxTouchPoints > 0)
 
 export type DisplayBreakpoint = keyof DisplayThresholds
 
@@ -93,19 +93,19 @@ const parseDisplayOptions = (
 // Cross-browser support as described in:
 // https://stackoverflow.com/questions/1248081
 function getClientWidth() {
-  return isBrowser
+  return inBrowser
     ? Math.max(document.documentElement!.clientWidth, window.innerWidth)
     : 0 // SSR
 }
 
 function getClientHeight() {
-  return isBrowser
+  return inBrowser
     ? Math.max(document.documentElement!.clientHeight, window.innerHeight)
     : 0 // SSR
 }
 
 function getPlatform(): DisplayPlatform {
-  const userAgent = isBrowser ? window.navigator.userAgent : 'ssr'
+  const userAgent = inBrowser ? window.navigator.userAgent : 'ssr'
 
   function match(regexp: RegExp) {
     return Boolean(userAgent.match(regexp))
@@ -206,7 +206,7 @@ export function createDisplay(
     state.thresholds = thresholds
   })
 
-  if (isBrowser) {
+  if (inBrowser) {
     window.addEventListener('resize', onResize, { passive: true })
   }
 

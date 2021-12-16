@@ -1,6 +1,6 @@
 // https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/delay.ts
 
-import { isBrowser, propsFactory } from '../utils'
+import { inBrowser, propsFactory } from '../utils'
 
 export interface DelayProps {
   closeDelay?: number | string
@@ -16,7 +16,7 @@ export function useDelay(props: DelayProps, cb?: (value: boolean) => void) {
   const delays: Partial<Record<keyof DelayProps, number>> = {}
   const runDelayFactory = (prop: keyof DelayProps) => (): Promise<boolean> => {
     // istanbul ignore next
-    if (!isBrowser) return Promise.resolve(true)
+    if (!inBrowser) return Promise.resolve(true)
 
     const active = prop === 'openDelay'
 
