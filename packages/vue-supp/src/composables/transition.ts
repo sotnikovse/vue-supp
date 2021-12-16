@@ -1,20 +1,23 @@
-import { h, Transition, mergeProps } from 'vue'
-import type { PropType, TransitionProps, FunctionalComponent } from 'vue'
+// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/transition.ts
 
-export const useTransitionProps = (defaultValue?: TransitionProps) => {
-  const type = Object as PropType<TransitionProps | null>
-  return {
-    transition: defaultValue
-      ? {
-          type,
-          default: () => defaultValue,
-        }
-      : type,
-  }
-}
+import { h, Transition, mergeProps } from 'vue'
+import { propsFactory } from '../utils'
+
+import type {
+  Component,
+  PropType,
+  TransitionProps,
+  FunctionalComponent,
+} from 'vue'
+
+export const makeTransitionProps = propsFactory({
+  transition: [String, Boolean, Object] as PropType<
+    string | false | (TransitionProps & { component?: Component })
+  >,
+})
 
 interface MaybeTransitionProps extends TransitionProps {
-  transition?: null | (TransitionProps & { component?: any })
+  transition?: string | boolean | (TransitionProps & { component?: any })
 }
 
 export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (
