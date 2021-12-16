@@ -1,5 +1,5 @@
 import { mount, VueWrapper } from '@vue/test-utils'
-import { h, defineComponent, PropType } from 'vue'
+import { h, defineComponent, PropType, computed } from 'vue'
 import { useClientRect } from '../clientRect'
 
 describe('clientRect.ts', () => {
@@ -15,7 +15,11 @@ describe('clientRect.ts', () => {
       shouldRound: Boolean,
     },
     setup(props) {
-      const { clientRect, updateClientRect } = useClientRect(props)
+      const { clientRect, updateClientRect } = useClientRect(
+        computed(() => props.element),
+        props.hasResizeListener,
+        props.shouldRound
+      )
 
       return {
         clientRect,

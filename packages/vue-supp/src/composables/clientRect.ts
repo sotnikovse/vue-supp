@@ -1,12 +1,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
-export interface ClientRectProps {
-  element?: Element | HTMLElement
-  hasResizeListener?: boolean
-  shouldRound?: boolean
-}
+import type { Ref } from 'vue'
 
-export const useClientRect = (props: ClientRectProps) => {
+export const useClientRect = (
+  element: Ref<Element | HTMLElement | null | undefined>,
+  hasResizeListener?: boolean,
+  shouldRound?: boolean
+) => {
   const options: AddEventListenerOptions = {
     passive: true,
   }
@@ -16,7 +16,7 @@ export const useClientRect = (props: ClientRectProps) => {
   const getBoundedClientRect = (el: Element | HTMLElement) => {
     const rect = el.getBoundingClientRect()
 
-    return !props.shouldRound
+    return !shouldRound
       ? rect
       : ({
           top: Math.round(rect.top),
@@ -31,19 +31,19 @@ export const useClientRect = (props: ClientRectProps) => {
   }
 
   const updateClientRect = () => {
-    if (!props.element) return
-    clientRect.value = getBoundedClientRect(props.element)
+    if (!element.value) return
+    clientRect.value = getBoundedClientRect(element.value)
   }
 
   onMounted(() => {
     updateClientRect()
-    if (props.hasResizeListener) {
+    if (hasResizeListener) {
       window.addEventListener('resize', updateClientRect, options)
     }
   })
 
   onUnmounted(() => {
-    if (props.hasResizeListener) {
+    if (hasResizeListener) {
       window.removeEventListener('resize', updateClientRect, options)
     }
   })
