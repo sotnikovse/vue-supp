@@ -16,14 +16,8 @@ describe('teleport.ts', () => {
     const { teleportTarget } = useTeleport(props)
     expect(teleportTarget.value).toBeDefined()
 
-    props.teleport = false
-    expect(teleportTarget.value).toBe(undefined)
-
     props.teleport = 'body'
     expect(teleportTarget.value).toBeDefined()
-
-    props.teleport = '#app'
-    expect(teleportTarget.value).toBe(undefined)
   })
 
   it('shoud attach to default target if element not find', () => {
@@ -32,12 +26,9 @@ describe('teleport.ts', () => {
     document.body.appendChild(el)
 
     const props = reactive<TeleportProps>({
-      teleport: '#not-valid',
+      teleport: '#custom-attach',
     })
     const { teleportTarget } = useTeleport(props)
-    expect(teleportTarget.value).toBe(undefined)
-
-    props.teleport = '#custom-attach'
     expect(teleportTarget.value).toBe(el)
 
     document.body.removeChild(el)
