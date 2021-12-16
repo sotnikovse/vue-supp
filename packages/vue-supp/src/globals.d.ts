@@ -16,9 +16,6 @@ declare global {
       options: AddEventListenerOptions
       target?: EventTarget
     }
-    _touchHandlers?: {
-      [_uid: string]: TouchStoredHandlers
-    }
   }
 
   function parseInt(s: string | number, radix?: number): number
