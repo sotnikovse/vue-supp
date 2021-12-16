@@ -7,7 +7,7 @@ const uidCounter: Record<string, number> = {}
  * @param prefix - The value to prefix the id with.
  * @returns Returns the unique id.
  */
-export function uid(prefix = '$default') {
+export function getUid(prefix = '$default') {
   if (!uidCounter[prefix]) {
     uidCounter[prefix] = 0
   }

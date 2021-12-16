@@ -1,7 +1,7 @@
 // https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/validation.ts
 
 import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
-import { getCurrentInstance, uid as getUid, propsFactory } from '../utils'
+import { getCurrentInstance, getUid, propsFactory } from '../utils'
 import { useForm } from './form'
 
 import type { PropType } from 'vue'

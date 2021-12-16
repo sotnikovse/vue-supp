@@ -1,7 +1,7 @@
 import type { DirectiveBinding, ObjectDirective } from 'vue'
 import type { TouchHandlers, TouchValue, TouchWrapper } from '../../types'
 
-import { uid } from '../utils'
+import { getUid } from '../utils'
 
 export interface TouchStoredHandlers {
   touchstart: (e: TouchEvent) => void
@@ -96,7 +96,7 @@ function mounted(el: HTMLElement, binding: TouchDirectiveBinding) {
 
   if (!target) return
 
-  const _uid: string = el.id || binding.arg || uid('touch-')
+  const _uid: string = el.id || binding.arg || getUid('touch-')
   if (!el.id) el.id = _uid
 
   const handlers = createHandlers(binding.value)
