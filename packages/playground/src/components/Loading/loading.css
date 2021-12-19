@@ -1,0 +1,27 @@
+.loading {
+  @apply relative align-middle w-6 h-6 text-gray-600;
+  font-size: 0;
+}
+.loading__spinner {
+  @apply animate-spin relative inline-block max-w-full max-h-full align-middle;
+  width: inherit;
+  height: inherit;
+  animation-duration: 0.8s;
+}
+.loading__spinner_spinner {
+  animation-timing-function: steps(12);
+}
+.loading__spinner_circular {
+  animation-duration: 2s;
+}
+.loading__line {
+  @apply absolute left-0 top-0 w-full h-full;
+}
+.loading__line::before {
+  @apply bg-current block w-0.5 h-1/4 mx-auto;
+  border-radius: 40%;
+  content: '';
+}
+.loading__circular {
+  @apply block w-full h-full;
+}
