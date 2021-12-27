@@ -1,15 +1,7 @@
 // https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/scroll.ts
 
-import {
-  computed,
-  getCurrentInstance,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-  warn,
-} from 'vue'
-import { propsFactory } from '../utils'
+import { computed, onBeforeUnmount, onMounted, ref, watch, warn } from 'vue'
+import { propsFactory, getCurrentInstance } from '../utils'
 
 import type { Ref } from 'vue'
 
@@ -87,7 +79,7 @@ export function useScroll(props: ScrollProps, args: ScrollArguments = {}) {
         if (!newTarget) {
           warn(
             `Unable to locate element with identifier ${scrollTarget}`,
-            getCurrentInstance()
+            getCurrentInstance('useScroll')
           )
           return
         }
