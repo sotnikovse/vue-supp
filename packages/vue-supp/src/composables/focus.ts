@@ -1,17 +1,36 @@
-// https://github.com/vuetifyjs/vuetify/blob/next/packages/vuetify/src/composables/focus.ts
-
 import { ref } from 'vue'
+import { getCurrentInstance } from '../utils'
 
-export const useFocus = () => {
+import type { Ref } from 'vue'
+
+export function useFocus(inputRef: Ref<HTMLInputElement | undefined>) {
+  const vm = getCurrentInstance('useFocus')
+
   const isFocused = ref(false)
 
-  function focus() {
+  function onFocus(e: Event) {
     isFocused.value = true
+    vm?.emit('focus', e)
+  }
+
+  function onBlur(e: Event) {
+    isFocused.value = false
+    vm?.emit('blur', e)
+  }
+
+  function focus() {
+    inputRef.value?.focus()
   }
 
   function blur() {
-    isFocused.value = false
+    inputRef.value?.blur()
   }
 
-  return { isFocused, focus, blur }
+  return {
+    isFocused,
+    onFocus,
+    onBlur,
+    focus,
+    blur,
+  }
 }
