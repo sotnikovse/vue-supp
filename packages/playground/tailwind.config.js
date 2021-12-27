@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.lightBlue,
+        primary: colors.sky,
       },
       keyframes: {
         scale: {
