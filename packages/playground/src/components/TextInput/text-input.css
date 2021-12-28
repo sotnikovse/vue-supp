@@ -1,0 +1,17 @@
+.text-input {
+  @apply relative rounded flex items-center h-9;
+  @apply bg-gray-100 focus-within:bg-transparent;
+  @apply focus-within:ring focus-within:ring-primary-300;
+  @apply transition-colors duration-100 ease-in-out;
+}
+.text-input_error {
+  @apply bg-red-100 focus-within:ring-red-400;
+}
+.text-input_disabled {
+  @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+}
+.text-input__input {
+  @apply align-middle rounded w-full bg-transparent px-2 py-1.5;
+  @apply placeholder-gray-400 disabled:placeholder-gray-400/50;
+  @apply focus:outline-none disabled:cursor-not-allowed;
+}
